@@ -18,13 +18,11 @@
     // detecteer submit
     if( !empty($_POST) ){
         // velden uitlezen in variabelen
-        $fistname = mysqli_real_escape_string($conn, $_POST['firstname']);
-        $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $password = mysqli_real_escape_string($conn,$_POST['password']);
         
         // validatie: velden mogen niet leeg zijn
-        if( !empty($firstname) && !empty($lastname) && !empty($email) && !empty($password) ){
+        if(  !empty($email) && !empty($password) ){
             // indien ok: login checken
             if( canLogin($email, $password) ) {
 				session_start();
@@ -75,14 +73,7 @@
                 </div>
                 <?php endif; ?>
  
-                <div class="form__field">
-                    <label for="firstname">Firstname</label>
-                    <input id="firstname" name="firstname" type="text">
-                </div>
-                <div class="form__field">
-                    <label for="lastname">Lastname</label>
-                    <input id="lastname" name="lastname" type="text">
-                </div>
+
                 <div class="form__field">
                     <label for="email">Email</label>
                     <input id="email" name="email" type="text">
