@@ -1,10 +1,13 @@
 <?php
- include_once(__DIR__ . '/classes/user');
-
+ include_once(__DIR__ . '/classes/user.php');
+ include_once(__DIR__ . '/classes/db.php');
  if(!empty($_POST)){
      try{
 
     $user = new User();
+    $user->setFirstname($_POST["firstname"]);
+    $user->setLastname($_POST["lastname"]);
+    $user->setEmail($_POST["email"]);
     $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
     $email = $_POST["email"];
@@ -16,19 +19,21 @@
     $whitelist = array('student.thomasmore.be');
 
 
+
     if( !empty($firstname) && !empty($lastname) && !empty($email) && in_array($domain,$whitelist) ){
-        $sql_e = "SELECT * FROM users WHERE email='$email'";
-        $res_e = mysqli_query($conn, $sql_e);
-        if(mysqli_num_rows($res_e) > 0){
+        /*$sql_e = $conn->query("SELECT * FROM users WHERE email='$email'");
+        $res_e = mysqli_query($conn, $sql_e);*/
+        
+        $emailcheck = User::checkDouble($email);
+        // var_dump($emailcheck);
+        if(count($emailcheck) > 0){
             $error = "Sorry... email already taken"; 
         }else{
             if(!empty($password) && $password === $passwordConfirmation ){
-                $password = password_hash($password,PASSWORD_DEFAULT,["cost" => 16]);
-                $user->setFirstname($firstname);
-                $user->setLastname($lastname);
-                $user->setEmail($email);
-                $user->setPassword($password);
 
+                $password = password_hash($password,PASSWORD_DEFAULT,["cost" => 16]);
+
+                $user->setPassword($password);
                 session_start();
                 $_SESSION["user"] = $email;
                 header("location:index.php");
@@ -88,7 +93,7 @@ catch(\Throwable $th){
 				</div>
 				<div class="form__field">
 					<label for="email">Email</label>
-					<input type="text" id="email" name="email" value="r123456@student.thomasmore.be">
+					<input type="text" id="email" name="email" placeholder="r123456@student.thomasmore.be">
 				</div>
 				<div class="form__field">
 					<label for="password">Password</label>

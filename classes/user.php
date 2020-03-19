@@ -110,6 +110,14 @@ class User {
 
 
     }
+    public static function checkDouble($email){
+        $conn = DB::getConnection();
+
+        $statement = $conn->prepare("SELECT * FROM users WHERE email='$email'"); //$conn->query kan ook
+        $statement->execute();
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $users;
+    }
 /*
     public static function getAll(){
         $conn = DB::getConnection();
