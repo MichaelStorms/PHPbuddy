@@ -1,7 +1,10 @@
 <?php
- include('db.inc.php');
+ include_once(__DIR__ . '/classes/user');
 
  if(!empty($_POST)){
+     try{
+
+    $user = new User();
     $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
     $email = $_POST["email"];
@@ -21,12 +24,18 @@
         }else{
             if(!empty($password) && $password === $passwordConfirmation ){
                 $password = password_hash($password,PASSWORD_DEFAULT,["cost" => 16]);
+                $user->setFirstname($firstname);
+                $user->setLastname($lastname);
+                $user->setEmail($email);
+                $user->setPassword($password);
+
                 session_start();
                 $_SESSION["user"] = $email;
                 header("location:index.php");
     
-                $query = "INSERT INTO `users`(`firstname`,`lastname`,`email`, `password`) VALUES ('$firstname','$lastname','$email','$password')";
-                $results = $conn->query($query);
+                $user->save();
+                /*$query = "INSERT INTO `users`(`firstname`,`lastname`,`email`, `password`) VALUES ('$firstname','$lastname','$email','$password')";
+                $results = $conn->query($query);*/
             }
             else{
                 $error = "password cannot be empty";
@@ -38,6 +47,10 @@
     }
     
 }
+catch(\Throwable $th){
+    $error = $th->getMessage();
+}}
+
 ?>
 
 <!doctype html>
