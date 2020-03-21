@@ -1,5 +1,5 @@
 <?php
-    include("db.inc.php");
+    include(__DIR__."/classes/Db.php");
 
 
     function canLogin($email, $password) {

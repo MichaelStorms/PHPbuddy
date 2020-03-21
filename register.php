@@ -1,6 +1,6 @@
 <?php
- include_once(__DIR__ . '/classes/user.php');
- include_once(__DIR__ . '/classes/db.php');
+ include_once(__DIR__ . '/classes/User.php');
+ include_once(__DIR__ . '/classes/Db.php');
  if(!empty($_POST)){
      try{
 
