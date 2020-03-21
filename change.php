@@ -1,10 +1,11 @@
 <?php
-    include_once(__DIR__ . "/settings/setting.php");
-    $conn = mysqli_connect('mysql:host=' . SETTINGS['db']['host'] . ';dbname=' . SETTINGS['db']['db'], SETTINGS['db']['user'], SETTINGS['db']['password']);
+    include(__DIR__ . "/settings/setting.php");
+    include("/classe/db.php");
+    
+    
 
     if (!empty($_POST)) {
         $image = $_POST['image'];
-        var_dump($image);
     }
 
     
