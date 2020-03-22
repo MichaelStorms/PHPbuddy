@@ -1,14 +1,21 @@
 <?php
     include(__DIR__ . "/settings/setting.php");
     include("/classe/db.php");
-    
+
+    $conn = new mysqli(SETTINGS['db']['host'], SETTINGS['db']['user'],SETTINGS['db']['password'],SETTINGS['db']['db']);
     
 
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+     }else{
+        echo "Connected successfully";
+     }
+       
     if (!empty($_POST)) {
         $image = $_POST['image'];
     }
 
-    
+
 
 
 ?>
