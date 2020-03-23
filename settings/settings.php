@@ -5,7 +5,7 @@
             "user" => "root",
             "password" => "",
             "host" => "localhost",
-            "port" => 3308,
-            "db" => "phpbuddy"
+            "port" => 3306,
+            "db" => "phpsamen"
         ]
     ];
