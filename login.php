@@ -1,9 +1,9 @@
 <?php
-    include("db.inc.php");
+    include_once(__DIR__ . '/classes/user.php');
+    include_once(__DIR__ . '/classes/db.php');
 
 
     function canLogin($email, $password) {
-        include("db.inc.php");
         $email = $conn->real_escape_string($email);
         $query = "SELECT * FROM users WHERE email = '$email'";
         $result = $conn->query($query);
@@ -14,13 +14,28 @@
             return false;
         }
     }
- 
+
+    function validateEmail($email)
+    {
+            // schrijf validatie
+            echo "test";
+            return false;
+    }
+
+    function validatePassword()
+    {
+
+    }
     // detecteer submit
     if( !empty($_POST) ){
         // velden uitlezen in variabelen
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $password = mysqli_real_escape_string($conn,$_POST['password']);
         
+        if (!validateEmail($email)) {
+            $error = "Email is not valid";
+        }
+
         // validatie: velden mogen niet leeg zijn
         if(  !empty($email) && !empty($password) ){
             // indien ok: login checken
