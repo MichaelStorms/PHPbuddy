@@ -1,6 +1,6 @@
 <?php
-	include "header.php";
-	include "db.php";
+	include(__DIR__."/classes/Db.php");
+	include_once(__DIR__ . '/classes/User.php');
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$location = $_POST["location"];
@@ -17,9 +17,14 @@
 		$extra = $_POST['extra'];
 		$update_profile = $mysqli->query("UPDATE users SET location= '$location', interests = '$interests', hobby = '$hobby', extra = '$extra' WHERE username = '$user'");
 			if ($update_profile) {
-			  header("Location: profilepage.php? user=$user");
+			  header("Location: profil-edition.php? user=$user");
 			} else {
 			  echo $mysqli->error;
+			}
+			if ($error) {
+				echo "ALL FIELDS ARE REQUIRED";
+			} else {
+				header('Location: profil-edition.php');
 			}
    }
 
@@ -31,7 +36,10 @@
 		return false;
 	}
 
-?>   
+?>  
+
+
+
 
 <!DOCTYPE html>
 <html>
@@ -39,16 +47,23 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<meta charset="UTF-8">
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">	
 		<title><?php echo $user['username'] ?>'s Profile Settings</title>
     </head> 
 	<body style="margin-left:20px;">      
 		<h3>Update Profile Information</h3> 
 
-	       <form method="post" action="profilepage.php">            			
+	       <form method="post" action="profil-edition.php">     
+				<?php if(isset($error)): ?>
+					<div class="form__error">
+						<p><?php echo $error; ?></p>
+					</div>
+				<?php endif; ?>   
+				    			
 				<label>Location:</label><br> 
-		         <input type="text" name="location" value="Waar woon je/ zit je op kot?" /><br> 
+		         <input style="width:100px" type="text" name="location" value="Waar woon je/ zit je op kot?" /><br> 
 
 				<div class="dropdown">
 					<label>Interesse in de richting IMD:</label><br> 
@@ -93,4 +108,3 @@
 
 </html>
 
-<?php include "footer.php"?>
