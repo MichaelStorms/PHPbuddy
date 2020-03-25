@@ -8,56 +8,55 @@ include(__DIR__ . "/classe/db.php");
 session_start();
 $conn = new mysqli(SETTINGS['db']['host'], SETTINGS['db']['user'], SETTINGS['db']['password'], SETTINGS['db']['db']);
 
-// if (!empty($_POST)) {
-//     $image = $_POST['image'];
-//     $conn = new mysqli(SETTINGS['db']['host'], SETTINGS['db']['user'],SETTINGS['db']['password'],SETTINGS['db']['db']);
-
-
-
-//      $sql = "SELECT * FROM users id";
-//      $result= mysqli_query($conn, $sql);
-//      $query = "INSERT INTO users(image) VALUES('$image')";
-// }
 $_SESSION["id"] = 1;
-$_SESSION["password"] = "lol";
+$_SESSION["password"] = "123";
+$_SESSION["email"] = "test@test.com";
 
-$test = $_SESSION["password"];
+$paswordDb = $_SESSION["password"];
+$emailDb = $_SESSION["email"];
+
 
 if (isset($_SESSION['id'])) {
-	// $requser = $conn->prepare('SELECT * FROM users WHERE id = ?');
-	// $requser -> bind_param("s", $_SESSION['id']);
-	// $requser->execute();
-	// $user = $requser->fetch();
-	// print_r($requser);
-
 	if (isset($_POST['avatar'])) {
 		$updateAvatar = $conn->prepare("UPDATE users SET image = ? WHERE id = ?");
 		$updateAvatar->bind_param("si", $_SESSION['id'], $_SESSION['id']);
 		$updateAvatar->execute();
 	}
-	var_dump($test);
-	if (!empty($_POST['passwordOld']) == $test) {
-		
-		if (!empty($_POST['passwordNew']) === !empty($_POST['passwordCheck'])) {
-			$updateAvatar = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
-			$updateAvatar->bind_param("si", $_POST['passwordNew'], $_SESSION['id']);
-			$updateAvatar->execute();
-			echo "succes";
-		}else {
-			echo "<h3>Wachtwoord is niet het zelfde</h3>";
+
+
+	if (!empty($_POST['passwordOld'])) {
+		$passwordNew = $_POST["passwordNew"];
+		$passwordCheck = $_POST['passwordCheck'];
+		if (!empty($_POST['passwordOld']) == $paswordDb) {
+			if ($passwordNew == $passwordCheck) {
+				$updateAvatar = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
+				$updateAvatar->bind_param("si", $_POST['passwordNew'], $_SESSION['id']);
+				$updateAvatar->execute();
+				echo "<h3>succes</h3>";
+			} else {
+				echo "<h3>Wachtwoord is niet het zelfde</h3>";
+			}
+		} else {
+			echo "<h3>doesnt work</h3>";
 		}
-	}else {
-		echo "<h3>doesnt work</h3>";
 	}
 
-	// if(!empty($_POST['password']) === !empty($_POST['passwordcheck'])) {
-	// 	$updateAvatar = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
-	// 	$updateAvatar->bind_param("si", $_POST['password'], $_SESSION['id']);
-	// 	$updateAvatar->execute();
-
-	// } else{
-	// 	echo "<h3>Wachtwoord is niet het zelfde</h3>";
-	// }
+	if (!empty($_POST['emailOld'])) {
+		$emailNew = $_POST['emailNew'];
+		$emailCheck = $_POST['emailCheck'];
+		if (!empty($_POST['emailOld']) === $emailDb) {
+			if ($emailNew === $emailCheck) {
+				$updateAvatar = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
+				$updateAvatar->bind_param("si", $_POST['emailNew'], $_SESSION['id']);
+				$updateAvatar->execute();
+				echo "<h3>succes</h3>";
+			} else {
+				echo "<h3>email is niet het zelfde</h3>";
+			}
+		} else {
+			echo "<h3>Niet het zelde email adres</h3>";
+		}
+	}
 
 
 	// 	if (isset($_FILES['avatar']) and !empty($_FILES['avatar']['name'])) {
@@ -97,9 +96,10 @@ if (isset($_SESSION['id'])) {
 
 <body>
 	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+		<h2>change Profile pic</h2>
 		<input type="file" name="avatar">
 		<br>
-		<h2>password change</h2>
+		<h2>change password</h2>
 		<p>old password</p>
 		<input type="password" name="passwordOld">
 		<p>new password</p>
@@ -107,9 +107,16 @@ if (isset($_SESSION['id'])) {
 		<p>repeat password</p>
 		<input type="password" name="passwordCheck">
 		<br>
+		<h2>change Email</h2>
 		<p>email change</p>
+		<input type="text" name="emailOld" id="">
 		<br>
-		<input type="text" name="email" id="">
+		<p>email change</p>
+		<input type="text" name="emailNew" id="">
+		<br>
+		<p>email change</p>
+		<input type="text" name="emailCheck" id="">
+		<br>
 
 
 		<input type="submit" value="submit">
