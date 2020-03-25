@@ -15,12 +15,39 @@ $_SESSION["email"] = "test@test.com";
 $paswordDb = $_SESSION["password"];
 $emailDb = $_SESSION["email"];
 
+if (isset($_POST['avatar'])) {
+	$size = 2097152;
+	$filetypes = array('jpg', 'jpeg', 'gif', 'png');
+	$avatar = $_POST['avatar'];
 
-if (isset($_SESSION['id'])) {
-	if (isset($_POST['avatar'])) {
-		$updateAvatar = $conn->prepare("UPDATE users SET image = ? WHERE id = ?");
-		$updateAvatar->bind_param("si", $_SESSION['id'], $_SESSION['id']);
-		$updateAvatar->execute();
+
+	$target_dir = "images/";
+	$target_file = $target_dir . basename($_FILES["avatar"]["name"]);
+	$uploadOk = 1;
+	$sizeFile = getimagesize($_FILES['avatar']);
+
+	if($sizefile !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+    }
+	
+	
+	if ($sizefile <= $size) {
+		if (isset($_SESSION['id'])) {
+			if (isset($_POST['avatar'])) {
+				$updateAvatar = $conn->prepare("UPDATE users SET image = ? WHERE id = ?");
+				$updateAvatar->bind_param("si", $_SESSION['id'], $_SESSION['id']);
+				$updateAvatar->execute();
+			}
+		}else {
+			echo "File is te groot of foute file type";
+		}
+
+	} else {
+		echo "lol";
 	}
 
 
@@ -59,29 +86,29 @@ if (isset($_SESSION['id'])) {
 	}
 
 
-	// 	if (isset($_FILES['avatar']) and !empty($_FILES['avatar']['name'])) {
-	// 		$size = 2097152;
-	// 		$filetypes = array('jpg', 'jpeg', 'gif', 'png');
-	// 		if ($_FILES['avatar']['size'] <= $size) {
-	// 			$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+	// if (isset($_FILES['avatar']) and !empty($_FILES['avatar']['name'])) {
+	// 	$size = 2097152;
+	// 	$filetypes = array('jpg', 'jpeg', 'gif', 'png');
+	// 	if ($_FILES['avatar']['size'] <= $size) {
+	// 		$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
 
-	// 			if (in_array($extensionUpload, $filetypes)) {
-	// 				$route = __DIR__ . "images/" . $_SESSION['id'] . "." . $extensionUpload;
-	// 				$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $route);
-	// 				if ($resultat) {
-	// 					 $updateAvatar = $conn->prepare("UPDATE users SET image = ? WHERE id = ?");
-	// 					 $updateAvatar -> bind_param("ss",$_SESSION['id'] . "." . $extensionUpload, $_SESSION['id']);
-	// 					 $updateAvatar->execute();
-	// 				} {
-	// 					$error = "Kon de file niet uploden";
-	// 				}
-	// 			} else {
-	// 				$error = "Het formaat van de file is niet tiegestaan. Het moet een formaat jpg, png of gif zijn.";
+	// 		if (in_array($extensionUpload, $filetypes)) {
+	// 			$route = __DIR__ . "images/" . $_SESSION['id'] . "." . $extensionUpload;
+	// 			$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $route);
+	// 			if ($resultat) {
+	// 				 $updateAvatar = $conn->prepare("UPDATE users SET image = ? WHERE id = ?");
+	// 				 $updateAvatar -> bind_param("ss",$_SESSION['id'] . "." . $extensionUpload, $_SESSION['id']);
+	// 				 $updateAvatar->execute();
+	// 			} {
+	// 				$error = "Kon de file niet uploden";
 	// 			}
 	// 		} else {
-	// 			$msg = "andere file grote of type";
+	// 			$error = "Het formaat van de file is niet tiegestaan. Het moet een formaat jpg, png of gif zijn.";
 	// 		}
+	// 	} else {
+	// 		$msg = "andere file grote of type";
 	// 	}
+	// }
 }
 
 ?>
