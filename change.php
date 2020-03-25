@@ -12,11 +12,6 @@ $conn = new mysqli(SETTINGS['db']['host'], SETTINGS['db']['user'], SETTINGS['db'
 //     $image = $_POST['image'];
 //     $conn = new mysqli(SETTINGS['db']['host'], SETTINGS['db']['user'],SETTINGS['db']['password'],SETTINGS['db']['db']);
 
-if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
-} else {
-	echo "Connected successfully";
-}
 
 
 //      $sql = "SELECT * FROM users id";
@@ -24,7 +19,9 @@ if ($conn->connect_error) {
 //      $query = "INSERT INTO users(image) VALUES('$image')";
 // }
 $_SESSION["id"] = 1;
+$_SESSION["password"] = "lol";
 
+$test = $_SESSION["password"];
 
 if (isset($_SESSION['id'])) {
 	// $requser = $conn->prepare('SELECT * FROM users WHERE id = ?');
@@ -33,12 +30,36 @@ if (isset($_SESSION['id'])) {
 	// $user = $requser->fetch();
 	// print_r($requser);
 
-	if(isset($_POST['avatar'])){
+	if (isset($_POST['avatar'])) {
 		$updateAvatar = $conn->prepare("UPDATE users SET image = ? WHERE id = ?");
 		$updateAvatar->bind_param("si", $_SESSION['id'], $_SESSION['id']);
 		$updateAvatar->execute();
+	}
+	var_dump($test);
+	if (!empty($_POST['passwordOld']) == $test) {
 		
-	} 
+		if (!empty($_POST['passwordNew']) === !empty($_POST['passwordCheck'])) {
+			$updateAvatar = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
+			$updateAvatar->bind_param("si", $_POST['passwordNew'], $_SESSION['id']);
+			$updateAvatar->execute();
+			echo "succes";
+		}else {
+			echo "<h3>Wachtwoord is niet het zelfde</h3>";
+		}
+	}else {
+		echo "<h3>doesnt work</h3>";
+	}
+
+	// if(!empty($_POST['password']) === !empty($_POST['passwordcheck'])) {
+	// 	$updateAvatar = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
+	// 	$updateAvatar->bind_param("si", $_POST['password'], $_SESSION['id']);
+	// 	$updateAvatar->execute();
+
+	// } else{
+	// 	echo "<h3>Wachtwoord is niet het zelfde</h3>";
+	// }
+
+
 	// 	if (isset($_FILES['avatar']) and !empty($_FILES['avatar']['name'])) {
 	// 		$size = 2097152;
 	// 		$filetypes = array('jpg', 'jpeg', 'gif', 'png');
@@ -77,8 +98,21 @@ if (isset($_SESSION['id'])) {
 <body>
 	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 		<input type="file" name="avatar">
+		<br>
+		<h2>password change</h2>
+		<p>old password</p>
+		<input type="password" name="passwordOld">
+		<p>new password</p>
+		<input type="password" name="passwordNew">
+		<p>repeat password</p>
+		<input type="password" name="passwordCheck">
+		<br>
+		<p>email change</p>
+		<br>
+		<input type="text" name="email" id="">
+
+
 		<input type="submit" value="submit">
-		<label for="avatar"></label>
 	</form>
 </body>
 
