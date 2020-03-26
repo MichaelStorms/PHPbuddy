@@ -1,68 +1,59 @@
-<?php
-    include_once(__DIR__ . '/classes/user.php');
-    include_once(__DIR__ . '/classes/db.php');
+<?php 
+  include_once(__DIR__ . '/classes/user.php');
+  include_once(__DIR__ . '/classes/db.php');
+  
+function canLogin($email,$password){
+$conn = new mysqli('localhost','root','','phpsamen');
+$email = $conn->real_escape_string($email); //DIT IS KANKER BELANGRIJK ALTIJD DOEN ANDERS SQL INJECTIE MOGELIJK
+$query = "select * from users where email = '$email'";
+$result = $conn->query($query);
+$user = $result->fetch_assoc();
+if(password_verify($password, $user['password'])){
+	return true;
+} else {
+	return false;
+}
+}
 
 
-    function canLogin($email, $password) {
-        $email = $conn->real_escape_string($email);
-        $query = "SELECT * FROM users WHERE email = '$email'";
-        $result = $conn->query($query);
-        $user = $result -> fetch_assoc();
-        if(password_verify($password, $user["password"])){
-            return true;
-        } else{
-            return false;
-        }
-    }
 
-    function validateEmail($email)
-    {
-            // schrijf validatie
-            echo "test";
-            return false;
-    }
+// detecteer of er ge-submit werd
+if(!empty ($_POST)){
 
-    function validatePassword()
-    {
+// velden uitlezen in variabelen
+$email = $_POST['email'];
+$password = $_POST['password'];
 
-    }
-    // detecteer submit
-    if( !empty($_POST) ){
-        // velden uitlezen in variabelen
-        $conn = Db::getConnection();
-        $email = mysqli_real_escape_string($conn, $_POST['email']);
-        $password = mysqli_real_escape_string($conn,$_POST['password']);
-        
-        if (!validateEmail($email)) {
-            $error = "Email is not valid";
-        }
+// validatie: velden mogen niet leeg zijn
+if(!empty($email) && !empty($password)){
+// indien oke: login checken
+if(canLogin($email,$password)){
+	session_start();
+	$_SESSION['user'] = $email;
+	/*
+	$salt = "fuckingkankerhomo";
+	// check of login "net@flix.com" password ="12345"
+	$cookieValue = $email . "," . md5($email.$salt);
+	setcookie("loggedin",$cookieValue, time()+60*60*24*7); // die rare maaltafels zijn een week in seconden
+	// redirect naar index.php
+	// + onthouden dat user aangelogd is*/
 
-        // validatie: velden mogen niet leeg zijn
-        if(  !empty($email) && !empty($password) ){
-            // indien ok: login checken
-            if( canLogin($email, $password) ) {
-				session_start();
-				$_SESSION["user"] = $email;
-				
-                /*$salt = "SDKJFEK23148234!!#;;";
- 
-                // + onthouden dat user aangelogd is
-                $cookieValue = $email . "," . md5($email.$salt);
-                setcookie("loggedin", $cookieValue, time()+60*60*24*7 ); // 1 week
- 
-                // redirect naar index.php*/
-                header("Location: index.php");
-            } else {
-                $error = "Sorry, we couldn't log you in.";
-            }
-        } else {
-            // indien leeg: error generen
-            $error = "Email and password are required.";
-        }
-    }
+	header("Location: index.php");
+} else {
+	$error = "Incorrect info";
+}
+
+	
+} else {
+	$error = "Email and password are required.";
+	// indien leeg -> error genereren
+}
 
 
+}
 ?>
+
+
 
 
 <!doctype html>

@@ -118,6 +118,23 @@ class User {
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $users;
     }
+
+    function canLogin($email, $password) {
+        $conn = DB::getConnection();
+
+        $statement = $conn->query("SELECT * FROM users WHERE email='$email'");
+        $statement->execute();
+        
+        $email = $conn->real_escape_string($email);
+        $query = "SELECT * FROM users WHERE email = '$email'";
+        $result = $conn->query($query);
+        $user = $result -> fetch_assoc();
+        if(password_verify($password, $user["password"])){
+            return true;
+        } else{
+            return false;
+        }
+    }
 /*
     public static function getAll(){
         $conn = DB::getConnection();
