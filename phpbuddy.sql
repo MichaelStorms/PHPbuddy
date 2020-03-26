@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `firstname` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastname` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` int(11) NOT NULL,
+  `password` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 COMMIT;
