@@ -1,19 +1,27 @@
 <?php 
   include_once(__DIR__ . '/classes/user.php');
   include_once(__DIR__ . '/classes/db.php');
+  
+function getPasswordByEmail($email)
+{
+    $conn = Db::getConnection();
+    $statement = $conn->prepare("SELECT password FROM users where email = :email"); //DIT IS KANKER BELANGRIJK ALTIJD DOEN ANDERS SQL INJECTIE MOGELIJK
+    $statement->bindValue(":email", $email);
+    $result = $statement->execute();   
 
-function canLogin($email,$password){
-$conn = Db::getConnection();
-$email = $conn->real_escape_string($email); //DIT IS KANKER BELANGRIJK ALTIJD DOEN ANDERS SQL INJECTIE MOGELIJK
-$query = "select * from users where email = '$email'";
-$result = $conn->query($query);
-$user = $result->fetch_assoc();
-if(password_verify($password, $user['password'])){
-	return true;
-} else {
-	return false;
+    return $result;
 }
+
+function canLogin($email, $enteredPassword){
+    $password = getPasswordByEmail($email);
+    
+    if(password_verify($password, $enteredPassword)){
+        return true;
+    } else {
+        return false;
+    }
 }
+
 
 
 
