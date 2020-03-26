@@ -1,9 +1,9 @@
 <?php 
   include_once(__DIR__ . '/classes/user.php');
   include_once(__DIR__ . '/classes/db.php');
-  
+
 function canLogin($email,$password){
-$conn = new mysqli('localhost','root','','phpsamen');
+$conn = Db::getConnection();
 $email = $conn->real_escape_string($email); //DIT IS KANKER BELANGRIJK ALTIJD DOEN ANDERS SQL INJECTIE MOGELIJK
 $query = "select * from users where email = '$email'";
 $result = $conn->query($query);
