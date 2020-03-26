@@ -32,11 +32,11 @@
             if(!empty($password) && $password === $passwordConfirmation ){
 
                 $password = password_hash($password,PASSWORD_DEFAULT,["cost" => 16]);
-
+                
                 $user->setPassword($password);
                 session_start();
                 $_SESSION["user"] = $email;
-                header("location:index.php");
+               // header("location:index.php");
     
                 $user->save();
                 /*$query = "INSERT INTO `users`(`firstname`,`lastname`,`email`, `password`) VALUES ('$firstname','$lastname','$email','$password')";

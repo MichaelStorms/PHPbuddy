@@ -2,18 +2,19 @@
 
 include_once(__DIR__ . "/db.php");
 
-class User {
+class User
+{
     private $firstname;
     private $lastname;
     private $email;
     private $password;
 
-  
-    
+
+
 
     /**
      * Get the value of firstname
-     */ 
+     */
     public function getFirstname()
     {
         return $this->firstname;
@@ -23,7 +24,7 @@ class User {
      * Set the value of firstname
      *
      * @return  self
-     */ 
+     */
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
@@ -33,7 +34,7 @@ class User {
 
     /**
      * Get the value of lastname
-     */ 
+     */
     public function getLastname()
     {
         return $this->lastname;
@@ -43,7 +44,7 @@ class User {
      * Set the value of lastname
      *
      * @return  self
-     */ 
+     */
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
@@ -53,7 +54,7 @@ class User {
 
     /**
      * Get the value of email
-     */ 
+     */
     public function getEmail()
     {
         return $this->email;
@@ -63,10 +64,10 @@ class User {
      * Set the value of email
      *
      * @return  self
-     */ 
+     */
     public function setEmail($email)
     {
-        if(empty($email)){
+        if (empty($email)) {
             throw new Exception("this cant be empty");
         }
         $this->email = $email;
@@ -82,14 +83,15 @@ class User {
      * Set the value of password
      *
      * @return  self
-     */ 
+     */
     public function setPassword($password)
     {
         $this->password = $password;
 
         return $this;
     }
-    public function save(){
+    public function save()
+    {
         $conn = Db::getConnection();
 
         $statement = $conn->prepare("insert into users (firstname, lastname, email, password) values (:firstname, :lastname, :email, :password)");
@@ -99,18 +101,17 @@ class User {
         $email = $this->getEmail();
         $password = $this->getPassword();
 
-        $statement->bindValue(":firstname",$firstname);
-        $statement->bindValue(":lastname",$lastname);
-        $statement->bindValue(":email",$email);
-        $statement->bindValue(":password",$password);
+        $statement->bindValue(":firstname", $firstname);
+        $statement->bindValue(":lastname", $lastname);
+        $statement->bindValue(":email", $email);
+        $statement->bindValue(":password", $password);
 
         $result = $statement->execute();
 
         return $result;
-
-
     }
-    public static function checkDouble($email){
+    public static function checkDouble($email)
+    {
         $conn = DB::getConnection();
 
         $statement = $conn->prepare("SELECT * FROM users WHERE email='$email'"); //$conn->query kan ook
@@ -119,23 +120,32 @@ class User {
         return $users;
     }
 
-    function canLogin($email, $password) {
-        $conn = DB::getConnection();
+    public function canLogin($email, $enteredPassword)
+    {
+        $password = $this->getPasswordByEmail($email);
 
-        $statement = $conn->query("SELECT * FROM users WHERE email='$email'");
-        $statement->execute();
-        
-        $email = $conn->real_escape_string($email);
-        $query = "SELECT * FROM users WHERE email = '$email'";
-        $result = $conn->query($query);
-        $user = $result -> fetch_assoc();
-        if(password_verify($password, $user["password"])){
+        if (password_verify($enteredPassword, $password)) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
-/*
+
+
+    private function getPasswordByEmail($email)
+    {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT password FROM users where email = :email");
+        $statement->bindValue(":email", $email);
+        $statement->execute();
+
+        $result = $statement->fetch();
+
+        return $result['password'];
+    }
+
+
+    /*
     public static function getAll(){
         $conn = DB::getConnection();
 
@@ -147,8 +157,5 @@ class User {
 
     /**
      * Get the value of password
-     */ 
-
+     */
 }
-
-
