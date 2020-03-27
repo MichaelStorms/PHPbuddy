@@ -4,10 +4,10 @@ include_once(__DIR__ . "/db.php");
 
 class User
 {
-    private $firstname;
-    private $lastname;
-    private $email;
-    private $password;
+    protected $firstname;
+    protected $lastname;
+    protected $email;
+    protected $password;
 
 
 
