@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Gegenereerd op: 16 mrt 2020 om 13:55
+-- Gegenereerd op: 27 mrt 2020 om 12:20
 -- Serverversie: 8.0.18
 -- PHP-versie: 7.3.12
 
@@ -31,10 +31,16 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lastname` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` int(11) NOT NULL,
+  `firstname` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastname` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `interests` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hobby` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extra` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imgDescription` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 COMMIT;
