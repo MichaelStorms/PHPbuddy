@@ -1,4 +1,0 @@
-$ echo settings >> .gitignore
-$ git rm --cached settings
-rm 'settings'
-$ git commit -m "Start ignoring settings"
