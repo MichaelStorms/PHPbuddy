@@ -1,47 +1,38 @@
 <?php
-	include(__DIR__."/classes/Db.php");
-	include_once(__DIR__ . '/classes/User.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$location = $_POST["location"];
-		$interests = $_POST["interests"];
-		$hobby = $_POST["hobby"];
-		$extra = $_POST["extra"];
-	  }
+	session_start();
 
-	  if (isset($_POST['update_profile'])) {
-		$user = $_GET['user'];
+	include(__DIR__."/classes/db.php");
+	include_once(__DIR__ . '/classes/user.php'); 
+	
+	//var_dump($_SESSION['user']);
+	
+	if (!empty($_POST)) {
+		//echo "test";
+
 		$location = $_POST['location'];
-		$interests = $_POST['interests'];
+		$course = $_POST['course'];
 		$hobby = $_POST['hobby'];
 		$extra = $_POST['extra'];
-		$update_profile = $mysqli->query("UPDATE users SET location= '$location', interests = '$interests', hobby = '$hobby', extra = '$extra' WHERE username = '$user'");
-			if ($update_profile) {
-			  header("Location: profilepage.php? user=$user");
-			} else {
-			  echo $mysqli->error;
-			}
-			if ($error) {
-				echo "ALL FIELDS ARE REQUIRED";
-			} else {
-				header('Location: profilepage.php');
-			}
-   }
+		
+		//$email = $_SESSION['user']; (nodig om te laten sturen)
+
+		$result = user::updateProfile($location,$course,$hobby,$extra,$email);
+
+	}
 
 
-	function profileupdate( $field ){
+	function profileUpdate( $field ){
 		if (preg_match("/^[^@]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$/", $field)){
 			return true;
 		}
 		return false;
 	}
 
-?>  
-
-
-
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
     <head>  
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -55,7 +46,7 @@
 	<body style="margin-left:20px;">      
 		<h3>Update Profile Information</h3> 
 
-	       <form method="post" action="profilepage.php">     
+	       <form method="post" action="">     
 				<?php if(isset($error)): ?>
 					<div class="form__error">
 						<p><?php echo $error; ?></p>
@@ -97,7 +88,7 @@
 						</select>
 				</div>
 			        
-			<input style="margin:2.5%;" type="submit" name="profileupdate" value="Update" />        
+			<input style="margin:2.5%;" type="submit" name="profileupdate" value="Update" />    <!-- button ipv input    --> 
 		</form>    
 	</body>
 
