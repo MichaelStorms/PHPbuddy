@@ -6,7 +6,8 @@ error_reporting(E_ALL);
 include(__DIR__ . "/settings/setting.php");
 include(__DIR__ . "/classe/db.php");
 session_start();
-$conn = new mysqli(SETTINGS['db']['host'], SETTINGS['db']['user'], SETTINGS['db']['password'], SETTINGS['db']['db']);
+//$conn = new mysqli(SETTINGS['db']['host'], SETTINGS['db']['user'], SETTINGS['db']['password'], SETTINGS['db']['db']);
+$conn = new PDO('mysql:host='.SETTINGS['db']['host'].';dbname='.SETTINGS['db']['db'], SETTINGS['db']['user'], SETTINGS['db']['password']);
 
 
 $_SESSION["id"] = 1;
@@ -30,7 +31,7 @@ if (isset($_FILES['avatar']) and !empty($_FILES['avatar']['name'])) {
 			$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $route);
 			if ($resultat) {
 				$updateAvatar = $conn->prepare("UPDATE users SET image = ? WHERE id = ?");
-				$updateAvatar->bind_param("ss", $_SESSION['id'], $_SESSION['id']);
+				$updateAvatar->bindparam("ss", $_SESSION['id'], $_SESSION['id']);
 				$updateAvatar->execute();
 			} {
 				$error = "Kon de file niet uploden";
@@ -46,7 +47,7 @@ if (isset($_FILES['avatar']) and !empty($_FILES['avatar']['name'])) {
 		$description = $_POST['description'];
 		$cleanDescription = htmlspecialchars($description);
 		$updateAvatar = $conn->prepare("UPDATE users SET imgDescription = ? WHERE id = ?");
-		$updateAvatar->bind_param("si", $cleanDescription, $_SESSION['id']);
+		$updateAvatar->bindparam("si", $cleanDescription, $_SESSION['id']);
 		$updateAvatar->execute();
 		echo "<h3>succes</h3>";
 	} else {
@@ -64,7 +65,7 @@ if (!empty($_POST['passwordOld'])) {
 	if (!empty($_POST['passwordOld']) == $paswordDb) {
 		if ($passwordNew == $passwordCheck) {
 			$updateAvatar = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
-			$updateAvatar->bind_param("si", $_POST['passwordNew'], $_SESSION['id']);
+			$updateAvatar->bindparam("si", $_POST['passwordNew'], $_SESSION['id']);
 			$updateAvatar->execute();
 			echo "<h3>succes</h3>";
 		} else {
@@ -82,7 +83,7 @@ if (!empty($_POST['emailOld'])) {
 	if (!empty($_POST['emailOld']) === $emailDb) {
 		if ($emailNew === $emailCheck) {
 			$updateAvatar = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
-			$updateAvatar->bind_param("si", $_POST['emailNew'], $_SESSION['id']);
+			$updateAvatar->bindparam("si", $_POST['emailNew'], $_SESSION['id']);
 			$updateAvatar->execute();
 			echo "<h3>succes</h3>";
 		} else {
