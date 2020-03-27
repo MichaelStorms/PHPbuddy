@@ -1,4 +1,4 @@
-$ echo settings.php >> .gitignore
-$ git rm --cached settings.php
-rm 'settings.php'
-$ git commit -m "Start ignoring settings.php"
+$ echo settings >> .gitignore
+$ git rm --cached settings
+rm 'settings'
+$ git commit -m "Start ignoring settings"
