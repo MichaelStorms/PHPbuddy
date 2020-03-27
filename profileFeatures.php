@@ -17,14 +17,14 @@
 		$extra = $_POST['extra'];
 		$update_profile = $mysqli->query("UPDATE users SET location= '$location', interests = '$interests', hobby = '$hobby', extra = '$extra' WHERE username = '$user'");
 			if ($update_profile) {
-			  header("Location: profil-edition.php? user=$user");
+			  header("Location: profilepage.php? user=$user");
 			} else {
 			  echo $mysqli->error;
 			}
 			if ($error) {
 				echo "ALL FIELDS ARE REQUIRED";
 			} else {
-				header('Location: profil-edition.php');
+				header('Location: profilepage.php');
 			}
    }
 
@@ -55,7 +55,7 @@
 	<body style="margin-left:20px;">      
 		<h3>Update Profile Information</h3> 
 
-	       <form method="post" action="profil-edition.php">     
+	       <form method="post" action="profilepage.php">     
 				<?php if(isset($error)): ?>
 					<div class="form__error">
 						<p><?php echo $error; ?></p>
@@ -63,7 +63,7 @@
 				<?php endif; ?>   
 				    			
 				<label>Location:</label><br> 
-		         <input style="width:100px" type="text" name="location" value="Waar woon je/ zit je op kot?" /><br> 
+		         <input style="width:100px" type="text" name="location" placeholder="Waar woon je/ zit je op kot?" /><br> 
 
 				<div class="dropdown">
 					<label>Interesse in de richting IMD:</label><br> 
