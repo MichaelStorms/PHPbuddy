@@ -1,20 +1,19 @@
 <?php
-ini_set('display_errors', 1);
+/*ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
+*/
 	session_start();
 
 	include(__DIR__."/classes/db.php");
 	include_once(__DIR__ . '/classes/user.php'); 
 	
-	var_dump($_SESSION['user']);
 
-	
+	//var_dump($_POST);
+
 	if (!empty($_POST)) {
-		//echo "test";
 
-		
+
 
 		$location = $_POST['location'];
 		$course = $_POST['course'];
@@ -26,11 +25,21 @@ error_reporting(E_ALL);
 		if(!empty($location || $hobby || $extra || $class || $buddy)){
 		
 		//$email = $_SESSION['user']; (nodig om te laten sturen)
-		
-		$result = user::updateProfile($location,$course,$hobby,$extra,$class,$buddy);
-
+		$user = new User();
+		$user->setlocation($_POST["location"]);
+		$user->setCourse($_POST["course"]);
+		$user->setHobby($_POST["hobby"]);
+		$user->setExtra($_POST["extra"]);
+		$user->setClass($_POST["class"]);
+		$user->setBuddy($_POST["buddy"]);
+		$user->updateProfile();
+			echo "succes";
+		}
+		else{
+			echo "veld kan niet leeg zijn";
 		}
 	}
+	
 
 
 	function profileUpdate( $field ){
@@ -54,7 +63,7 @@ error_reporting(E_ALL);
 	<body style="margin-left:20px;">      
 		<h3>Update Profile Information</h3> 
 
-	       <form method="post" action="">     
+	       <form action="" method="post">     
 				<?php if(isset($error)): ?>
 					<div class="form__error">
 						<p><?php echo $error; ?></p>

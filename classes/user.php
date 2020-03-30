@@ -274,13 +274,21 @@ class User
         return $result['password'];
     }
 
-    public static function updateProfile($location,$course,$hobby,$extra,$class,$buddy)
+    public static function updateProfile()
     {
         $email = $_SESSION["user"];
 
         $conn = Db::getConnection();
         
         $statement = $conn->prepare("INSERT INTO users (location, interests, hobby, extra, class, buddy ) VALUES (:location,:course,:hobby,:extra,:class,:buddy) where email = $email ");
+
+        $location = $this->getLocation();
+        $course = $this->getCourse();
+        $hobby = $this->getHobby();
+        $extra = $this->getExtra();
+        $class = $this->getClass();
+        $buddy = $this->getBuddy();
+
         $statement->bindValue(":location", $location);
         $statement->bindValue(":course", $course);
         $statement->bindValue(":hobby", $hobby);
