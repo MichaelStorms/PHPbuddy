@@ -1,45 +1,53 @@
 <?php
+/*
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+error_reporting(E_ALL);*/
 
 	session_start();
-
-	include(__DIR__."/classes/db.php");
+	
+	include(__DIR__. "/classes/db.php");
 	include_once(__DIR__ . '/classes/user.php'); 
 	
 	var_dump($_SESSION['user']);
 
 	
 	if (!empty($_POST)) {
-		//echo "test";
+		echo "test";
 
 		
 
-		$location = $_POST['location'];
+		$locatie = $_POST['locatie'];
 		$course = $_POST['course'];
 		$hobby = $_POST['hobby'];
 		$extra = $_POST['extra'];
 		$class = $_POST['class'];
 		$buddy = $_POST['buddy'];
 
-		if(!empty($location || $hobby || $extra || $class || $buddy)){
+		if(!empty($locatie) || !empty($hobby) || !empty($extra) || !empty($class) || !empty($buddy)){
 		
-		//$email = $_SESSION['user']; (nodig om te laten sturen)
-		
-		$result = user::updateProfile($location,$course,$hobby,$extra,$class,$buddy);
-
+		echo "succes";
+		$user = new User();
+		$user->setLocatie($_POST["locatie"]);
+		$user->setCourse($_POST["course"]);
+		$user->setHobby($_POST["hobby"]);
+		$user->setExtra($_POST["extra"]);
+		$user->setClass($_POST["class"]);
+		$user->setBuddy($_POST["buddy"]);
+		}
+		else{
+			echo "niet succes";
 		}
 	}
 
-
+/*
 	function profileUpdate( $field ){
 		if (preg_match("/^[^@]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$/", $field)){
 			return true;
 		}
 		return false;
 	}
-
+*/
 ?><!DOCTYPE html>
 <html>
     <head>  
@@ -61,8 +69,8 @@ error_reporting(E_ALL);
 					</div>
 				<?php endif; ?>   
 				    			
-				<label>Location:</label><br> 
-		         <input style="width:100px" type="text" name="location" placeholder="Waar woon je/ zit je op kot?" /><br> 
+				<label>Locatie:</label><br> 
+		         <input style="width:100px" type="text" name="locatie" placeholder="Waar woon je/ zit je op kot?" /><br> 
 
 				<div class="dropdown">
 					<label>Interesse in de richting IMD:</label><br> 

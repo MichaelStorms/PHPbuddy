@@ -10,7 +10,7 @@ class User
     protected $password;
     protected $class;
     protected $buddy;
-    private $location;
+    private $locatie;
     private $course;
     private $hobby;
     private $extra;
@@ -99,9 +99,9 @@ class User
 /**
      * Get the value of location
      */ 
-    public function getLocation()
+    public function getLocatie()
     {
-        return $this->location;
+        return $this->locatie;
     }
 
     /**
@@ -109,9 +109,9 @@ class User
      *
      * @return  self
      */ 
-    public function setLocation($location)
+    public function setLocatie($locatie)
     {
-        $this->location = $location;
+        $this->locatie = $locatie;
 
         return $this;
     }
@@ -274,19 +274,27 @@ class User
         return $result['password'];
     }
 
-    public static function updateProfile($location,$course,$hobby,$extra,$class,$buddy)
+    public function updateProfile()
     {
-        $email = $_SESSION["user"];
+        $email = trim($_SESSION['user']); 
 
         $conn = Db::getConnection();
-        
-        $statement = $conn->prepare("INSERT INTO users (location, interests, hobby, extra, class, buddy ) VALUES (:location,:course,:hobby,:extra,:class,:buddy) where email = $email ");
-        $statement->bindValue(":location", $location);
-        $statement->bindValue(":course", $course);
-        $statement->bindValue(":hobby", $hobby);
-        $statement->bindValue(":extra", $extra);
-        $statement->bindValue(":class", $class);
-        $statement->bindValue(":buddy", $buddy);
+        $statement = $conn->prepare("UPDATE users SET locatie = :locatie, interests = :course, hobby = :hobby, extra = :extra, class = :class, buddy = :buddy WHERE email = '$email'"); //:email moet voor een of andere reden.
+
+        $locatie = $this->getLocatie();
+        $course = $this->getCourse();
+        $hobby = $this->getHobby();
+        $extra = $this->getExtra();
+        $class = $this->getClass();
+        $buddy = $this->getBuddy();
+
+        $statement->bindParam(":locatie", $locatie);
+        $statement->bindParam(":course", $course);
+        $statement->bindParam(":hobby", $hobby);
+        $statement->bindParam(":extra", $extra);
+        $statement->bindParam(":class", $class);
+        $statement->bindParam(":buddy", $buddy);
+      //  $statement->bindParam(":email", $email);
         
 
         $result = $statement->execute();

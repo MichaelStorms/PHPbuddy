@@ -7,7 +7,7 @@
     $user = new User();
     $user->setFirstname($_POST["firstname"]);
     $user->setLastname($_POST["lastname"]);
-    $user->setEmail($_POST["email"]);
+    $user->setEmail(trim($_POST["email"]));
     $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
     $email = $_POST["email"];
