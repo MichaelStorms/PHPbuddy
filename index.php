@@ -22,6 +22,7 @@
       <form action="logout.php" method="post">
         <div class="form__field">
           <input type="submit" value="Logout" class="btn btn--primary">
+          <a href="profileFeatures.php">update your profile.</a>
         </div>
       </form>
     </div>

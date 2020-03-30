@@ -8,20 +8,28 @@ error_reporting(E_ALL);
 	include(__DIR__."/classes/db.php");
 	include_once(__DIR__ . '/classes/user.php'); 
 	
-	//var_dump($_SESSION['user']);
+	var_dump($_SESSION['user']);
+
 	
 	if (!empty($_POST)) {
 		//echo "test";
+
+		
 
 		$location = $_POST['location'];
 		$course = $_POST['course'];
 		$hobby = $_POST['hobby'];
 		$extra = $_POST['extra'];
+		$class = $_POST['class'];
+		$buddy = $_POST['buddy'];
+
+		if(!empty($location || $hobby || $extra || $class || $buddy)){
 		
 		//$email = $_SESSION['user']; (nodig om te laten sturen)
+		
+		$result = user::updateProfile($location,$course,$hobby,$extra,$class,$buddy);
 
-		$result = user::updateProfile($location,$course,$hobby,$extra,$email);
-
+		}
 	}
 
 
@@ -59,10 +67,10 @@ error_reporting(E_ALL);
 				<div class="dropdown">
 					<label>Interesse in de richting IMD:</label><br> 
 						<select name="course" id="course" >
-							<option value="0">Kies</option>
-							<option value="Voetbal">Development</option>
-							<option value="Basketbal">Design</option>
-							<option value="Gaming">Design & Development</option>
+							<option value="">Kies</option>
+							<option value="Development">Development</option>
+							<option value="Design">Design</option>
+							<option value="Design & Development">Design & Development</option>
 						</select>
 				</div>
 
@@ -70,7 +78,7 @@ error_reporting(E_ALL);
 		         <div class="dropdown">
 					<label>Hobby:</label><br> 
 						<select name="hobby" id="hobby">
-							<option value="0">Kies</option>
+							<option value="">Kies</option>
 							<option value="Voetbal">Voetbal</option>
 							<option value="Basketbal">Basketbal</option>
 							<option value="Gaming">Gaming</option>
@@ -82,9 +90,28 @@ error_reporting(E_ALL);
 		         <div class="dropdown">
 					<label>Extra:</label><br> 
 						<select name="extra" id="extra">
-							<option value="0">Kies</option>
+							<option value="">Kies</option>
 							<option value="foodie">Ik ben een foodie</option>
 							<option value="party">Ik vind een stevige party wel tof</option>
+						</select>
+				</div>
+
+				<div class="dropdown">
+					<label>Welke klas zit je in:</label><br> 
+						<select name="class" id="class" >
+							<option value="">Kies</option>
+							<option value="1IMD">1IMD</option>
+							<option value="2IMD">2IMD</option>
+							<option value="3IMD">3IMD</option>
+						</select>
+				</div>
+
+				<div class="dropdown">
+					<label>Zoek je een buddy of wil je een buddy onder hoede nemen:</label><br> 
+						<select name="buddy" id="buddy" >
+							<option value="">Kies</option>
+							<option value="BuddySearcher">Ik zoek een buddy</option>
+							<option value="BuddyHolder">Ik wil een buddy onder mijn hoede</option>
 						</select>
 				</div>
 			        

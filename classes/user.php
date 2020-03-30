@@ -8,6 +8,8 @@ class User
     protected $lastname;
     protected $email;
     protected $password;
+    protected $class;
+    protected $buddy;
     private $location;
     private $course;
     private $hobby;
@@ -174,6 +176,50 @@ class User
         return $this;
     }
 
+    /**
+     * Get the value of class
+     */ 
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
+     * Set the value of class
+     *
+     * @return  self
+     */ 
+    public function setClass($class)
+    {
+        $this->class = $class;
+
+        return $this;
+    }
+
+        /**
+     * Get the value of buddy
+     */ 
+    public function getBuddy()
+    {
+        return $this->buddy;
+    }
+
+    /**
+     * Set the value of buddy
+     *
+     * @return  self
+     */ 
+    public function setBuddy($buddy)
+    {
+        $this->buddy = $buddy;
+
+        return $this;
+    }
+
+
+
+
+
     public function save()
     {
         $conn = Db::getConnection();
@@ -228,22 +274,26 @@ class User
         return $result['password'];
     }
 
-    public static function updateProfile($location,$course,$hobby,$extra,$email)
+    public static function updateProfile($location,$course,$hobby,$extra,$class,$buddy)
     {
+        $email = $_SESSION["user"];
+
         $conn = Db::getConnection();
         
-        $statement = $conn->prepare("INSERT INTO users (`location`, `interests`, `hobby`, `extra`) VALUES (:location,:course,:hobby,:extra) where email = :email ");
+        $statement = $conn->prepare("INSERT INTO users (location, interests, hobby, extra, class, buddy ) VALUES (:location,:course,:hobby,:extra,:class,:buddy) where email = $email ");
         $statement->bindValue(":location", $location);
         $statement->bindValue(":course", $course);
         $statement->bindValue(":hobby", $hobby);
         $statement->bindValue(":extra", $extra);
-        $statement->bindValue(":email", $email);
+        $statement->bindValue(":class", $class);
+        $statement->bindValue(":buddy", $buddy);
+        
 
         $result = $statement->execute();
 
         return $result;
     }
-
+}
 
     /*
     public static function getAll(){
@@ -260,4 +310,6 @@ class User
      */
 
     
-}
+
+
+
