@@ -13,7 +13,8 @@ error_reporting(E_ALL);*/
 
 	
 	if (!empty($_POST)) {
-		echo "test";
+		//echo "test";
+		try{
 
 		
 
@@ -26,7 +27,7 @@ error_reporting(E_ALL);*/
 
 		if(!empty($locatie) || !empty($hobby) || !empty($extra) || !empty($class) || !empty($buddy)){
 		
-		echo "succes";
+		//echo "succes";
 		$user = new User();
 		$user->setLocatie($_POST["locatie"]);
 		$user->setCourse($_POST["course"]);
@@ -36,9 +37,12 @@ error_reporting(E_ALL);*/
 		$user->setBuddy($_POST["buddy"]);
 		}
 		else{
-			echo "niet succes";
+			//echo "niet succes";
 		}
 	}
+	catch(\Throwable $th){
+		$error = $th->getMessage();
+	}}
 
 /*
 	function profileUpdate( $field ){
