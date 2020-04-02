@@ -12,8 +12,8 @@ include_once(__DIR__ . "/db.php");
 
 
 
-
-
+    
+ 
 
     public static function getUsers(){
         $conn = Db::getConnection();

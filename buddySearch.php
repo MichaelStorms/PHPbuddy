@@ -1,5 +1,6 @@
 <?php
 include_once(__DIR__ . "/classes/Filter.php");
+include_once("filterArray.php");
   session_start();
   $i = 0;
   $email = $_SESSION["user"];
@@ -42,22 +43,38 @@ include_once(__DIR__ . "/classes/Filter.php");
       </div>
       <?php endif; ?>
       <?php if(!empty(Filter::getInterests($email)[0]["interests"])): ?>
-      <div class="form__field">
-      <label for="interests">zoek op <?php echo Filter::getInterests($email)[0]["interests"]; ?></label>
-      <input type="checkbox" id="interests" name="interests" value="<?php echo Filter::getInterests($email)[0]["interests"]; ?>">
-      </div>
+        <div class="dropdown">
+					<label>filter op richting:</label><br> 
+						<select name="course" id="course" >
+            <option value="">Kies</option>
+              <?php foreach($coursesList as $course): ?>
+							<option value="<?php echo $course ?>"><?php echo $course?> </option>
+              <?php endforeach; ?>
+						</select>
+				</div>
       <?php endif; ?>
       <?php if(!empty(Filter::getHobby($email)[0]["hobby"])): ?>
-      <div class="form__field">
-      <label for="hobby">zoek op <?php echo Filter::getHobby($email)[0]["hobby"]; ?></label>
-      <input type="checkbox" id="hobby" name="hobby" value="<?php echo Filter::getHobby($email)[0]["hobby"]; ?>">
-      </div>
+        <div class="dropdown">
+					<label>filter op hobby:</label><br> 
+						<select name="hobby" id="hobby" >
+            <option value="">Kies</option>
+              <?php foreach($hobbyList as $hobby): ?>
+							<option value="<?php echo $hobby ?>"><?php echo $hobby?> </option>
+              <?php endforeach; ?>
+						</select>
+				</div>
       <?php endif; ?>
       <?php if(!empty(Filter::getExtra($email)[0]["extra"])): ?>
-      <div class="form__field">
-      <label for="extra">zoek op <?php echo Filter::getExtra($email)[0]["extra"]; ?></label>
-      <input type="checkbox" id="extra" name="extra" value="<?php echo Filter::getExtra($email)[0]["extra"]; ?>">
-      </div>
+         <div class="dropdown">
+					<label>filter op extra:</label><br> 
+						<select name="extra" id="extra">
+              <option value="">Kies</option>
+              <?php foreach($extraList as $extra): ?>
+							<option value="<?php echo $extra ?>"><?php echo $extra?> </option>
+              <?php endforeach; ?>
+
+						</select>
+				</div>
       <?php endif; ?>
       <div class="form__field">
       <input value="Find a buddy!" type="submit" id="submit" class="btn btn--primary">
@@ -69,7 +86,7 @@ include_once(__DIR__ . "/classes/Filter.php");
     <?php foreach($users as $key => $user){ ?>
     <div class="user" style="margin-top:50px; margin-left:20px;">
     <a href="profilePage.php?id=<?php  echo $key; ?>" style="background-image: url(<?php echo $user["image"] ?>)"></a>
-    <a href="profilePage.php?id=<?php  echo $key; ?>"><p><?php echo $user["Firstname"] ." " . $user["LastName"] ?></p></a>
+    <a href="profilePage.php?id=<?php  echo $key; ?>"><p><?php echo ucfirst($user["Firstname"]) ." " . $user["LastName"] ?></p></a>
     <p>woont in: <?php echo $user["locatie"] ?></p>
     <p>zit in klas: <?php echo $user["class"] ?></p>
     </div>
