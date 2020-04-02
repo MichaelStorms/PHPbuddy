@@ -10,6 +10,16 @@
 
 * [Feature 4](https://github.com/MichaelStorms/PHPbuddy/tree/Feature-4)
 
+* [Feature 5](https://github.com/MichaelStorms/PHPbuddy/tree/Feature-5)
+
+* [Feature 6](https://github.com/MichaelStorms/PHPbuddy/tree/Feature-6)
+
+* [Feature 7](https://github.com/MichaelStorms/PHPbuddy/tree/Feature-7)
+
+* [Feature 8](https://github.com/MichaelStorms/PHPbuddy/tree/Feature-8)
+
+* [Feature 9](https://github.com/MichaelStorms/PHPbuddy/tree/Feature-9)
+
 
 
 
