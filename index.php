@@ -23,6 +23,7 @@
         <div class="form__field">
           <input type="submit" value="Logout" class="btn btn--primary">
           <a href="profileFeatures.php">update your profile.</a>
+          <a href="buddySearch.php">go find a buddy!</a>
         </div>
       </form>
     </div>
