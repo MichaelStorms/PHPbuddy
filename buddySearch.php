@@ -18,7 +18,7 @@ include_once("filterArray.php");
     {
       $searchResult = $filter->searchPerson($search);
     }else if(!empty($course)||!empty($locatie)||!empty($hobby)||!empty($extra)){
-      var_dump($searchResult = $filter->filterSearch($course,$locatie,$hobby,$extra));
+      $searchResult = $filter->filterSearch($course,$locatie,$hobby,$extra);
     }
   }
   else{
