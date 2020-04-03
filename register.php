@@ -5,15 +5,13 @@
      try{
 
     $user = new User();
-    $user->setFirstname($_POST["firstname"]);
-    $user->setLastname($_POST["lastname"]);
-    $user->setEmail(trim($_POST["email"]));
-    $user->setClass($_POST["class"]);
-    $user->setBuddy($_POST["buddy"]);
+
     $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
     $email = $_POST["email"];
     $password = $_POST["password"];
+    $buddy = $_POST["buddy"];
+    $class = $_POST["class"];
     $passwordConfirmation = $_POST["password_confirmation"];
     $email = trim($email);
     $domain = explode("@", $email);
@@ -22,7 +20,7 @@
 
 
 
-    if( !empty($firstname) && !empty($lastname) && !empty($email) && in_array($domain,$whitelist) ){
+    if( !empty($firstname) && !empty($lastname) && !empty($buddy) && !empty($class) && !empty($email) && in_array($domain,$whitelist) ){
         /*$sql_e = $conn->query("SELECT * FROM users WHERE email='$email'");
         $res_e = mysqli_query($conn, $sql_e);*/
         
@@ -39,7 +37,11 @@
                 session_start();
                 $_SESSION["user"] = $email;
                 header("location:index.php");
-    
+                $user->setFirstname($_POST["firstname"]);
+                $user->setLastname($_POST["lastname"]);
+                $user->setEmail(trim($_POST["email"]));
+                $user->setClass($_POST["class"]);
+                $user->setBuddy($_POST["buddy"]);
                 $user->save();
                 /*$query = "INSERT INTO `users`(`firstname`,`lastname`,`email`, `password`) VALUES ('$firstname','$lastname','$email','$password')";
                 $results = $conn->query($query);*/
