@@ -13,7 +13,6 @@ include_once("filterArray.php");
     if(!empty($locatie)){ $locatie = $_GET["locatie"];}
     $hobby = $_GET["hobby"];
     $extra = $_GET["extra"];
-    var_dump($locatie);
     if(!empty($search))
     {
       $searchResult = $filter->searchPerson($search);
