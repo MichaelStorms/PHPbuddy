@@ -8,6 +8,8 @@
     $user->setFirstname($_POST["firstname"]);
     $user->setLastname($_POST["lastname"]);
     $user->setEmail(trim($_POST["email"]));
+    $user->setClass($_POST["class"]);
+    $user->setBuddy($_POST["buddy"]);
     $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
     $email = $_POST["email"];
@@ -103,6 +105,22 @@ catch(\Throwable $th){
                 <div class="form__field">
 					<label for="password_confirmation">Confirm your password</label>
 					<input type="password" id="password_confirmation" name="password_confirmation">
+                </div>
+                <div class="dropdown">
+					<label>Welke klas zit je in:</label><br> 
+						<select name="class" id="class" >
+							<option value="1IMD">1IMD</option>
+							<option value="2IMD">2IMD</option>
+							<option value="3IMD">3IMD</option>
+						</select>
+				</div>
+
+				<div class="dropdown">
+					<label>Zoek je een buddy of wil je een buddy onder hoede nemen:</label><br> 
+						<select name="buddy" id="buddy" >
+							<option value="BuddySearcher">Ik zoek een buddy</option>
+							<option value="BuddyHolder">Ik wil een buddy onder mijn hoede</option>
+						</select>
 				</div>
 
 				<div class="form__field">

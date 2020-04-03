@@ -17,7 +17,8 @@ error_reporting(E_ALL);*/
 		try{
 
 		
-
+			$user = new User();
+			
 		$locatie = $_POST['locatie'];
 		$course = $_POST['course'];
 		$hobby = $_POST['hobby'];
@@ -25,19 +26,29 @@ error_reporting(E_ALL);*/
 		$class = $_POST['class'];
 		$buddy = $_POST['buddy'];
 
-		if(!empty($locatie) || !empty($hobby) || !empty($extra) || !empty($class) || !empty($buddy)){
+		if(!empty($locatie) || !empty($hobby) || !empty($course) || !empty($extra) || !empty($class) || !empty($buddy)){
 		
 		//echo "succes";
-		$user = new User();
 		$user->setLocatie($_POST["locatie"]);
 		$user->setCourse($_POST["course"]);
 		$user->setHobby($_POST["hobby"]);
 		$user->setExtra($_POST["extra"]);
 		$user->setClass($_POST["class"]);
 		$user->setBuddy($_POST["buddy"]);
+
+		$user->updateProfile();
+		}
+		else if(!empty($locatie) || !empty($hobby) || !empty($course) || !empty($extra)){
+
+			$user->setLocatie($_POST["locatie"]);
+			$user->setCourse($_POST["course"]);
+			$user->setHobby($_POST["hobby"]);
+			$user->setExtra($_POST["extra"]);
+			$user->updateProfileNoClassBuddy();
 		}
 		else{
 			//echo "niet succes";
+
 		}
 	}
 	catch(\Throwable $th){

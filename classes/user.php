@@ -224,17 +224,21 @@ class User
     {
         $conn = Db::getConnection();
 
-        $statement = $conn->prepare("insert into users (firstname, lastname, email, password) values (:firstname, :lastname, :email, :password)");
+        $statement = $conn->prepare("insert into users (firstname, lastname, email, password, class, buddy) values (:firstname, :lastname, :email, :password , :class, :buddy)");
 
         $firstname = $this->getFirstname();
         $lastname = $this->getLastname();
         $email = $this->getEmail();
         $password = $this->getPassword();
+        $class = $this->getClass();
+        $buddy = $this->getBuddy();
 
         $statement->bindValue(":firstname", $firstname);
         $statement->bindValue(":lastname", $lastname);
         $statement->bindValue(":email", $email);
         $statement->bindValue(":password", $password);
+        $statement->bindValue(":class",$class);
+        $statement->bindValue(":buddy",$buddy);
 
         $result = $statement->execute();
 
@@ -294,6 +298,31 @@ class User
         $statement->bindParam(":extra", $extra);
         $statement->bindParam(":class", $class);
         $statement->bindParam(":buddy", $buddy);
+      //  $statement->bindParam(":email", $email);
+        
+
+        $result = $statement->execute();
+
+        return $result;
+    }
+    public function updateProfileNoClassBuddy()
+    {
+        $email = trim($_SESSION['user']); 
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET locatie = :locatie, interests = :course, hobby = :hobby, extra = :extra WHERE email = '$email'"); //:email moet voor een of andere reden.
+
+        $locatie = $this->getLocatie();
+        $course = $this->getCourse();
+        $hobby = $this->getHobby();
+        $extra = $this->getExtra();
+
+
+        $statement->bindParam(":locatie", $locatie);
+        $statement->bindParam(":course", $course);
+        $statement->bindParam(":hobby", $hobby);
+        $statement->bindParam(":extra", $extra);
+
       //  $statement->bindParam(":email", $email);
         
 
