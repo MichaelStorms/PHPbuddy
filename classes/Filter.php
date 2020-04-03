@@ -53,6 +53,23 @@ include_once(__DIR__ . "/db.php");
         return $extra;
     }
 
+    public static function searchPerson($search){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT * FROM users WHERE CONCAT_WS(' ', firstname, lastname) LIKE '%$search%'");
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public static function filterSearch($course,$locatie,$hobby,$extra){
+        $conn = Db::getConnection();
+        $query = "SELECT * FROM users WHERE ('$course' = '' OR interests = '$course') AND ('$locatie' = '' OR locatie = '$locatie') AND ('$hobby' = '' OR hobby = '$hobby') AND ('$extra' = '' OR extra= '$extra')";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     /**
      * Get the value of search
      */ 

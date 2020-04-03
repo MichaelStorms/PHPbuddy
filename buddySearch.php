@@ -5,9 +5,21 @@ include_once("filterArray.php");
   $i = 0;
   $email = $_SESSION["user"];
   $filter = new Filter();
+  $locatie = '';
   $users = $filter->getUsers();
   if(!empty($_GET)){
-
+    $search = htmlspecialchars($_GET["search"]);
+    $course = $_GET["course"];
+    if(!empty($locatie)){ $locatie = $_GET["locatie"];}
+    $hobby = $_GET["hobby"];
+    $extra = $_GET["extra"];
+    var_dump($locatie);
+    if(!empty($search))
+    {
+      $searchResult = $filter->searchPerson($search);
+    }else if(!empty($course)||!empty($locatie)||!empty($hobby)||!empty($extra)){
+      var_dump($searchResult = $filter->filterSearch($course,$locatie,$hobby,$extra));
+    }
   }
   else{
     shuffle($users);
@@ -83,6 +95,7 @@ include_once("filterArray.php");
     </form>
     </div>
     <div class="user__list"> 
+    <?php if(empty($_GET)){ ?>
     <?php foreach($users as $key => $user){ ?>
     <div class="user" style="margin-top:50px; margin-left:20px;">
     <a href="profilePage.php?id=<?php  echo $key; ?>" style="background-image: url(<?php echo $user["image"] ?>)"></a>
@@ -91,7 +104,15 @@ include_once("filterArray.php");
     <p>zit in klas: <?php echo $user["class"] ?></p>
     </div>
     <?php if(++$i == 10) break; ?>
-    <?php } ?>
+    <?php }}else if(!empty($_GET)){ ?>
+      <?php foreach($searchResult as $key => $result){ ?>
+      <div class="user" style="margin-top:50px; margin-left:20px;">
+    <a href="profilePage.php?id=<?php  echo $key; ?>" style="background-image: url(<?php echo $result["image"] ?>)"></a>
+    <a href="profilePage.php?id=<?php  echo $key; ?>"><p><?php echo ucfirst($result["firstname"]) ." " . $result["lastname"] ?></p></a>
+    <p>woont in: <?php echo $result["locatie"] ?></p>
+    <p>zit in klas: <?php echo $result["class"] ?></p>
+    </div>
+    <?php }} ?>
     </div> 
 
 
