@@ -8,12 +8,13 @@ class User
     protected $lastname;
     protected $email;
     protected $password;
-    private $location;
-    private $course;
-    private $hobby;
-    private $extra;
+    protected $id;
 
 
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Get the value of firstname
@@ -93,87 +94,6 @@ class User
 
         return $this;
     }
-
-/**
-     * Get the value of location
-     */ 
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * Set the value of location
-     *
-     * @return  self
-     */ 
-    public function setLocation($location)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of course
-     */ 
-    public function getCourse()
-    {
-        return $this->course;
-    }
-
-    /**
-     * Set the value of course
-     *
-     * @return  self
-     */ 
-    public function setCourse($course)
-    {
-        $this->course = $course;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of hobby
-     */ 
-    public function getHobby()
-    {
-        return $this->hobby;
-    }
-
-    /**
-     * Set the value of hobby
-     *
-     * @return  self
-     */ 
-    public function setHobby($hobby)
-    {
-        $this->hobby = $hobby;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of extra
-     */ 
-    public function getExtra()
-    {
-        return $this->extra;
-    }
-
-    /**
-     * Set the value of extra
-     *
-     * @return  self
-     */ 
-    public function setExtra($extra)
-    {
-        $this->extra = $extra;
-
-        return $this;
-    }
-
     public function save()
     {
         $conn = Db::getConnection();
@@ -194,6 +114,7 @@ class User
 
         return $result;
     }
+    
     public static function checkDouble($email)
     {
         $conn = DB::getConnection();
@@ -228,22 +149,6 @@ class User
         return $result['password'];
     }
 
-    public static function updateProfile($location,$course,$hobby,$extra,$email)
-    {
-        $conn = Db::getConnection();
-        
-        $statement = $conn->prepare("INSERT INTO users (`location`, `interests`, `hobby`, `extra`) VALUES (:location,:course,:hobby,:extra) where email = :email ");
-        $statement->bindValue(":location", $location);
-        $statement->bindValue(":course", $course);
-        $statement->bindValue(":hobby", $hobby);
-        $statement->bindValue(":extra", $extra);
-        $statement->bindValue(":email", $email);
-
-        $result = $statement->execute();
-
-        return $result;
-    }
-
 
     /*
     public static function getAll(){
@@ -258,6 +163,4 @@ class User
     /**
      * Get the value of password
      */
-
-    
 }
