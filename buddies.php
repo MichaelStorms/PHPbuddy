@@ -35,7 +35,7 @@ var_dump($buddy);
               <img src='https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraight&accessoriesType=Blank&hairColor=BlondeGolden&facialHairType=Blank&clotheType=ShirtVNeck&clotheColor=PastelBlue&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Pale' class="img-circle" width="60px">
           </div>
           <div class="col-sm-8">
-            <h4><a href="#"> <?php echo $buddy[]; ?></a></h4>
+            <h4><a href="#"> <?php echo $buddy[id]; ?></a></h4>
             <p><a href="#">4 mutual friends</a></p>
           </div>
           <div class="col-sm-2">
