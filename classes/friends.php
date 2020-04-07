@@ -16,6 +16,15 @@ class Buddy{
 
         return $result;
     }
+
+    public static function getAll(){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("select * FROM friends WHERE Buddies");
+        $statement->execute();
+        $buddies = $statement-> fetch(PDO::FETCH_ASSOC);
+
+        return $buddies;
+    }
 }
 ?>
 
