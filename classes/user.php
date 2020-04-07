@@ -8,7 +8,9 @@ class User
     protected $lastname;
     protected $email;
     protected $password;
-    private $location;
+    protected $class;
+    protected $buddy;
+    private $locatie;
     private $course;
     private $hobby;
     private $extra;
@@ -97,9 +99,9 @@ class User
 /**
      * Get the value of location
      */ 
-    public function getLocation()
+    public function getLocatie()
     {
-        return $this->location;
+        return $this->locatie;
     }
 
     /**
@@ -107,9 +109,9 @@ class User
      *
      * @return  self
      */ 
-    public function setLocation($location)
+    public function setLocatie($locatie)
     {
-        $this->location = $location;
+        $this->locatie = $locatie;
 
         return $this;
     }
@@ -174,21 +176,69 @@ class User
         return $this;
     }
 
+    /**
+     * Get the value of class
+     */ 
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
+     * Set the value of class
+     *
+     * @return  self
+     */ 
+    public function setClass($class)
+    {
+        $this->class = $class;
+
+        return $this;
+    }
+
+        /**
+     * Get the value of buddy
+     */ 
+    public function getBuddy()
+    {
+        return $this->buddy;
+    }
+
+    /**
+     * Set the value of buddy
+     *
+     * @return  self
+     */ 
+    public function setBuddy($buddy)
+    {
+        $this->buddy = $buddy;
+
+        return $this;
+    }
+
+
+
+
+
     public function save()
     {
         $conn = Db::getConnection();
 
-        $statement = $conn->prepare("insert into users (firstname, lastname, email, password) values (:firstname, :lastname, :email, :password)");
+        $statement = $conn->prepare("insert into users (firstname, lastname, email, password, class, buddy) values (:firstname, :lastname, :email, :password , :class, :buddy)");
 
         $firstname = $this->getFirstname();
         $lastname = $this->getLastname();
         $email = $this->getEmail();
         $password = $this->getPassword();
+        $class = $this->getClass();
+        $buddy = $this->getBuddy();
 
         $statement->bindValue(":firstname", $firstname);
         $statement->bindValue(":lastname", $lastname);
         $statement->bindValue(":email", $email);
         $statement->bindValue(":password", $password);
+        $statement->bindValue(":class",$class);
+        $statement->bindValue(":buddy",$buddy);
 
         $result = $statement->execute();
 
@@ -228,22 +278,59 @@ class User
         return $result['password'];
     }
 
-    public static function updateProfile($location,$course,$hobby,$extra,$email)
+    public function updateProfile()
     {
+        $email = trim($_SESSION['user']); 
+
         $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET locatie = :locatie, interests = :course, hobby = :hobby, extra = :extra, class = :class, buddy = :buddy WHERE email = '$email'"); //:email moet voor een of andere reden.
+
+        $locatie = $this->getLocatie();
+        $course = $this->getCourse();
+        $hobby = $this->getHobby();
+        $extra = $this->getExtra();
+        $class = $this->getClass();
+        $buddy = $this->getBuddy();
+
+        $statement->bindParam(":locatie", $locatie);
+        $statement->bindParam(":course", $course);
+        $statement->bindParam(":hobby", $hobby);
+        $statement->bindParam(":extra", $extra);
+        $statement->bindParam(":class", $class);
+        $statement->bindParam(":buddy", $buddy);
+      //  $statement->bindParam(":email", $email);
         
-        $statement = $conn->prepare("INSERT INTO users (`location`, `interests`, `hobby`, `extra`) VALUES (:location,:course,:hobby,:extra) where email = :email ");
-        $statement->bindValue(":location", $location);
-        $statement->bindValue(":course", $course);
-        $statement->bindValue(":hobby", $hobby);
-        $statement->bindValue(":extra", $extra);
-        $statement->bindValue(":email", $email);
 
         $result = $statement->execute();
 
         return $result;
     }
+    public function updateProfileNoClassBuddy()
+    {
+        $email = trim($_SESSION['user']); 
 
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET locatie = :locatie, interests = :course, hobby = :hobby, extra = :extra WHERE email = '$email'"); //:email moet voor een of andere reden.
+
+        $locatie = $this->getLocatie();
+        $course = $this->getCourse();
+        $hobby = $this->getHobby();
+        $extra = $this->getExtra();
+
+
+        $statement->bindParam(":locatie", $locatie);
+        $statement->bindParam(":course", $course);
+        $statement->bindParam(":hobby", $hobby);
+        $statement->bindParam(":extra", $extra);
+
+      //  $statement->bindParam(":email", $email);
+        
+
+        $result = $statement->execute();
+
+        return $result;
+    }
+}
 
     /*
     public static function getAll(){
@@ -260,4 +347,6 @@ class User
      */
 
     
-}
+
+
+
