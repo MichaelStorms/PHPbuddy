@@ -20,7 +20,19 @@
         foreach(fetchAll($query) as $i){
             if($i['type']=='like'){
                 echo ucfirst($i['name'])." liked your post. <br/>".$i['date'];
-            }else{
+            }else if($i['type']=='❤'){
+                echo ucfirst($i['name'])." ❤ your post. <br/>".$i['date'];
+            }
+            else if($i['type']=='😂'){
+                echo ucfirst($i['name'])." 😂 your post. <br/>".$i['date'];
+            }else if($i['type']=='😮'){
+                echo ucfirst($i['name'])." 😮 your post. <br/>".$i['date'];
+            }else if($i['type']=='😥'){
+                echo ucfirst($i['name'])." 😥 your post. <br/>".$i['date'];
+            }else if($i['type']=='😡'){
+                echo ucfirst($i['name'])." 😡 your post. <br/>".$i['date'];
+            }
+            else{
                 echo "Some commented on your post.<br/>".$i['message'];
             }
         }
