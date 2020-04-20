@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 14, 2020 at 03:11 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.3
+-- Host: 127.0.0.1:3308
+-- Gegenereerd op: 20 apr 2020 om 14:51
+-- Serverversie: 8.0.18
+-- PHP-versie: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,54 +25,71 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `buddychat`
+-- Tabelstructuur voor tabel `buddychat`
 --
 
-CREATE TABLE `buddychat` (
-  `id` int(11) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `buddychat`;
+CREATE TABLE IF NOT EXISTS `buddychat` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `sender_id` int(11) NOT NULL,
   `receiver_id` int(11) NOT NULL,
-  `message` varchar(10000) CHARACTER SET utf8mb4 NOT NULL,
-  `messageread` tinyint(1) DEFAULT NULL
+  `message` varchar(10000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `messageread` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `friends`
+-- Tabelstructuur voor tabel `friends`
 --
 
-CREATE TABLE `friends` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `buddy_one` int(11) NOT NULL,
-  `buddy_two` int(11) NOT NULL,
-  `buddies` int(11) NOT NULL
+DROP TABLE IF EXISTS `friends`;
+CREATE TABLE IF NOT EXISTS `friends` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_one` int(11) NOT NULL,
+  `user_two` int(11) NOT NULL,
+  `buddies` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_one` (`user_one`),
+  KEY `user_two` (`user_two`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `friends`
---
-
-INSERT INTO `friends` (`id`, `buddy_one`, `buddy_two`, `buddies`) VALUES
-(1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notifications`
+-- Tabelstructuur voor tabel `friend_request`
 --
 
-CREATE TABLE `notifications` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `friend_request`;
+CREATE TABLE IF NOT EXISTS `friend_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sender` int(11) NOT NULL,
+  `receiver` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sender` (`sender`),
+  KEY `receiver` (`receiver`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `notifications`
+--
+
+DROP TABLE IF EXISTS `notifications`;
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `type` text NOT NULL,
   `message` text NOT NULL,
   `status` text NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `notifications`
+-- Gegevens worden geëxporteerd voor tabel `notifications`
 --
 
 INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES
@@ -95,27 +112,29 @@ INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabelstructuur voor tabel `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `firstname` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lastname` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `locatie` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `interests` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hobby` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extra` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `class` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `buddy` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `imgDescription` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastname` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locatie` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `interests` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hobby` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extra` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `class` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `buddy` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imgDescription` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Gegevens worden geëxporteerd voor tabel `users`
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `locatie`, `interests`, `hobby`, `extra`, `class`, `buddy`, `image`, `imgDescription`) VALUES
@@ -127,62 +146,22 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `locati
 (10, 'luka', 'luka', 'r0764418@student.thomasmore.be', '$2y$16$wuhQlZ8jMi/bByz9vw8IIuJJiEEybphTaDlp7iL.RZDp.Hu7aU19u', '', '', '', '', '', '', '', '');
 
 --
--- Indexes for dumped tables
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `buddychat`
---
-ALTER TABLE `buddychat`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `friends`
+-- Beperkingen voor tabel `friends`
 --
 ALTER TABLE `friends`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `buddy_one` (`buddy_one`),
-  ADD KEY `buddy_two` (`buddy_two`);
+  ADD CONSTRAINT `friends_ibfk_1` FOREIGN KEY (`user_one`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `friends_ibfk_2` FOREIGN KEY (`user_two`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Indexes for table `notifications`
+-- Beperkingen voor tabel `friend_request`
 --
-ALTER TABLE `notifications`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `buddychat`
---
-ALTER TABLE `buddychat`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `friends`
---
-ALTER TABLE `friends`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `notifications`
---
-ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `friend_request`
+  ADD CONSTRAINT `friend_request_ibfk_1` FOREIGN KEY (`sender`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `friend_request_ibfk_2` FOREIGN KEY (`receiver`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
