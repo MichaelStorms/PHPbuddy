@@ -9,11 +9,8 @@ error_reporting(E_ALL);*/
 	include(__DIR__. "/classes/db.php");
 	include_once(__DIR__ . '/classes/user.php'); 
 	
-<<<<<<< HEAD
-	var_dump($_SESSION['user']);
-=======
+	//$_SESSION['user'];
 
->>>>>>> feature-9
 
 	
 	if (!empty($_POST)) {
@@ -79,6 +76,8 @@ error_reporting(E_ALL);*/
 		<title>Profile Settings</title>
     </head> 
 	<body style="margin-left:20px;">      
+	<?php include_once("nav.inc.php"); ?>
+
 		<h3>Update Profile Information</h3> 
 
 	       <form method="post" action="">     

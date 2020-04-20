@@ -331,7 +331,17 @@ class User
 
         return $result;
     }
+    public static function getUser($email){
+        
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT * FROM users where email ='$email'");
+        $statement->execute();
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $users;
+    }
 }
+
+
 
     /*
     public static function getAll(){

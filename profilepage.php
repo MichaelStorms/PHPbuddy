@@ -104,6 +104,8 @@ if (!empty($_POST['emailOld'])) {
 </head>
 
 <body>
+<?php include_once("nav.inc.php"); ?>
+
 	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 		<h2>change Profile pic</h2>
 		<input type="file" name="avatar">

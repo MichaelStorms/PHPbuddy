@@ -41,6 +41,8 @@ include_once("filterArray.php");
 </head>
 
 <body>
+<?php include_once("nav.inc.php"); ?>
+
     <div>
     <form action="" method="get">
       <div class="form__field">
@@ -97,19 +99,22 @@ include_once("filterArray.php");
     <?php if(empty($_GET)){ ?>
     <?php foreach($users as $key => $user){ ?>
     <div class="user" style="margin-top:50px; margin-left:20px;">
-    <a href="profilePage.php?id=<?php  echo $key; ?>" style="background-image: url(<?php echo $user["image"] ?>)"></a>
-    <a href="profilePage.php?id=<?php  echo $key; ?>"><p><?php echo ucfirst($user["Firstname"]) ." " . $user["LastName"] ?></p></a>
+    <a href="userPage.php?id=<?php  echo $user["id"]; ?>" style="background-image: url(<?php echo $user["image"] ?>)"></a>
+    <a href="userPage.php?id=<?php  echo $user["id"]; ?>"><p><?php echo ucfirst($user["Firstname"]) ." " . $user["LastName"] ?></p></a>
     <p>woont in: <?php echo $user["locatie"] ?></p>
     <p>zit in klas: <?php echo $user["class"] ?></p>
+    <a href="userPage.php?id=<?php echo $user["id"] ?>">Request buddy</a>
+
     </div>
     <?php if(++$i == 10) break; ?>
     <?php }}else if(!empty($_GET)){ ?>
       <?php foreach($searchResult as $key => $result){ ?>
       <div class="user" style="margin-top:50px; margin-left:20px;">
-    <a href="profilePage.php?id=<?php  echo $key; ?>" style="background-image: url(<?php echo $result["image"] ?>)"></a>
-    <a href="profilePage.php?id=<?php  echo $key; ?>"><p><?php echo ucfirst($result["firstname"]) ." " . $result["lastname"] ?></p></a>
+    <a href="userPage.php?id=<?php  echo $result["id"]; ?>" style="background-image: url(<?php echo $result["image"] ?>)"></a>
+    <a href="userPage.php?id=<?php  echo $result["id"]; ?>"><p><?php echo ucfirst($result["firstname"]) ." " . $result["lastname"] ?></p></a>
     <p>woont in: <?php echo $result["locatie"] ?></p>
     <p>zit in klas: <?php echo $result["class"] ?></p>
+    <a href="userPage.php?id=<?php echo $result["id"] ?>">Request buddy</a>
     </div>
     <?php }} ?>
     </div> 

@@ -16,6 +16,8 @@
 </head>
 
 <body>
+<?php include_once("nav.inc.php"); ?>
+
   <h1>Hello, world!</h1>
   <?php if (isset($_SESSION['user'])) : ?>
     <div class="logout-form-wrapper">
