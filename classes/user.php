@@ -248,7 +248,8 @@ class User
     {
         $conn = DB::getConnection();
 
-        $statement = $conn->prepare("SELECT * FROM users WHERE email='$email'"); //$conn->query kan ook
+        $statement = $conn->prepare("SELECT * FROM users WHERE email=:email");
+        $statement->bindParam(":email",$email); //$conn->query kan ook
         $statement->execute();
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $users;
