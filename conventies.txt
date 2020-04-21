@@ -1,0 +1,28 @@
+Namegiving (https://www.php-fig.org/psr/psr-1/): 
+
+    In folder classes: alle files mét hoofdletter
+
+    In folder interfaces: alle files met i en dan woord met hoofdletter
+
+    In folder settings: alles files met kleine letters
+
+OOP: 
+    Werken volgens principes van OOP (4 principes)
+
+    Met classes werken 
+
+    PDO prepare statements gebruiken 
+
+Framework: 
+    Voorlopig gebruik van Bootstrap: https://getbootstrap.com/docs/4.4/getting-started/introduction/
+
+Voorkomen: 
+    SQL Injectie 
+    XSS
+
+
+
+Advanced, moet voldoen aan: 
+https://www.php-fig.org/psr/psr-1/
+https://www.php-fig.org/psr/psr-3/
+https://www.php-fig.org/psr/psr-4/

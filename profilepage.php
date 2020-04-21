@@ -3,12 +3,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include(__DIR__ . "/settings/setting.php");
-include(__DIR__ . "/classe/db.php");
+include(__DIR__ . "/settings/settings.php");
+include(__DIR__ . "/classes/db.php");
 session_start();
 //$conn = new mysqli(SETTINGS['db']['host'], SETTINGS['db']['user'], SETTINGS['db']['password'], SETTINGS['db']['db']);
-$conn = new PDO('mysql:host='.SETTINGS['db']['host'].';dbname='.SETTINGS['db']['db'], SETTINGS['db']['user'], SETTINGS['db']['password']);
-
+$conn = Db::getConnection();
 
 $_SESSION["id"] = 1;
 $_SESSION["password"] = "123";
