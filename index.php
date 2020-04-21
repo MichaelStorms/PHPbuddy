@@ -16,11 +16,18 @@
 </head>
 
 <body>
+<?php include_once("nav.inc.php"); ?>
+
   <h1>Hello, world!</h1>
   <?php if (isset($_SESSION['user'])) : ?>
     <div class="logout-form-wrapper">
       <form action="logout.php" method="post">
         <div class="form__field">
+          <a href="profileFeatures.php">update your profile.</a>
+          <a href="buddySearch.php">go find a buddy!</a>
+          <a href="notifications.php">Chat</a>
+          <a href="buddies.php">Buddies</a>
+          <a href="profilepage.php">🛠</a>
           <input type="submit" value="Logout" class="btn btn--primary">
           <a href="profileFeatures.php">update your profile.</a>
           <a href="buddySearch.php">go find a buddy!</a>
