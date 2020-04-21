@@ -7,13 +7,13 @@ include(__DIR__."/classes/db.php");
 
     function fetchAll($query){
 
-        $conn = DB::getConnection();
+        $conn = Db::getConnection();
         $statement = $conn->query($query);
         return $statement->fetchAll();
     }
     function performQuery($query){
 
-        $conn = DB::getConnection();
+        $conn = Db::getConnection();
         $statement = $conn->query($query);
         if($statement->execute()){
             return true;
