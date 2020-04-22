@@ -96,9 +96,9 @@ class User
         return $this;
     }
 
-/**
+    /**
      * Get the value of location
-     */ 
+     */
     public function getLocatie()
     {
         return $this->locatie;
@@ -108,7 +108,7 @@ class User
      * Set the value of location
      *
      * @return  self
-     */ 
+     */
     public function setLocatie($locatie)
     {
         $this->locatie = $locatie;
@@ -118,7 +118,7 @@ class User
 
     /**
      * Get the value of course
-     */ 
+     */
     public function getCourse()
     {
         return $this->course;
@@ -128,7 +128,7 @@ class User
      * Set the value of course
      *
      * @return  self
-     */ 
+     */
     public function setCourse($course)
     {
         $this->course = $course;
@@ -138,7 +138,7 @@ class User
 
     /**
      * Get the value of hobby
-     */ 
+     */
     public function getHobby()
     {
         return $this->hobby;
@@ -148,7 +148,7 @@ class User
      * Set the value of hobby
      *
      * @return  self
-     */ 
+     */
     public function setHobby($hobby)
     {
         $this->hobby = $hobby;
@@ -158,7 +158,7 @@ class User
 
     /**
      * Get the value of extra
-     */ 
+     */
     public function getExtra()
     {
         return $this->extra;
@@ -168,7 +168,7 @@ class User
      * Set the value of extra
      *
      * @return  self
-     */ 
+     */
     public function setExtra($extra)
     {
         $this->extra = $extra;
@@ -178,7 +178,7 @@ class User
 
     /**
      * Get the value of class
-     */ 
+     */
     public function getClass()
     {
         return $this->class;
@@ -188,7 +188,7 @@ class User
      * Set the value of class
      *
      * @return  self
-     */ 
+     */
     public function setClass($class)
     {
         $this->class = $class;
@@ -196,9 +196,9 @@ class User
         return $this;
     }
 
-        /**
+    /**
      * Get the value of buddy
-     */ 
+     */
     public function getBuddy()
     {
         return $this->buddy;
@@ -208,7 +208,7 @@ class User
      * Set the value of buddy
      *
      * @return  self
-     */ 
+     */
     public function setBuddy($buddy)
     {
         $this->buddy = $buddy;
@@ -237,8 +237,8 @@ class User
         $statement->bindValue(":lastname", $lastname);
         $statement->bindValue(":email", $email);
         $statement->bindValue(":password", $password);
-        $statement->bindValue(":class",$class);
-        $statement->bindValue(":buddy",$buddy);
+        $statement->bindValue(":class", $class);
+        $statement->bindValue(":buddy", $buddy);
 
         $result = $statement->execute();
 
@@ -249,7 +249,7 @@ class User
         $conn = DB::getConnection();
 
         $statement = $conn->prepare("SELECT * FROM users WHERE email=:email");
-        $statement->bindParam(":email",$email); //$conn->query kan ook
+        $statement->bindParam(":email", $email); //$conn->query kan ook
         $statement->execute();
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $users;
@@ -281,7 +281,7 @@ class User
 
     public function updateProfile()
     {
-        $email = trim($_SESSION['user']); 
+        $email = trim($_SESSION['user']);
 
         $conn = Db::getConnection();
         $statement = $conn->prepare("UPDATE users SET locatie = :locatie, interests = :course, hobby = :hobby, extra = :extra, class = :class, buddy = :buddy WHERE email = '$email'"); //:email moet voor een of andere reden.
@@ -299,8 +299,8 @@ class User
         $statement->bindParam(":extra", $extra);
         $statement->bindParam(":class", $class);
         $statement->bindParam(":buddy", $buddy);
-      //  $statement->bindParam(":email", $email);
-        
+        //  $statement->bindParam(":email", $email);
+
 
         $result = $statement->execute();
 
@@ -308,7 +308,7 @@ class User
     }
     public function updateProfileNoClassBuddy()
     {
-        $email = trim($_SESSION['user']); 
+        $email = trim($_SESSION['user']);
 
         $conn = Db::getConnection();
         $statement = $conn->prepare("UPDATE users SET locatie = :locatie, interests = :course, hobby = :hobby, extra = :extra WHERE email = '$email'"); //:email moet voor een of andere reden.
@@ -324,26 +324,69 @@ class User
         $statement->bindParam(":hobby", $hobby);
         $statement->bindParam(":extra", $extra);
 
-      //  $statement->bindParam(":email", $email);
-        
+        //  $statement->bindParam(":email", $email);
+
 
         $result = $statement->execute();
 
         return $result;
     }
-    public static function getUser($email){
-        
+    public static function getUser($email)
+    {
+
         $conn = Db::getConnection();
         $statement = $conn->prepare("SELECT * FROM users where email ='$email'");
         $statement->execute();
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $users;
     }
+
+    public static function getUsers()
+    {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT id, Firstname , LastName , image , locatie , class FROM users");
+        $statement->execute();
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $users;
+    }
+
+    public function userUpdatePassword()
+    {
+        $email = trim($_SESSION['user']);
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET password = :password WHERE email = '$email'");
+        
+        $password = $this->getPassword();
+
+        $statement->bindParam(":password", $password);
+
+        $result = $statement->execute();
+        return $result;
+    }
+
+    public function userUpdateEmail()
+    {
+        
+        $email = trim($_SESSION['user']);
+        var_dump($email);
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET email = :emailNew WHERE email = '$email'");
+        $emailNew = $this->getEmail();
+        
+        
+        $statement->bindParam(":emailNew", $emailNew);
+
+        $result = $statement->execute();
+
+        return $result;
+    }
 }
 
 
 
-    /*
+
+/*
     public static function getAll(){
         $conn = DB::getConnection();
 
@@ -353,11 +396,6 @@ class User
         return $users;
     }*/
 
-    /**
-     * Get the value of password
-     */
-
-    
-
-
-
+/**
+ * Get the value of password
+ */
