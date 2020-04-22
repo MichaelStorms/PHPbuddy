@@ -1,5 +1,6 @@
 <?php
-  session_start();
+include("init.php");
+include("loginCheck.inc.php")
 ?>
 <!doctype html>
 <html lang="en">

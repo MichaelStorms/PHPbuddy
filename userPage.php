@@ -1,8 +1,7 @@
 <?php
-session_start();
-include_once(__DIR__ . "/classes/user.php");
+include("init.php");
+include("loginCheck.inc.php");
 $email = $_SESSION["user"];
-$user = new User();
 $profile = $user->getUser($email);
 ?>
 <!DOCTYPE html>

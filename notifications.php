@@ -2,22 +2,12 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    
+    include("init.php");
+    include("loginCheck.inc.php");
 
     include("notificationFunctions.php");
     include("requestFunctions.php");
-    include("init.php");
-    if(isset($_SESSION['id']) && isset($_SESSION['user'])){
-      $user_data = $user->find_user_by_id($_SESSION['id']);
-      if($user_data ===  false){
-          header('Location: logout.php');
-          exit;
-      }
-  }
-  else{
-      header('Location: logout.php');
-      exit;
-  }
+
   // TOTAL REQUESTS
   $get_req_num = $buddy->request_notification($_SESSION['id'], false);
   // TOTAL FRIENDS
@@ -83,6 +73,20 @@
             </div>
           </li>
         </ul>
+            <ul>
+                <li><a href="index.php" rel="noopener noreferrer">Home</a></li>
+                <li><a href="notifications.php" rel="noopener noreferrer">Requests<span class="badge <?php
+                if($get_req_num > 0){
+                    echo 'redBadge';
+                }
+                ?>"><?php echo $get_req_num;?></span></a></li>
+
+                <li><a href="buddies.php" rel="noopener noreferrer">Friends<span class="badge"><?php echo $get_frnd_num;?></span></a></li>
+                <li><a href="userPage.php">Go to my profile.</a></li>
+
+                <li><a href="logout.php" rel="noopener noreferrer">Logout</a></li>
+            </ul>
+
                 </nav>    
     <main role="main" class="container">
 

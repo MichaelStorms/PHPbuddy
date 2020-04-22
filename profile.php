@@ -1,4 +1,3 @@
-Users can access this profile.php after logging in.
 <?php
 require 'init.php';
 if(isset($_SESSION['id']) && isset($_SESSION['user'])){

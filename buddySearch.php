@@ -1,7 +1,8 @@
 <?php
+include("init.php");
+include("loginCheck.inc.php");
 include_once(__DIR__ . "/classes/Filter.php");
 include_once("filterArray.php");
-  session_start();
   $i = 0;
   $email = $_SESSION["user"];
   $filter = new Filter();

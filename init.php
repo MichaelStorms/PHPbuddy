@@ -7,11 +7,11 @@ include('classes/user.php');
 include('classes/friends.php');
 
 // DATABASE CONNECTIONS
-$conn = new Db();
+/*$conn = new Db();
 $db_connection = $conn->getConnection();
-
+*/
 // USER OBJECT
-$user = new User($db_connection);
+$user = new User();//$db_connection);
 // FRIEND OBJECT
-$buddy = new Buddy($db_connection);
+$buddy = new Buddy();//$db_connection);
 ?>

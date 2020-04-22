@@ -5,17 +5,7 @@ error_reporting(E_ALL);
 
 include_once("init.php");
 
-if(isset($_SESSION['id']) && isset($_SESSION['user'])){
-  $user_data = $user->find_user_by_id($_SESSION['id']);
-  if($user_data ===  false){
-      header('Location: logout.php');
-      exit;
-  }
-}
-else{
-  header('Location: logout.php');
-  exit;
-}
+include_once("loginCheck.inc.php");
 // TOTAL REQUESTS
 $get_req_num = $buddy->request_notification($_SESSION['id'], false);
 // TOTLA FRIENDS
@@ -24,7 +14,6 @@ $get_frnd_num = $buddy->get_all_friends($_SESSION['id'], false);
 $get_all_friends = $buddy->get_all_friends($_SESSION['id'], true);
 
 
-$buddy = Buddy::getAll();
 
 ?>
 <html lang="en">
@@ -36,6 +25,8 @@ $buddy = Buddy::getAll();
 </head>
 
 <body>
+<?php include_once("nav.inc.php"); ?>
+
 <?php //include_once("nav.inc.php"); ?>
   <div class="profile_container">
         
@@ -45,18 +36,7 @@ $buddy = Buddy::getAll();
             </div>
             <h1><?php echo  $user_data->firstname ." ". $user_data->lastname;?></h1>
         </div>
-        <nav>
-            <ul>
-                <li><a href="profile.php" rel="noopener noreferrer">Home</a></li>
-                <li><a href="notifications.php" rel="noopener noreferrer">Requests<span class="badge <?php
-                if($get_req_num > 0){
-                    echo 'redBadge';
-                }
-                ?>"><?php echo $get_req_num;?></span></a></li>
-                <li><a href="buddies.php" rel="noopener noreferrer" class="active">Friends<span class="badge"><?php echo $get_frnd_num;?></span></a></li>
-                <li><a href="logout.php" rel="noopener noreferrer">Logout</a></li>
-            </ul>
-        </nav>
+
         <div class="all_users">
             <h3>All friends</h3>
             <div class="usersWrapper">
