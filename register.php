@@ -107,6 +107,7 @@ catch(\Throwable $th){
 
 				<div class="form__field">
 					<input type="submit" value="Sign me up!" class="btn btn--primary">	
+                    <a href="login.php">Already an account.</a>
 				</div>
 			</form>
 		</div>
