@@ -155,18 +155,7 @@
             </div>
             <h1><?php echo  $user_data->firstname ." ". $user_data->lastname;?></h1>
         </div>
-        <nav>
-            <ul>
-                <li><a href="profile.php" rel="noopener noreferrer">Home</a></li>
-                <li><a href="notifications.php" rel="noopener noreferrer" class="active">Requests<span class="badge <?php
-                if($get_req_num > 0){
-                    echo 'redBadge';
-                }
-                ?>"><?php echo $get_req_num;?></span></a></li>
-                <li><a href="buddies.php" rel="noopener noreferrer">Friends<span class="badge"><?php echo $get_frnd_num;?></span></a></li>
-                <li><a href="logout.php" rel="noopener noreferrer">Logout</a></li>
-            </ul>
-        </nav>
+        
         <div class="all_users">
             <h3>All request senders</h3>
             <div class="usersWrapper">

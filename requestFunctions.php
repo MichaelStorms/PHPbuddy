@@ -1,7 +1,7 @@
 <?php
 
 
-    // Check if user is logged in
+   /* // Check if user is logged in
     if(isset($_SESSION['id']) && isset($_SESSION['user'])){
 
     // If send request is activated
@@ -14,7 +14,7 @@
             }
     }
     else{
-        header('Location: notifications.php');
+      //  header('Location: notifications.php');
         exit;
     }
 

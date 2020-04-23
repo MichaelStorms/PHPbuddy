@@ -1,6 +1,6 @@
 <?php
 include("init.php");
-include("loginCheck.inc.php")
+include("loginCheck.inc.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -36,8 +36,11 @@ include("loginCheck.inc.php")
       </form>
     </div>
   <?php endif; ?>
-  <!--     buddyRegistration -->
-
+  <!--     buddies on the site -->
+    <div>
+      <p>There are currently : <?php echo $buddy->getUserAmount(); ?> people registred.</p>
+      <p>And there have been <?php echo $buddy->getFriendAmount(); ?> friendships made </p>
+    </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

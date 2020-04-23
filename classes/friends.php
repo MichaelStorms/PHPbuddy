@@ -32,12 +32,12 @@ class Buddy{
         try{
             $sql = "SELECT * FROM `friends` WHERE (user_one = :my_id AND user_two = :frnd_id) OR (user_one = :frnd_id AND user_two = :my_id)";
 
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':my_id',$my_id, PDO::PARAM_INT);
-            $stmt->bindValue(':frnd_id', $id, PDO::PARAM_INT);
-            $stmt->execute();
+            $statement = $conn->prepare($sql);
+            $statement->bindValue(':my_id',$my_id, PDO::PARAM_INT);
+            $statement->bindValue(':frnd_id', $id, PDO::PARAM_INT);
+            $statement->execute();
 
-            if($stmt->rowCount() === 1){
+            if($statement->rowCount() === 1){
                 return true;
             }
             else{
@@ -56,10 +56,10 @@ class Buddy{
 
         try{
             $sql = "SELECT * FROM `friend_request` WHERE sender = ? AND receiver = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$my_id, $id]);
+            $statement = $conn->prepare($sql);
+            $statement->execute([$my_id, $id]);
 
-            if($stmt->rowCount() === 1){
+            if($statement->rowCount() === 1){
                 return true;
             }
             else{
@@ -77,10 +77,10 @@ class Buddy{
 
         try{
             $sql = "SELECT * FROM `friend_request` WHERE sender = ? AND receiver = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$id, $my_id]);
+            $statement = $conn->prepare($sql);
+            $statement->execute([$id, $my_id]);
 
-            if($stmt->rowCount() === 1){
+            if($statement->rowCount() === 1){
                 return true;
             }
             else{
@@ -99,12 +99,12 @@ class Buddy{
         try{
             $sql = "SELECT * FROM `friend_request` WHERE (sender = :my_id AND receiver = :frnd_id) OR (sender = :frnd_id AND receiver = :my_id)";
 
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':my_id',$my_id, PDO::PARAM_INT);
-            $stmt->bindValue(':frnd_id', $id, PDO::PARAM_INT);
-            $stmt->execute();
+            $statement = $conn->prepare($sql);
+            $statement->bindValue(':my_id',$my_id, PDO::PARAM_INT);
+            $statement->bindValue(':frnd_id', $id, PDO::PARAM_INT);
+            $statement->execute();
     
-            if($stmt->rowCount() === 1){
+            if($statement->rowCount() === 1){
                 return true;
             }
             else{
@@ -123,8 +123,8 @@ class Buddy{
 
         try{
             $sql = "INSERT INTO `friend_request`(sender, receiver) VALUES(?,?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$my_id, $id]);
+            $statement = $conn->prepare($sql);
+            $statement->execute([$my_id, $id]);
             header('Location: UserFriendProfile.php?id='.$id);
             exit;
         }
@@ -140,10 +140,10 @@ class Buddy{
         try{
             $sql = "DELETE FROM `friend_request` WHERE (sender = :my_id AND receiver = :frnd_id) OR (sender = :frnd_id AND receiver = :my_id)";
 
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':my_id',$my_id, PDO::PARAM_INT);
-            $stmt->bindValue(':frnd_id', $id, PDO::PARAM_INT);
-            $stmt->execute();
+            $statement = $conn->prepare($sql);
+            $statement->bindValue(':my_id',$my_id, PDO::PARAM_INT);
+            $statement->bindValue(':frnd_id', $id, PDO::PARAM_INT);
+            $statement->execute();
             header('Location: UserFriendProfile.php?id='.$id);
             exit;
         }
@@ -160,15 +160,15 @@ class Buddy{
         try{
 
             $delete_pending_friends = "DELETE FROM `friend_request` WHERE (sender = :my_id AND receiver = :frnd_id) OR (sender = :frnd_id AND receiver = :my_id)";
-            $delete_stmt = $conn->prepare($delete_pending_friends);
-            $delete_stmt->bindValue(':my_id',$my_id, PDO::PARAM_INT);
-            $delete_stmt->bindValue(':frnd_id', $id, PDO::PARAM_INT);
-            $delete_stmt->execute();
-            if($delete_stmt->execute()){
+            $delete_statement = $conn->prepare($delete_pending_friends);
+            $delete_statement->bindValue(':my_id',$my_id, PDO::PARAM_INT);
+            $delete_statement->bindValue(':frnd_id', $id, PDO::PARAM_INT);
+            $delete_statement->execute();
+            if($delete_statement->execute()){
 
                 $sql = "INSERT INTO `friends`(user_one, user_two) VALUES(?, ?)";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute([$my_id, $id]);
+                $statement = $conn->prepare($sql);
+                $statement->execute([$my_id, $id]);
                 header('Location: UserFriendProfile.php?id='.$id);
                 exit;
                 
@@ -185,10 +185,10 @@ class Buddy{
 
         try{
             $delete_friends = "DELETE FROM `friends` WHERE (user_one = :my_id AND user_two = :frnd_id) OR (user_one = :frnd_id AND user_two = :my_id)";
-            $delete_stmt = $conn->prepare($delete_friends);
-            $delete_stmt->bindValue(':my_id',$my_id, PDO::PARAM_INT);
-            $delete_stmt->bindValue(':frnd_id', $id, PDO::PARAM_INT);
-            $delete_stmt->execute();
+            $delete_statement = $conn->prepare($delete_friends);
+            $delete_statement->bindValue(':my_id',$my_id, PDO::PARAM_INT);
+            $delete_statement->bindValue(':frnd_id', $id, PDO::PARAM_INT);
+            $delete_statement->execute();
             header('Location: UserFriendProfile.php?id='.$id);
             exit;
         }
@@ -204,13 +204,13 @@ class Buddy{
         try{
             $sql = "SELECT sender, firstname, lastname, image FROM `friend_request` JOIN users ON friend_request.sender = users.id WHERE receiver = ?";
 
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([$my_id]);
+            $statement = $conn->prepare($sql);
+            $statement->execute([$my_id]);
             if($send_data){
-                return $stmt->fetchAll(PDO::FETCH_OBJ);
+                return $statement->fetchAll(PDO::FETCH_OBJ);
             }
             else{
-                return $stmt->rowCount();
+                return $statement->rowCount();
             }
 
         }
@@ -226,26 +226,26 @@ class Buddy{
 
         try{
             $sql = "SELECT * FROM `friends` WHERE user_one = :my_id OR user_two = :my_id";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':my_id',$my_id, PDO::PARAM_INT);
-            $stmt->execute();
+            $statement = $conn->prepare($sql);
+            $statement->bindValue(':my_id',$my_id, PDO::PARAM_INT);
+            $statement->execute();
 
                 if($send_data){
 
                     $return_data = [];
-                    $all_users = $stmt->fetchAll(PDO::FETCH_OBJ);
+                    $all_users = $statement->fetchAll(PDO::FETCH_OBJ);
 
                     foreach($all_users as $row){
                         if($row->user_one == $my_id){
                             $get_user = "SELECT id, firstname, lastname, image FROM users WHERE id = ?";
-                            $get_user_stmt = $conn->prepare($get_user);
-                            $get_user_stmt->execute([$row->user_two]);
-                            array_push($return_data, $get_user_stmt->fetch(PDO::FETCH_OBJ));
+                            $get_user_statement = $conn->prepare($get_user);
+                            $get_user_statement->execute([$row->user_two]);
+                            array_push($return_data, $get_user_statement->fetch(PDO::FETCH_OBJ));
                         }else{
                             $get_user = "SELECT id, firstname, lastname, image FROM users WHERE id = ?";
-                            $get_user_stmt = $conn->prepare($get_user);
-                            $get_user_stmt->execute([$row->user_one]);
-                            array_push($return_data, $get_user_stmt->fetch(PDO::FETCH_OBJ));
+                            $get_user_statement = $conn->prepare($get_user);
+                            $get_user_statement->execute([$row->user_one]);
+                            array_push($return_data, $get_user_statement->fetch(PDO::FETCH_OBJ));
                         }
                     }
 
@@ -253,8 +253,36 @@ class Buddy{
 
                 }
                 else{
-                    return $stmt->rowCount();
+                    return $statement->rowCount();
                 }
+        }
+        catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getUserAmount(){
+        $conn = Db::getConnection();
+        try{
+        $sql = "SELECT COUNT(id)  FROM users" ;
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $total = $statement->fetchColumn();
+        return $total;
+    }
+    catch (PDOException $e) {
+        die($e->getMessage());
+    }
+    }
+
+    public function getFriendAmount(){
+        $conn = Db::getConnection();
+        try{
+        $sql = "SELECT COUNT(id) FROM friends" ;
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $total = $statement->fetchColumn();
+        return $total;
         }
         catch (PDOException $e) {
             die($e->getMessage());
