@@ -248,7 +248,8 @@ class User
     {
         $conn = DB::getConnection();
 
-        $statement = $conn->prepare("SELECT * FROM users WHERE email='$email'"); //$conn->query kan ook
+        $statement = $conn->prepare("SELECT * FROM users WHERE email=:email");
+        $statement->bindParam(":email",$email); //$conn->query kan ook
         $statement->execute();
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $users;
@@ -330,21 +331,74 @@ class User
 
         return $result;
     }
-}
-
-    /*
-    public static function getAll(){
-        $conn = DB::getConnection();
-
-        $statement = $conn->prepare("select * from users"); //$conn->query kan ook
+    public static function getUser($email){
+        
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT * FROM users where email ='$email'");
         $statement->execute();
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $users;
-    }*/
+    }
 
-    /**
-     * Get the value of password
-     */
+
+
+     // FIND USER BY ID
+     function find_user_by_id($id){
+        $conn = Db::getConnection();
+        try{
+            $find_user = $conn->prepare("SELECT * FROM users WHERE id = ?");
+            $find_user->execute([$id]);
+            if($find_user->rowCount() === 1){
+                return $find_user->fetch(PDO::FETCH_OBJ);
+            }
+            else{
+                return false;
+            }
+        }
+        catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+    
+    // FETCH ALL USERS WHERE ID IS NOT EQUAL TO MY ID
+    function all_users($id){
+        $conn = Db::getConnection();
+        try{
+            $get_users = $conn->prepare("SELECT id, firstname, lastname, image FROM users WHERE id != ?");
+            $get_users->execute([$id]);
+            if($get_users->rowCount() > 0){
+                return $get_users->fetchAll(PDO::FETCH_OBJ);
+            }
+            else{
+                return false;
+            }
+        }
+        catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+
+
+
+/*
+public static function getAll(){
+    $conn = DB::getConnection();
+
+    $statement = $conn->prepare("select * from users"); //$conn->query kan ook
+    $statement->execute();
+    $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $users;
+}*/
+
+/**
+ * Get the value of password
+ */
+
+}
+?>
+
+
 
     
 

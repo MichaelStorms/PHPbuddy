@@ -4,12 +4,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);*/
 
-	session_start();
+	include("init.php");
 	
-	include(__DIR__. "/classes/db.php");
-	include_once(__DIR__ . '/classes/user.php'); 
-	
-	var_dump($_SESSION['user']);
+	//$_SESSION['user'];
+
 
 	
 	if (!empty($_POST)) {
@@ -17,7 +15,6 @@ error_reporting(E_ALL);*/
 		try{
 
 		
-			$user = new User();
 			
 		$locatie = $_POST['locatie'];
 		$course = $_POST['course'];
@@ -75,6 +72,8 @@ error_reporting(E_ALL);*/
 		<title>Profile Settings</title>
     </head> 
 	<body style="margin-left:20px;">      
+	<?php include_once("nav.inc.php"); ?>
+
 		<h3>Update Profile Information</h3> 
 
 	       <form method="post" action="">     
