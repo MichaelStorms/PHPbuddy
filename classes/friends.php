@@ -261,6 +261,49 @@ class Buddy{
         }
     }
 
+
+    public function get_all_Userfriends($id, $send_data){
+        $conn = Db::getConnection();
+
+        try{
+            $sql = "SELECT * FROM `friends` WHERE user_one = :id OR user_two = :id";
+            $statement = $conn->prepare($sql);
+            $statement->bindValue(':id',$id, PDO::PARAM_INT);
+            $statement->execute();
+
+                if($send_data){
+
+                    $return_data = [];
+                    $all_users = $statement->fetchAll(PDO::FETCH_OBJ);
+
+                    foreach($all_users as $row){
+                        if($row->user_one == $id){
+                            $get_user = "SELECT id, firstname, lastname, image FROM users WHERE id = ?";
+                            $get_user_statement = $conn->prepare($get_user);
+                            $get_user_statement->execute([$row->user_two]);
+                            array_push($return_data, $get_user_statement->fetch(PDO::FETCH_OBJ));
+                        }else{
+                            $get_user = "SELECT id, firstname, lastname, image FROM users WHERE id = ?";
+                            $get_user_statement = $conn->prepare($get_user);
+                            $get_user_statement->execute([$row->user_one]);
+                            array_push($return_data, $get_user_statement->fetch(PDO::FETCH_OBJ));
+                        }
+                    }
+
+                    return $return_data;
+
+                }
+                else{
+                    return $statement->rowCount();
+                }
+        }
+        catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+
+
     public function getUserAmount(){
         $conn = Db::getConnection();
         try{

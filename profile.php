@@ -29,6 +29,7 @@ $get_frnd_num = $buddy->get_all_friends($_SESSION['id'], false);
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 </head>
 <body>
+    <?php include_once("nav.inc.php") ?>
     <div class="profile_container">
         
         <div class="inner_profile">
@@ -37,18 +38,7 @@ $get_frnd_num = $buddy->get_all_friends($_SESSION['id'], false);
             </div>
             <h1><?php echo  $user_data->firstname ." ". $user_data->lastname;?></h1>
         </div>
-        <nav>
-            <ul>
-                <li><a href="profile.php" rel="noopener noreferrer" class="active">Home</a></li>
-                <li><a href="notifications.php" rel="noopener noreferrer">Requests<span class="badge <?php
-                if($get_req_num > 0){
-                    echo 'redBadge';
-                }
-                ?>"><?php echo $get_req_num;?></span></a></li>
-                <li><a href="buddies.php" rel="noopener noreferrer">Friends<span class="badge"><?php echo $get_frnd_num;?></span></a></li>
-                <li><a href="logout.php" rel="noopener noreferrer">Logout</a></li>
-            </ul>
-        </nav>
+        
         <div class="all_users">
             <h3>All Users</h3>
             <div class="usersWrapper">

@@ -46,7 +46,7 @@ $get_all_friends = $buddy->get_all_friends($_SESSION['id'], true);
                         echo '<div class="user_box">
                                 <div class="user_img"><img src="profile_images/'.$row->image.'" alt="Profile image"></div>
                                 <div class="user_info"><span>'.$row->firstname ." ". $row->lastname.'</span>
-                                <span><a href="user_profile.php?id='.$row->id.'" class="see_profileBtn">See profile</a></div>
+                                <span><a href="UserFriendProfile.php?id='.$row->id.'" class="see_profileBtn">See profile</a></div>
                             </div>';
                     }
                 }

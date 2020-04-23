@@ -19,7 +19,7 @@ include("loginCheck.inc.php");
 <body>
 <?php include_once("nav.inc.php"); ?>
 
-  <h1>Hello, world!</h1>
+  <h1>Hello, <?php echo  $user_data->firstname ." ". $user_data->lastname;?></h1>
   <?php if (isset($_SESSION['user'])) : ?>
     <div class="logout-form-wrapper">
       <form action="logout.php" method="post">
