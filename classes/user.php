@@ -14,7 +14,8 @@ class User
     private $course;
     private $hobby;
     private $extra;
-
+    private $image;
+    private $description;
 
 
     /**
@@ -216,8 +217,45 @@ class User
         return $this;
     }
 
+ /**
+     * Get the value of image
+     */ 
+    public function getImage()
+    {
+        return $this->image;
+    }
 
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setImage($image)
+    {
+        $this->image = $image;
 
+        return $this;
+    }
+
+    /**
+     * Get the value of description
+     */ 
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set the value of description
+     *
+     * @return  self
+     */ 
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
 
 
     public function save()
@@ -369,13 +407,46 @@ class User
     {
         
         $email = trim($_SESSION['user']);
-        var_dump($email);
+
         $conn = Db::getConnection();
         $statement = $conn->prepare("UPDATE users SET email = :emailNew WHERE email = '$email'");
         $emailNew = $this->getEmail();
         
         
         $statement->bindParam(":emailNew", $emailNew);
+
+        $result = $statement->execute();
+
+        return $result;
+    }
+
+    public function userUpdateImage()
+    {
+        $email = trim($_SESSION['user']);
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET image = :image WHERE email = '$email'");
+        $image = $this->getImage();
+        
+        
+        $statement->bindParam(":image", $image);
+
+        $result = $statement->execute();
+
+        return $result;
+    }
+
+    public function userUpdateDescription()
+    {
+        
+        $email = trim($_SESSION['user']);
+
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("UPDATE users SET imgDescription = :description WHERE email = '$email'");
+        $description = $this->getDescription();
+        
+        
+        $statement->bindParam(":description", $description);
 
         $result = $statement->execute();
 
@@ -394,6 +465,10 @@ class User
         $statement->execute();
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $users;
+
+   
+
+    
     }*/
 
 /**
