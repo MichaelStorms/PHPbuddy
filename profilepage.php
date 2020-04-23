@@ -46,7 +46,7 @@ include(__DIR__ . "/classes/user.php");
 // 	}
 // }
 
-
+echo $_SESSION['user'];
 if (isset($_FILES['avatar']) and !empty($_FILES['avatar']['name'])) {
 	$size = 2097152;
 	$filetypes = array('jpg');
@@ -65,6 +65,7 @@ if (isset($_FILES['avatar']) and !empty($_FILES['avatar']['name'])) {
 					$user->setImage($image);
 					$user->userUpdateImage();
 					echo 'foto geupload';
+					$succesUploadImage = $image;
 				}
 			} else {
 				echo "<h3>file size of type is niet goed</h3>";
@@ -159,6 +160,8 @@ if (!empty($_POST['emailOld'])) {
 		<br>
 		<h3>description</h3>
 		<textarea name="description" cols="30" rows="10"></textarea>
+		<?php echo '<img src=" $succesUploadImage ">'; ?>
+		
 		<h2>change password</h2>
 		<p>old password</p>
 		<input type="password" name="passwordOld">
