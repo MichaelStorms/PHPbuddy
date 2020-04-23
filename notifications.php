@@ -2,12 +2,17 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    
-    session_start();
+    include("init.php");
+    include("loginCheck.inc.php");
 
-    include ("notificationFunctions.php");
-    include ("requestFunctions.php");
+    include("notificationFunctions.php");
+    include("requestFunctions.php");
 
+  // TOTAL REQUESTS
+  $get_req_num = $buddy->request_notification($_SESSION['id'], false);
+  // TOTAL FRIENDS
+  $get_frnd_num = $buddy->get_all_friends($_SESSION['id'], false);
+  $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
 ?>
 <!doctype html>
 <html lang="en">
@@ -21,7 +26,7 @@
   </head>
 
   <body>
-
+  
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -46,13 +51,7 @@
                  if(count(fetchAll($query))>0){
                      foreach(fetchAll($query) as $i){
                 ?>
-              <a style="
-                         <?php
-                            if($i['status']=='unread'){
-                                echo "font-weight:bold;";
-                            }
-                         ?>
-                         " class="dropdown-item" href="notificationsView.php?id=<?php echo $i['id'] ?>">
+              <a style="<?php if($i['status']=='unread'){ echo 'font-weight:bold;';}?>" class="dropdown-item" href="notificationsView.php?id=<?php echo $i['id'] ?>">
                 <small><i><?php echo date('F j, Y, g:i a',strtotime($i['date'])) ?></i></small><br/>
                   <?php 
                   
@@ -74,6 +73,20 @@
             </div>
           </li>
         </ul>
+            <ul>
+                <li><a href="index.php" rel="noopener noreferrer">Home</a></li>
+                <li><a href="notifications.php" rel="noopener noreferrer">Requests<span class="badge <?php
+                if($get_req_num > 0){
+                    echo 'redBadge';
+                }
+                ?>"><?php echo $get_req_num;?></span></a></li>
+
+                <li><a href="buddies.php" rel="noopener noreferrer">Friends<span class="badge"><?php echo $get_frnd_num;?></span></a></li>
+                <li><a href="userPage.php">Go to my profile.</a></li>
+
+                <li><a href="logout.php" rel="noopener noreferrer">Logout</a></li>
+            </ul>
+
                 </nav>    
     <main role="main" class="container">
 
@@ -133,6 +146,36 @@
 
     </main><!-- /.container -->
 
+  <!-- Vanaf hier friend request -->
+    <div class="profile_container">
+        
+        <div class="inner_profile">
+            <div class="img">
+                <img src="profile_images/<?php echo $user_data->image; ?>" alt="Profile image">
+            </div>
+            <h1><?php echo  $user_data->firstname ." ". $user_data->lastname;?></h1>
+        </div>
+        
+        <div class="all_users">
+            <h3>All request senders</h3>
+            <div class="usersWrapper">
+                <?php
+                if($get_req_num > 0){
+                    foreach($get_all_req_sender as $row){
+                        echo '<div class="user_box">
+                                <div class="user_img"><img src="profile_images/'.$row->image.'" alt="Profile image"></div>
+                                <div class="user_info"><span>'.$row->firstname ." ".$row->lastname.'</span>
+                                <span><a href="UserFriendProfile.php?id='.$row->sender.'" class="see_profileBtn">See profile</a></div>
+                            </div>';
+                    }
+                }
+                else{
+                    echo '<h4>You have no friend requests!</h4>';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

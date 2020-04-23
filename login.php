@@ -16,6 +16,9 @@ if (!empty($_POST)) {
         if ($user->canLogin($email, $password)) {
             session_start();
             $_SESSION['user'] = $email;
+            $userlist = $user->getUser($email);
+            $id = $userlist[0]["id"];
+            $_SESSION['id'] = $id;
             header("Location: index.php");
         } else {
             $error = "Incorrect info";

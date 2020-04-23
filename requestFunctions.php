@@ -1,8 +1,8 @@
 <?php
 
 
-    // Check if user is logged in
-    if(isset($_SESSION['user_id']) && isset($_SESSION['email'])){
+   /* // Check if user is logged in
+    if(isset($_SESSION['id']) && isset($_SESSION['user'])){
 
     // If send request is activated
     if($_GET['action'] == 'sendRequest'){
@@ -10,11 +10,11 @@
             //echo "users";
             $requestee_id = $_GET['friend'];
             $requester_id = $_GET['user'];
-            $result = friends::sendRequest($requestee_id, $requester_id);
+            $result = Buddy::sendRequest($requestee_id, $requester_id);
             }
     }
     else{
-        header('Location: notifications.php');
+      //  header('Location: notifications.php');
         exit;
     }
 

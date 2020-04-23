@@ -4,10 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);*/
 
-	session_start();
-	
-	include(__DIR__. "/classes/db.php");
-	include_once(__DIR__ . '/classes/user.php'); 
+	include("init.php");
 	
 	//$_SESSION['user'];
 
@@ -18,7 +15,6 @@ error_reporting(E_ALL);*/
 		try{
 
 		
-			$user = new User();
 			
 		$locatie = $_POST['locatie'];
 		$course = $_POST['course'];

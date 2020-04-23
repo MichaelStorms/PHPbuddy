@@ -5,8 +5,8 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    
-    session_start();
+    include_once("init.php");
+    include_once("loginCheck.inc.php");
 
     include_once(__DIR__ . "/notificationFunctions.php");
     $id = $_GET['id'];
