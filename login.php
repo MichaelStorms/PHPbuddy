@@ -1,6 +1,7 @@
 <?php
 include_once(__DIR__ . '/classes/user.php');
 include_once(__DIR__ . '/classes/db.php');
+include_once(__DIR__ . '/classes/Chat.php');
 
 // detecteer of er ge-submit werd
 if (!empty($_POST)) {
@@ -13,12 +14,20 @@ if (!empty($_POST)) {
     if (!empty($email) && !empty($password)) {
         // indien oke: login checken
         $user = new User();
+        $chat = new Chat();
         if ($user->canLogin($email, $password)) {
             session_start();
+
             $_SESSION['user'] = $email;
             $userlist = $user->getUser($email);
+
             $id = $userlist[0]["id"];
             $_SESSION['id'] = $id;
+
+            $chat->updateUserOnline($id,1);
+
+            $lastInsertId = $chat->insertUserLoginDetails($userlist[0]['id']);
+            $_SESSION['login_details_id'] = $lastInsertId;
             header("Location: index.php");
         } else {
             $error = "Incorrect info";

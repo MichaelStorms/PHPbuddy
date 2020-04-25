@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);*/
 
 	include("init.php");
-	
+	include("loginCheck.inc.php");
 	//$_SESSION['user'];
 
 
@@ -21,9 +21,9 @@ error_reporting(E_ALL);*/
 		$hobby = $_POST['hobby'];
 		$extra = $_POST['extra'];
 		$class = $_POST['class'];
-		$buddy = $_POST['buddy'];
+		$friend = $_POST['buddy'];
 
-		if(!empty($locatie) || !empty($hobby) || !empty($course) || !empty($extra) || !empty($class) || !empty($buddy)){
+		if(!empty($locatie) || !empty($hobby) || !empty($course) || !empty($extra) || !empty($class) || !empty($friend)){
 		
 		//echo "succes";
 		$user->setLocatie($_POST["locatie"]);
