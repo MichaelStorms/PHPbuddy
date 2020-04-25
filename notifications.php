@@ -121,12 +121,53 @@
               }
           }
           
+          if (isset($_POST['lol'])) {
+            $name = $_POST['name'];
+            $query = "INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', '😂', '', 'unread', CURRENT_TIMESTAMP)";
+            if (performQuery($query)) {
+              //header("location:index.php");
+            }
+          }
+          if (isset($_POST['heart'])) {
+            $name = $_POST['name'];
+            $query = "INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', '❤', '', 'unread', CURRENT_TIMESTAMP)";
+            if (performQuery($query)) {
+              //header("location:index.php");
+            }
+          }
+          if (isset($_POST['ooh'])) {
+            $name = $_POST['name'];
+            $query = "INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', '😮', '', 'unread', CURRENT_TIMESTAMP)";
+            if (performQuery($query)) {
+              //header("location:index.php");
+            }
+          }
+          if (isset($_POST['sad'])) {
+            $name = $_POST['name'];
+            $query = "INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', '😥', '', 'unread', CURRENT_TIMESTAMP)";
+            if (performQuery($query)) {
+              //header("location:index.php");
+            }
+          }
+          if (isset($_POST['angry'])) {
+            $name = $_POST['name'];
+            $query = "INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', '😡', '', 'unread', CURRENT_TIMESTAMP)";
+            if (performQuery($query)) {
+              //header("location:index.php");
+            }
+          }
+    
           ?>
-        <form method="post" class="" style="padding:10px;">
-          <input name="name" class="" type="text" placeholder ="Name" style=" width:300px; height:200px;" required>
-          <button name="like" class="" type="submit">Like  </button>
-        </form>
-
+          <form method="post" class="" style="padding:10px;">
+            <input name="name" class="" type="text" placeholder="Name" style=" width:300px; height:200px;" required>
+            <button name="like" class="" type="submit">Like </button>
+            <button name="heart" class="" type="submit">❤</button>
+            <button name="lol" class="" type="submit">😂</button>
+            <button name="ooh" class="" type="submit">😮</button>
+            <button name="sad" class="" type="submit">😥</button>
+            <button name="angry" class="" type="submit">😡</button>
+          </form>
+    
         <br>
         <form method="post" action="">     
                     <?php if(isset($error)): ?>

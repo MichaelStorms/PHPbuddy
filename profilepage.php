@@ -3,11 +3,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include(__DIR__ . "/settings/settings.php");
-include(__DIR__ . "/classes/db.php");
+include(__DIR__ . "/settings/setting.php");
+include(__DIR__ . "/classe/db.php");
 session_start();
 //$conn = new mysqli(SETTINGS['db']['host'], SETTINGS['db']['user'], SETTINGS['db']['password'], SETTINGS['db']['db']);
-$conn = Db::getConnection();
+$conn = new PDO('mysql:host='.SETTINGS['db']['host'].';dbname='.SETTINGS['db']['db'], SETTINGS['db']['user'], SETTINGS['db']['password']);
+
 
 $_SESSION["id"] = 1;
 $_SESSION["password"] = "123";
@@ -104,22 +105,6 @@ if (!empty($_POST['emailOld'])) {
 </head>
 
 <body>
-<nav class="navbar">
-            <ul>
-                <li><a href="index.php" rel="noopener noreferrer">Home</a></li>
-                <li><a href="notifications.php" rel="noopener noreferrer">Requests<span class="badge <?php
-                if($get_req_num > 0){
-                    echo 'redBadge';
-                }
-                ?>"><?php echo $get_req_num;?></span></a></li>
-
-                <li><a href="buddies.php" rel="noopener noreferrer">Friends<span class="badge"><?php echo $get_frnd_num;?></span></a></li>
-                <li><a href="userPage.php">Go to my profile.</a></li>
-
-                <li><a href="logout.php" rel="noopener noreferrer">Logout</a></li>
-            </ul>
-        </nav>
-
 	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 		<h2>change Profile pic</h2>
 		<input type="file" name="avatar">
@@ -135,13 +120,13 @@ if (!empty($_POST['emailOld'])) {
 		<input type="password" name="passwordCheck">
 		<br>
 		<h2>change Email</h2>
-		<p>email old</p>
+		<p>email change</p>
 		<input type="text" name="emailOld" id="">
 		<br>
-		<p>email new</p>
+		<p>email change</p>
 		<input type="text" name="emailNew" id="">
 		<br>
-		<p>email check</p>
+		<p>email change</p>
 		<input type="text" name="emailCheck" id="">
 		<br>
 
