@@ -3,13 +3,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
-
-include(__DIR__ . "/classes/db.php");
-include(__DIR__ . "/classes/user.php");
+include("init.php");
 
 
-echo $_SESSION['user'];
 if (isset($_FILES['avatar']) and !empty($_FILES['avatar']['name'])) {
 	$size = 2097152;
 	$filetypes = array('jpg');
@@ -117,6 +113,8 @@ if (!empty($_POST['emailOld'])) {
 </head>
 
 <body>
+<?php include_once("nav.inc.php"); ?>
+
 	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 		<h2>change Profile pic</h2>
 		<input type="file" name="avatar">
