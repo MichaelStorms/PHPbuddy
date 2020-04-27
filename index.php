@@ -29,7 +29,6 @@ include("loginCheck.inc.php");
           <a href="chatPage.php">Chat</a>
           <a href="buddies.php">Buddies</a>
           <a href="profilepage.php">🛠</a>
-          <input type="submit" value="Logout" class="btn btn--primary">
           <a href="profileFeatures.php">update your profile.</a>
           <a href="buddySearch.php">go find a buddy!</a>
         </div>

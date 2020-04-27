@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include("init.php");
+include("loginCheck.inc.php");
 
 
 if (isset($_FILES['avatar']) and !empty($_FILES['avatar']['name'])) {
@@ -56,7 +57,7 @@ if (!empty($_POST['description'])) {
 
 
 
-if (!empty($_POST['esuserUpdateDescriptionOld'])) {
+if (!empty($_POST['passwordOld'])) {
 	try {
 		$user = new User();
 		if (!empty($_POST['passwordNew']) == !empty($_POST['passwordCheck'])) {
