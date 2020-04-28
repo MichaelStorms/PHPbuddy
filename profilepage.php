@@ -122,7 +122,7 @@ if (!empty($_POST['emailOld'])) {
 		<br>
 		<h3>description</h3>
 		<textarea name="description" cols="30" rows="10"></textarea>
-		<?php echo '<img src=" $succesUploadImage ">'; ?>
+		<img src="images/<?php echo $user_data->email . ".jpg" ?>" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: 250px">
 		
 		<h2>change password</h2>
 		<p>old password</p>

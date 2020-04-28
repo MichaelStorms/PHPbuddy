@@ -1,6 +1,32 @@
 <?php
 include("init.php");
 include("loginCheck.inc.php");
+
+include_once(__DIR__ . "/classes/Filter.php");
+include_once("filterArray.php");
+
+
+$i = 0;
+$email = $_SESSION["user"];
+$filter = new Filter();
+$locatie = '';
+$users = $filter->getUsers();
+if (!empty($_GET)) {
+  $search = $_GET["search"];
+  $course = $_GET["course"];
+  if (!empty($locatie)) {
+    $locatie = $_GET["locatie"];
+  }
+  $hobby = $_GET["hobby"];
+  $extra = $_GET["extra"];
+  if (!empty($search)) {
+    $searchResult = $filter->searchPerson($search);
+  } else if (!empty($course) || !empty($locatie) || !empty($hobby) || !empty($extra)) {
+    $searchResult = $filter->filterSearch($course, $locatie, $hobby, $extra);
+  }
+} else {
+  shuffle($users);
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,19 +43,119 @@ include("loginCheck.inc.php");
 </head>
 
 <body>
+  <header>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+      <div class="container d-flex justify-content-between">
+        <?php include_once("nav.inc.php"); ?>
+      </div>
+    </div>
+  </header>
+  <section class="jumbotron text-center" style="margin: 0">
+    <div class="container">
+      <h1>Hello, <?php echo  $user_data->firstname . " " . $user_data->lastname; ?></h1>
+<img class="img-thumbnail" src="images/<?php echo $user_data->email . ".jpg" ?>" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: 250px">
+<p>imgDescription ?></p>
+      <!--     buddies on the site -->
+      <div>
+        <p>There are currently : <?php echo $buddy->getUserAmount(); ?> people registred.</p>
+        <p>And there have been <?php echo $buddy->getFriendAmount(); ?> friendships made </p>
 
-    <?php include_once("nav.inc.php"); ?>
-  
+      </div>
+    </div>
+
+  </section>
 
 
-  <h1>Hello, <?php echo  $user_data->firstname . " " . $user_data->lastname; ?></h1>
-  
-  <!--     buddies on the site -->
-  <div>
-    <p>There are currently : <?php echo $buddy->getUserAmount(); ?> people registred.</p>
-    <p>And there have been <?php echo $buddy->getFriendAmount(); ?> friendships made </p>
-  </div>
-  </div>
+  <div class="album py-5 bg-light">
+
+
+    <div class="container">
+      <h2>Search for your buddy</h2>
+      <form action="" method="get">
+        <div class="form__field">
+          <label for="search">Zoek een persoon</label>
+          <input class="border" type="text" placeholder="search" id="search" name="search">
+        </div>
+        <?php if (!empty(Filter::getLocation($email)[0]["locatie"])) : ?>
+          <div class="form__field">
+            <label for="locatie">Zoek op <?php echo ucfirst(Filter::getLocation($email)[0]["locatie"]); ?></label>
+            <input class="border " type="checkbox" id="locatie" name="locatie" value="<?php echo ucfirst(Filter::getLocation($email)[0]["locatie"]); ?>">
+          </div>
+        <?php endif; ?>
+        <?php if (!empty(Filter::getInterests($email)[0]["interests"])) : ?>
+          <div class="dropdown">
+            <label>Filter op richting:</label><br> 
+            <select name="course" id="course">
+              <option class="border border-info" value="">Kies</option>
+              <?php foreach ($coursesList as $course) : ?>
+                <option value="<?php echo $course ?>"><?php echo $course ?> </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        <?php endif; ?>
+        <?php if (!empty(Filter::getHobby($email)[0]["hobby"])) : ?>
+          <div class="dropdown">
+            <label>Filter op hobby:</label><br> 
+            <select name="hobby" id="hobby">
+              <option value="">Kies</option>
+              <?php foreach ($hobbyList as $hobby) : ?>
+                <option value="<?php echo $hobby ?>"><?php echo $hobby ?> </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        <?php endif; ?>
+        <?php if (!empty(Filter::getExtra($email)[0]["extra"])) : ?>
+           <div class="dropdown">
+            <label>Filter op extra:</label><br> 
+            <select name="extra" id="extra">
+              <option value="">Kies</option>
+              <?php foreach ($extraList as $extra) : ?>
+                <option value="<?php echo $extra ?>"><?php echo $extra ?> </option>
+              <?php endforeach; ?>
+
+            </select>
+          </div>
+        <?php endif; ?>
+        <div class="form__field">
+          <input value="Find a buddy!" type="submit" id="submit" class="btn btn--primary">
+        </div>
+
+      </form>
+    </div>
+
+
+      <div class="container user__list">
+        <?php if (empty($_GET)) { ?>
+          <?php foreach ($users as $key => $user) { ?>
+            <div class="row">
+              <div class="user col-md-4" style="margin-top:50px; margin-left:20px;">
+                <a href="UserFriendProfile.php?id=<?php echo $user["id"]; ?>" style="background-image: url(<?php echo $user["image"] ?>)"></a>
+                <a href="UserFriendProfile.php?id=<?php echo $user["id"]; ?>">
+                  <p><?php echo ucfirst($user["Firstname"]) . " " . $user["LastName"] ?></p>
+                </a>
+                <p>woont in: <?php echo $user["locatie"] ?></p>
+                <p>zit in klas: <?php echo $user["class"] ?></p>
+                <a href="UserFriendProfile.php?id=<?php echo $user["id"] ?>">Request buddy</a>
+
+              </div>
+            </div>
+
+            <?php if (++$i == 10) break; ?>
+          <?php }
+        } else if (!empty($_GET)) { ?>
+          <?php foreach ($searchResult as $key => $result) { ?>
+            <div class="user" style="margin-top:50px; margin-left:20px;">
+              <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>" style="background-image: url(<?php echo $result["image"] ?>)"></a>
+              <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>">
+                <p><?php echo ucfirst($result["firstname"]) . " " . $result["lastname"] ?></p>
+              </a>
+              <p>woont in: <?php echo $result["locatie"] ?></p>
+              <p>zit in klas: <?php echo $result["class"] ?></p>
+              <a href="UserFriendProfile.php?id=<?php echo $result["id"] ?>">Request buddy</a>
+            </div>
+      </div>
+  <?php }
+        } ?>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
