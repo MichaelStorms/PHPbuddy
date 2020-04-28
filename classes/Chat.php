@@ -20,8 +20,8 @@ class Chat extends User{
             }
         }
     }*/
-	private function getData($sqlQuery) {
-        $conn = Db::getConnection();
+	private function getData($sqlQuery) { //functie om sql's uit te voeren met error info + arrays
+        $conn = Db::getConnection(); 
         $statement = $conn->prepare($sqlQuery);
 		$result = $statement->execute();
 		if(!$result){
@@ -34,7 +34,7 @@ class Chat extends User{
 		return $data;
     }
     
-	private function getNumRows($sqlQuery) {
+	private function getNumRows($sqlQuery) { //functie om aantal kolommen uit de databank te halen.
         $conn = Db::getConnection();
         $statement = $conn->prepare($sqlQuery);
 		$result = $statement->execute();
@@ -54,19 +54,19 @@ class Chat extends User{
             
         return  $this->getData($sqlQuery);
 	}*/
-	public function chatUsers($id){
+	public function chatUsers($id){ //functie om alle users buiten jezelf te tonen.
 		$sqlQuery = "
 			SELECT * FROM users 
 			WHERE id != '$id'";
 		return  $this->getData($sqlQuery);
 	}
-	public function getUserDetails($id){
+	public function getUserDetails($id){ //functie om alle user details te tonen buiten die van jezelf
 		$sqlQuery = "
 			SELECT * FROM users 
 			WHERE id = '$id'";
 		return  $this->getData($sqlQuery);
 	}
-	public function getUserAvatar($id){
+	public function getUserAvatar($id){ //functie om user avatars te tonen
 		$sqlQuery = "
 			SELECT image
 			FROM users
@@ -78,7 +78,7 @@ class Chat extends User{
 		}	
 		return $userAvatar;
 	}	
-	public function updateUserOnline($id, $online) {
+	public function updateUserOnline($id, $online) {//functie om de user  online te zetten.
         $conn = Db::getConnection();		
 		$sqlUserUpdate = "
 			UPDATE users 
@@ -88,6 +88,7 @@ class Chat extends User{
             $statement = $conn->prepare($sqlUserUpdate);
             $statement->execute();	
 	}
+	//functie om de message in chat te steken. (gaat in samenwerking me AJAX, check chat.js)
 	public function insertChat($reciever_id, $sender_id, $message) {		
         $conn = Db::getConnection();
 		$sqlInsert = "
@@ -106,7 +107,8 @@ class Chat extends User{
 			echo json_encode($data);	
 		}
 	}
-	public function getUserChat($from_user_id, $to_user_id) {
+	//functie om de verzender en verkrijger te tonen + chat history te tonen (gaat in samenwerking me AJAX, check chat.js)
+	public function getUserChat($from_user_id, $to_user_id) { 
 
 		$fromUserAvatar = $this->getUserAvatar($from_user_id);	
 		$toUserAvatar = $this->getUserAvatar($to_user_id);			
@@ -127,6 +129,7 @@ class Chat extends User{
 			} else {
 				$conversation .= '<li class="replies">';
 				$conversation .= '<img width="22px" height="22px" src="userpics/'.$toUserAvatar.'" alt="" />';
+
 			}			
 			$conversation .= '<p>'.$chat["message"].'</p>';			
 			$conversation .= '</li>';
@@ -134,6 +137,7 @@ class Chat extends User{
 		$conversation .= '</ul>';
 		return $conversation;
 	}
+
 	public function showUserChat($from_user_id, $to_user_id) {	
         $conn = Db::getConnection();	
 		$userDetails = $this->getUserDetails($to_user_id);
@@ -148,7 +152,7 @@ class Chat extends User{
 					 <i class="fa fa-instagram" aria-hidden="true"></i>
 				</div>';
 		}		
-		// get user conversation
+		// krijg user conversatie
 		$conversation = $this->getUserChat($from_user_id, $to_user_id);	
 		// update chat user read status		
 		$sqlUpdate = "
@@ -171,6 +175,7 @@ class Chat extends User{
 		 );
 		 echo json_encode($data);		
 	}	
+	//toont aantal unread chat messages per gebruiker
 	public function getUnreadMessageCount($sender_id, $reciever_id) {
 		$sqlQuery = "
 			SELECT * FROM buddychat  
