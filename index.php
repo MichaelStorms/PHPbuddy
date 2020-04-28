@@ -17,29 +17,19 @@ include("loginCheck.inc.php");
 </head>
 
 <body>
-<?php include_once("nav.inc.php"); ?>
 
-  <h1>Hello, <?php echo  $user_data->firstname ." ". $user_data->lastname;?></h1>
-  <?php if (isset($_SESSION['user'])) : ?>
-    <div class="logout-form-wrapper">
-      <form action="logout.php" method="post">
-        <div class="form__field">
-          <a href="profileFeatures.php">update your profile.</a>
-          <a href="buddySearch.php">go find a buddy!</a>
-          <a href="chatPage.php">Chat</a>
-          <a href="buddies.php">Buddies</a>
-          <a href="profilepage.php">🛠</a>
-          <a href="profileFeatures.php">update your profile.</a>
-          <a href="buddySearch.php">go find a buddy!</a>
-        </div>
-      </form>
-    </div>
-  <?php endif; ?>
+    <?php include_once("nav.inc.php"); ?>
+  
+
+
+  <h1>Hello, <?php echo  $user_data->firstname . " " . $user_data->lastname; ?></h1>
+  
   <!--     buddies on the site -->
-    <div>
-      <p>There are currently : <?php echo $buddy->getUserAmount(); ?> people registred.</p>
-      <p>And there have been <?php echo $buddy->getFriendAmount(); ?> friendships made </p>
-    </div>
+  <div>
+    <p>There are currently : <?php echo $buddy->getUserAmount(); ?> people registred.</p>
+    <p>And there have been <?php echo $buddy->getFriendAmount(); ?> friendships made </p>
+  </div>
+  </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

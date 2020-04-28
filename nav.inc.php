@@ -24,28 +24,45 @@ $get_frnd_num = $buddy->get_all_friends($_SESSION['id'], false);
         list-style: none;
     }
 </style>
-<nav class="navbar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-    <ul>
-        <li><a href="index.php" rel="noopener noreferrer">Home</a></li>
-        <li><a href="notifications.php" rel="noopener noreferrer">Requests<span class="badge <?php
-                                                                                                if ($get_req_num > 0) {
-                                                                                                    echo 'redBadge';
-                                                                                                }
-                                                                                                ?>"><?php echo $get_req_num; ?></span></a></li>
+    <a class="navbar-brand" href="index.php">IMDBuddy</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-item nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="notifications.php">Requests<span class="badge <?php
+                                                                                        if ($get_req_num > 0) {
+                                                                                            echo 'redBadge';
+                                                                                        }
+                                                                                        ?>"><?php echo $get_req_num; ?></span></a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link"href="chatPage.php">Chat</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="buddies.php">Friends<span class="badge"><?php echo $get_frnd_num; ?></span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Profile
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="userPage.php">Profile</a>
+                    <a class="dropdown-item" href="profileFeatures.php">Hobby update</a>
+                    <a class="dropdown-item" href="profilepage.php">Setting veranderinegen</a>
+                </div>
+            </li>
+            <li><a class="nav-link"  href="logout.php" rel="noopener noreferrer">Logout</a></li>
+        </ul>
+    </div>
 
-        <li><a href="buddies.php" rel="noopener noreferrer">Friends<span class="badge"><?php echo $get_frnd_num; ?></span></a></li>
-        <div class="btn-group">
-            <button type="button" class="btn btn-primary"><a class="" href="userPage.php">profile</a></button>
-            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <div class="dropdown-menu">
-            <a class="dropdown-item" href="profileFeatures.php">hobby update</a>
-                <a class="dropdown-item" href="profilepage.php">setting veranderinegen</a>
-            </div>
-        </div>
 
-        <li><a href="logout.php" rel="noopener noreferrer">Logout</a></li>
-    </ul>
+    </ul> -->
 </nav>
