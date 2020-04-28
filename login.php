@@ -55,9 +55,9 @@ if (!empty($_POST)) {
     <title>Hello, world!</title>
 </head>
 
-<body style="height: 100%" class="bg-light">
+<body  style="background-image: url('images/backgroundpic.jpg'); background-repeat: no-repeat; background-size:cover; ">
     <div class="Buddylogin container ">
-        <div class="form form--login text-center " style="margin-top: 5%">
+        <div class="form form--login text-center " style="margin-top: 25%">
             <form class="form-signin  rounded p-3 mb-2 bg-dark text-white" action="" style="width: 50%; margin:auto;" method="post">
                 <h2 style="margin-top: 2%" form__title>Sign In</h2>
 
@@ -70,17 +70,17 @@ if (!empty($_POST)) {
 
                 <div class="form-group row" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
                     <label class="col-sm-2 col-form-label" for="email">Email</label>
-                    <div class="col-sm-10" style="">
+
                         <input id="email" class="form-control border border-info rounded" name="email" type="text">
-                    </div>
+
 
                 </div>
 
-                <div class="form-group row" style=" width: 80%; margin:auto;padding-bottom:2%;">
+                <div class="form-group row" style=" width: 80%; margin:auto;padding-bottom:2%; padding-top:2%;">
                     <label class="col-sm-2 col-form-label" for="password">Password</label>
-                    <div class="col-sm-10">
+
                         <input id="password" class="form-control border border-info rounded" name="password" type="password">
-                    </div>
+
 
                 </div>
 

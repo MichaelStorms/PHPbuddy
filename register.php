@@ -43,12 +43,12 @@
                 $results = $conn->query($query);*/
             }
             else{
-                $error = "password cannot be empty";
+                $error = "Password cannot be empty";
             }
         }
        
     }else{
-        $error = "email cannot be empty and/or you dont use your school email";
+        $error = "Email cannot be empty and/or you dont use your school email";
     }
     
 }
@@ -70,44 +70,47 @@ catch(\Throwable $th){
 
     <title>Hello, world!</title>
   </head>
-  <body>
-    	<div class="phpBuddyLogin phpBuddyLogin--register">
-		<div class="form form--login">
-			<form action="" method="post">
-				<h2 form__title>Sign up for an account</h2>
+  <body style="background-image: url('images/backgroundpic.jpg'); background-repeat: no-repeat; background-size:cover; ">
+    	<div class="phpBuddyLogin phpBuddyLogin--register container">
+		<div class="form form--login text-center" style="margin-top: 15%">
+			<form class="form-signin  rounded p-3 mb-2 bg-dark text-white" style="width: 50%; margin:auto;" action="" method="post">
+				<h2 style="margin-top: 2%" class=" form__title">Sign up for an account</h2>
 
 				<?php if( isset($error) ): ?>
-				<div class="form__error">
+				<div style="margin-top: 2%">
 					<p>
 						<?php echo $error; ?>
 					</p>
 				</div>
-				<?php endif; ?>
-				<div class="form__field">
-					<label for="firstname">Firstname</label>
-					<input type="text" id="firstname" name="firstname">
+                <?php endif; ?>
+                
+
+				<div class="form-group row" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
+					<label class="col-sm-2 col-form-label" for="firstname">Firstname</label>
+					<input class="form-control border border-info rounded" type="text" id="firstname" name="firstname">
 				</div>	
-                <div class="form__field">
-					<label for="lastname">Lastname</label>
-					<input type="text" id="lastname" name="lastname">
+                <div class="form-group row" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
+					<label class="col-sm-2 col-form-label" for="lastname">Lastname</label>
+					<input class="form-control border border-info rounded" type="text" id="lastname" name="lastname">
 				</div>
-				<div class="form__field">
-					<label for="email">Email</label>
-					<input type="text" id="email" name="email" placeholder="r123456@student.thomasmore.be">
+				<div class="form-group row" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
+					<label class="col-sm-2 col-form-label" for="email">Email</label>
+					<input class="form-control border border-info rounded" type="text" id="email" name="email" placeholder="r123456@student.thomasmore.be">
 				</div>
-				<div class="form__field">
-					<label for="password">Password</label>
-					<input type="password" id="password" name="password">
-				</div>
-
-                <div class="form__field">
-					<label for="password_confirmation">Confirm your password</label>
-					<input type="password" id="password_confirmation" name="password_confirmation">
+				<div class="form-group row" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
+					<label class="col-sm-2 col-form-label" for="password">Password</label>
+					<input class="form-control border border-info rounded" type="password" id="password" name="password">
 				</div>
 
-				<div class="form__field">
-					<input type="submit" value="Sign me up!" class="btn btn--primary">	
-                    <a href="login.php">Already an account.</a>
+                <div class="form-group row" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
+					<label  for="password_confirmation">Confirm your password</label>
+					<input class="form-control border border-info rounded" type="password" id="password_confirmation" name="password_confirmation">
+				</div>
+
+				<div >
+                    <input type="submit" value="Sign me up!" class="btn btn-outline-light">	
+                    <br>
+                    <a style="color:white; text-decoration: underline;" href="login.php">Already have an account?</a>
 				</div>
 			</form>
 		</div>
