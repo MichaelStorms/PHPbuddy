@@ -24,7 +24,7 @@ if (!empty($_POST)) {
             $id = $userlist[0]["id"];
             $_SESSION['id'] = $id;
 
-            $chat->updateUserOnline($id,1);
+            $chat->updateUserOnline($id, 1);
 
             $lastInsertId = $chat->insertUserLoginDetails($userlist[0]['id']);
             $_SESSION['login_details_id'] = $lastInsertId;
@@ -55,11 +55,11 @@ if (!empty($_POST)) {
     <title>Hello, world!</title>
 </head>
 
-<body>
-    <div class="Buddylogin">
-        <div class="form form--login">
-            <form action="" method="post">
-                <h2 form__title>Sign In</h2>
+<body style="height: 100%" class="bg-light">
+    <div class="Buddylogin container ">
+        <div class="form form--login text-center " style="margin-top: 5%">
+            <form class="form-signin  rounded p-3 mb-2 bg-dark text-white" action="" style="width: 50%; margin:auto;" method="post">
+                <h2 style="margin-top: 2%" form__title>Sign In</h2>
 
                 <?php if (isset($error)) : ?>
                     <div class="form__error">
@@ -68,18 +68,31 @@ if (!empty($_POST)) {
                 <?php endif; ?>
 
 
-                <div class="form__field">
-                    <label for="email">Email</label>
-                    <input id="email" name="email" type="text">
+                <div class="form-group row" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
+                    <label class="col-sm-2 col-form-label" for="email">Email</label>
+                    <div class="col-sm-10" style="">
+                        <input id="email" class="form-control border border-info rounded" name="email" type="text">
+                    </div>
+
                 </div>
-                <div class="form__field">
-                    <label for="password">Password</label>
-                    <input id="password" name="password" type="password">
+
+                <div class="form-group row" style=" width: 80%; margin:auto;padding-bottom:2%;">
+                    <label class="col-sm-2 col-form-label" for="password">Password</label>
+                    <div class="col-sm-10">
+                        <input id="password" class="form-control border border-info rounded" name="password" type="password">
+                    </div>
+
                 </div>
 
                 <div class="form__field">
-                    <input type="submit" value="Sign in" class="btn btn--primary">
-                    <input type="checkbox" id="rememberMe"><label for="rememberMe" class="label__inline">Remember me</label>
+                    <input type="submit" value="Sign in" class="btn btn-outline-light" style="margin:2%; width:40%">
+                    <br>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="rememberMe">
+                        <label for="rememberMe" class="custom-control-label">Remember me</label>
+                    </div>
+                    <a class="nav-link" href="register.php" style="color:white; text-decoration: underline;">Register</a>
+
                 </div>
             </form>
         </div>

@@ -17,7 +17,7 @@ if (isset($_FILES['avatar']) and !empty($_FILES['avatar']['name'])) {
 			$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
 
 			if (in_array($extensionUpload, $filetypes)) {
-				$image = $_SESSION['user'] . "." . $extensionUpload;
+				$image = $user_data->firstname . "." . $extensionUpload;
 				$route = __DIR__ . "/images/" . $image;
 				$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $route);
 
@@ -110,6 +110,7 @@ if (!empty($_POST['emailOld'])) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<title>change profile</title>
 </head>
 
@@ -122,7 +123,7 @@ if (!empty($_POST['emailOld'])) {
 		<br>
 		<h3>description</h3>
 		<textarea name="description" cols="30" rows="10"></textarea>
-		<img src="images/<?php echo $user_data->email . ".jpg" ?>" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: 250px">
+		<img src="images/<?php echo $user_data->firstname . ".jpg" ?>" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: 250px">
 		
 		<h2>change password</h2>
 		<p>old password</p>
