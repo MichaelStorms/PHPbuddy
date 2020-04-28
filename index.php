@@ -27,7 +27,12 @@ if (!empty($_GET)) {
 } else {
   shuffle($users);
 }
+
+$numOfCols = 4;
+$rowCount = 0;
+$bootstrapColWidth = 12 / $numOfCols;
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -137,33 +142,48 @@ if (!empty($_GET)) {
 
 
     <div class="container user__list">
-      <?php if (empty($_GET)) { ?>
-        <?php foreach ($users as $key => $user) { ?>
-          <div class="user" style="margin-top:50px; margin-left:20px;">
-            <a href="UserFriendProfile.php?id=<?php echo $user["id"]; ?>" style="background-image: url(<?php echo $user["image"] ?>)"></a>
-            <a href="UserFriendProfile.php?id=<?php echo $user["id"]; ?>">
-              <p><?php echo ucfirst($user["Firstname"]) . " " . $user["LastName"] ?></p>
-            </a>
-            <p>woont in: <?php echo $user["locatie"] ?></p>
-            <p>zit in klas: <?php echo $user["class"] ?></p>
-            <a href="UserFriendProfile.php?id=<?php echo $user["id"] ?>">Request buddy</a>
+      
+        <?php if (empty($_GET)) { ?>
 
-          </div>
-          <?php if (++$i == 10) break; ?>
+          <?php foreach ($users as $key => $user) { 
+             if($rowCount % $numOfCols == 0) { ?> <div class="row"> <?php }
+            $rowCount++; ?>
+            
+            <div class="col">
+              <div class="user" style="margin-top:50px; margin-left:20px;">
+                <a href="UserFriendProfile.php?id=<?php echo $user["id"]; ?>" style="background-image: url(<?php echo $user["image"] ?>)"></a>
+                <a href="UserFriendProfile.php?id=<?php echo $user["id"]; ?>">
+                  <p><?php echo ucfirst($user["Firstname"]) . " " . $user["LastName"] ?></p>
+                </a>
+                <p>woont in: <?php echo $user["locatie"] ?></p>
+                <p>zit in klas: <?php echo $user["class"] ?></p>
+                <a href="UserFriendProfile.php?id=<?php echo $user["id"] ?>">Request buddy</a>
+              </div>
+            </div>
+            
+            <?php if (++$i == 10) break; ?>
+                                                
+          <?php }
+          
+        } else if (!empty($_GET)) { ?>
+          <?php foreach ($searchResult as $key => $result) { 
+             if($rowCount % $numOfCols == 0) { ?> <div class="row"> <?php }
+            $rowCount++;?>
+            <div class="col">
+              <div class="user" style="margin-top:50px; margin-left:20px;">
+                <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>" style="background-image: url(<?php echo $result["image"] ?>)"></a>
+                <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>">
+                  <p><?php echo ucfirst($result["firstname"]) . " " . $result["lastname"] ?></p>
+                </a>
+                <p>woont in: <?php echo $result["locatie"] ?></p>
+                <p>zit in klas: <?php echo $result["class"] ?></p>
+                <a href="UserFriendProfile.php?id=<?php echo $result["id"] ?>">Request buddy</a>
+              </div>
+            </div>
         <?php }
-      } else if (!empty($_GET)) { ?>
-        <?php foreach ($searchResult as $key => $result) { ?>
-          <div class="user" style="margin-top:50px; margin-left:20px;">
-            <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>" style="background-image: url(<?php echo $result["image"] ?>)"></a>
-            <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>">
-              <p><?php echo ucfirst($result["firstname"]) . " " . $result["lastname"] ?></p>
-            </a>
-            <p>woont in: <?php echo $result["locatie"] ?></p>
-            <p>zit in klas: <?php echo $result["class"] ?></p>
-            <a href="UserFriendProfile.php?id=<?php echo $result["id"] ?>">Request buddy</a>
-          </div>
-      <?php }
-      } ?>
+        } ?>
+      </div>
+      
     </div>
 
     <!-- Optional JavaScript -->
