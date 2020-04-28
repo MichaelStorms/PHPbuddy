@@ -3,13 +3,14 @@ include_once(__DIR__ . '/classes/user.php');
 include_once(__DIR__ . '/classes/db.php');
 include_once(__DIR__ . '/classes/Chat.php');
 
+
 // detecteer of er ge-submit werd
 if (!empty($_POST)) {
 
     // velden uitlezen in variabelen
     $email = $_POST['email'];
     $password = $_POST['password'];
-
+    $account = $email;
     // validatie: velden mogen niet leeg zijn
     if (!empty($email) && !empty($password)) {
         // indien oke: login checken
@@ -28,9 +29,13 @@ if (!empty($_POST)) {
 
             $lastInsertId = $chat->insertUserLoginDetails($userlist[0]['id']);
             $_SESSION['login_details_id'] = $lastInsertId;
+            $user->protectAgainstBruteForceAttacks($account,true);
+
             header("Location: index.php");
         } else {
+
             $error = "Incorrect info";
+            $user->protectAgainstBruteForceAttacks($account,false);
         }
     } else {
         $error = "Email and password are required.";
