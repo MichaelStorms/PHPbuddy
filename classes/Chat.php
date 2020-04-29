@@ -230,7 +230,7 @@ class Chat extends User{
         $statement = $conn->prepare($sqlUpdate);
         $statement->execute();
 
-	}	
+	}	//wanneer was de gebruiker laatst online
 	public function getUserLastActivity($userId) {
 		$sqlQuery = "
 			SELECT last_activity FROM chat_login_details 
