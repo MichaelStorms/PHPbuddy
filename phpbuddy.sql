@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Gegenereerd op: 27 apr 2020 om 10:49
+-- Gegenereerd op: 29 apr 2020 om 15:00
 -- Serverversie: 8.0.18
 -- PHP-versie: 7.3.12
 
@@ -25,6 +25,36 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `antibruteforcetable`
+--
+
+DROP TABLE IF EXISTS `antibruteforcetable`;
+CREATE TABLE IF NOT EXISTS `antibruteforcetable` (
+  `abf_id` int(11) NOT NULL AUTO_INCREMENT,
+  `abf_account` varchar(255) NOT NULL,
+  `abf_ipadress` varchar(15) NOT NULL,
+  `abf_time` datetime NOT NULL,
+  `abf_post` text NOT NULL,
+  `abf_get` text NOT NULL,
+  PRIMARY KEY (`abf_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='Logs of brute-force attacks';
+
+--
+-- Gegevens worden geëxporteerd voor tabel `antibruteforcetable`
+--
+
+INSERT INTO `antibruteforcetable` (`abf_id`, `abf_account`, `abf_ipadress`, `abf_time`, `abf_post`, `abf_get`) VALUES
+(18, '', '::1', '2020-04-28 17:16:52', 'Array\n(\n    [email] => r0701956@student.thomasmore.be\n    [password] => test\n)\n', 'Array\n(\n)\n'),
+(17, '', '::1', '2020-04-28 17:16:17', 'Array\n(\n    [email] => r0701956@student.thomasmore.be\n    [password] => test\n)\n', 'Array\n(\n)\n'),
+(16, '', '::1', '2020-04-28 17:13:54', 'Array\n(\n    [email] => r0701956@student.thomasmore.be\n    [password] => test\n)\n', 'Array\n(\n)\n'),
+(15, '', '::1', '2020-04-28 17:13:12', 'Array\n(\n    [email] => r0701956@student.thomasmore.be\n    [password] => code2012\n)\n', 'Array\n(\n)\n'),
+(35, 'Honorable', '::1', '2020-04-29 00:19:04', 'Array\n(\n    [email] => Honorable\n    [password] => Mitch1998Storms1\n)\n', 'Array\n(\n)\n'),
+(34, 'Honorable', '::1', '2020-04-29 00:19:03', 'Array\n(\n    [email] => Honorable\n    [password] => Mitch1998Storms1\n)\n', 'Array\n(\n)\n'),
+(37, 'r0701956@student.thomasmore.be', '::1', '2020-04-29 16:30:32', 'Array\n(\n    [email] => r0701956@student.thomasmore.be\n    [password] => code2012\n)\n', 'Array\n(\n)\n');
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `buddychat`
 --
 
@@ -37,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `buddychat` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `buddychat`
@@ -46,11 +76,15 @@ CREATE TABLE IF NOT EXISTS `buddychat` (
 INSERT INTO `buddychat` (`id`, `sender_id`, `reciever_id`, `message`, `timestamp`, `status`) VALUES
 (1, 5, 0, 'hello', '2020-04-25 14:54:30', 1),
 (2, 5, 7, 'Hello there', '2020-04-25 14:55:43', 0),
-(3, 7, 5, 'hello', '2020-04-25 14:58:19', 1),
+(3, 7, 5, 'hello', '2020-04-25 14:58:19', 0),
 (4, 7, 9, 'hello', '2020-04-25 15:16:55', 1),
 (5, 7, 6, 'hey', '2020-04-25 15:48:13', 1),
 (6, 7, 6, 'hello', '2020-04-25 15:49:29', 1),
-(7, 7, 6, 'hey tehre', '2020-04-25 15:49:39', 1);
+(7, 7, 6, 'hey tehre', '2020-04-25 15:49:39', 1),
+(8, 5, 7, 'hello', '2020-04-27 13:21:07', 1),
+(9, 5, 6, 'hello', '2020-04-27 13:36:51', 1),
+(10, 5, 6, 'how are you', '2020-04-27 13:36:55', 1),
+(11, 5, 6, '&lt;script&gt;alert(‘XSS’)&lt;/script&gt;', '2020-04-27 14:34:47', 1);
 
 -- --------------------------------------------------------
 
@@ -72,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `chat_login_details` (
 --
 
 INSERT INTO `chat_login_details` (`id`, `userid`, `last_activity`, `is_typing`) VALUES
-(0, 5, '2020-04-25 14:08:53', 'no');
+(0, 5, '2020-04-25 14:08:53', 'yes');
 
 -- --------------------------------------------------------
 
@@ -196,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `locatie`, `interests`, `hobby`, `extra`, `class`, `buddy`, `image`, `imgDescription`, `current_session`, `online`) VALUES
-(5, 'Michaël', 'Storms', 'r0701956@student.thomasmore.be', '$2y$16$nJjC5dZwz1xCOG1G.L40muhAeE/jqu3PJIADHz7ps4k96zt70Gp9C', 'malle', 'Design', 'Gaming', 'foodie', '3IMD', 'BuddySearcher', '', '', 7, 0),
+(5, 'Michaël', 'Storms', 'r0701956@student.thomasmore.be', '$2y$16$nJjC5dZwz1xCOG1G.L40muhAeE/jqu3PJIADHz7ps4k96zt70Gp9C', 'malle', 'Design', 'Gaming', 'foodie', '3IMD', 'BuddySearcher', '', '', 9, 1),
 (6, 'john', 'doe', 'r0701757@student.thomasmore.be', '$2y$16$75Ec4jiBwkvXkjl.jcuU6Ox35MP0My78oeDMNUk0ZsXjEkY13Tuti', 'Mechelen', 'Development', 'Voetbal', 'party', '1IMD', 'BuddySearcher', '', '', 0, 0),
 (7, 'Nina', 'Van der kerken', 'r0701958@student.thomasmore.be', '$2y$16$fPRZivdzT7wCU7KdYBGVAeL6Ao3b51Mvd8NxWlJR3d8BkO24vx0Bm', 'malle', 'Development', 'Voetbal', 'foodie', '1IMD', 'BuddySearcher', '', '', 6, 1),
 (8, 'Kevin', 'De Vos', 'r0701959@student.thomasmore.be', '$2y$16$bl1XVyZOGlS7asMaRvNAxuof5A7pod1SFZ/u5C3XvgAc/lCAaDipm', 'malle', 'Design & Development', 'Basketbal', 'foodie', '3IMD', 'BuddyHolder', '', '', 0, 0),
