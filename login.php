@@ -28,9 +28,13 @@ if (!empty($_POST)) {
 
             $lastInsertId = $chat->insertUserLoginDetails($userlist[0]['id']);
             $_SESSION['login_details_id'] = $lastInsertId;
+            $user->protectAgainstBruteForceAttacks($account,true);
+
             header("Location: index.php");
         } else {
             $error = "Incorrect info";
+            $user->protectAgainstBruteForceAttacks($account,false);
+
         }
     } else {
         $error = "Email and password are required.";
