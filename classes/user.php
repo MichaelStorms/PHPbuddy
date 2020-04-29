@@ -432,6 +432,17 @@ class User
         return $result;
     }
 
+    public function passwordCheck($email, $enteredPassword)
+    {
+        $password = $this->getPasswordByEmail($email);
+
+        if (password_verify($enteredPassword, $password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function userUpdateEmail()
     {
         
