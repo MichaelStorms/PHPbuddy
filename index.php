@@ -58,7 +58,7 @@ $bootstrapColWidth = 12 / $numOfCols;
   <section class="jumbotron text-center" style="margin: 0">
     <div class="container">
       <h1>Hello, <?php echo  $user_data->firstname . " " . $user_data->lastname; ?></h1>
-      <img class="img-thumbnail" src="images/<?php echo $user_data->firstname . ".jpg" ?>" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: 250px">
+      <img class="img-thumbnail" src="images/<?php echo $user_data->image ?>" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: 250px">
       <p> <?php echo  $user_data->imgDescription ?></p>
       <!--     buddies on the site -->
       <div>

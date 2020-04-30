@@ -14,7 +14,6 @@ $get_frnd_num = $buddy->get_all_friends($_SESSION['id'], false);
 
     ul {
         width: 100%;
-        display: flex;
         justify-content: space-evenly;
     }
 

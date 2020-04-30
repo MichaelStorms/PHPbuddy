@@ -583,7 +583,7 @@ class User
         {
         // fetch it while you can
         $data = $stmt->fetch(PDO::FETCH_NUM);
-        var_dump($data);
+        
         // oke, here is the master-part: the equasion
         if($data[0] > $config['attempts'])
             {

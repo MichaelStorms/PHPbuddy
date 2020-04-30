@@ -9,7 +9,8 @@ if (!empty($_POST)) {
     // velden uitlezen in variabelen
     $email = $_POST['email'];
     $password = $_POST['password'];
-
+    $account = $email;
+    
     // validatie: velden mogen niet leeg zijn
     if (!empty($email) && !empty($password)) {
         // indien oke: login checken

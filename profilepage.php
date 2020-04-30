@@ -17,7 +17,7 @@ if (isset($_FILES['avatar']) and !empty($_FILES['avatar']['name'])) {
 			$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
 
 			if (in_array($extensionUpload, $filetypes)) {
-				$image = $user_data->firstname . "." . $extensionUpload;
+				$image = $user_data->id . "." . $extensionUpload;
 				$route = __DIR__ . "/images/" . $image;
 				$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'], $route);
 
