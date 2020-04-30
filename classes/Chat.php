@@ -93,8 +93,11 @@ class Chat extends User{
 		$sqlInsert = "
 			INSERT INTO buddychat 
 			(reciever_id, sender_id, message, status) 
-			VALUES ('$reciever_id', '$sender_id', '$message', '1')";
-        $statement = $conn->prepare($sqlInsert);
+			VALUES ('$reciever_id', '$sender_id', ':message', '1')";
+
+		$statement = $conn->prepare($sqlInsert);
+		$msg = $message;
+		$statement->bindParam(":message",$msg);
         $result = $statement->execute();	
 		if(!$result){
 			return ('Error in query: '. PDO::errorInfo());
