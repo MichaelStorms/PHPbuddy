@@ -59,7 +59,7 @@ $(document).ready(function(){
 	$(document).on('focus', '.message-input', function(){
 		var is_type = 'yes';
 		$.ajax({
-			url:"chat_action.php",
+			url:"../chat_action.php",
 			method:"POST",
 			data:{is_type:is_type, action:'update_typing_status'},
 			success:function(){
@@ -70,7 +70,7 @@ $(document).ready(function(){
 	$(document).on('blur', '.message-input', function(){
 		var is_type = 'no';
 		$.ajax({
-			url:"chat_action.php",
+			url:"../chat_action.php",
 			method:"POST",
 			data:{is_type:is_type, action:'update_typing_status'},
 			success:function() {
@@ -81,7 +81,7 @@ $(document).ready(function(){
 //update de status van de users
 function updateUserList() {
 	$.ajax({
-		url:"chat_action.php",
+		url:"../chat_action.php",
 		method:"POST",
 		dataType: "json",
 		data:{action:'update_user_list'},
@@ -108,7 +108,7 @@ function sendMessage(to_user_id) {
 		return false;
 	}
 	$.ajax({
-		url:"chat_action.php",
+		url:"../chat_action.php",
 		method:"POST",
 		data:{to_user_id:to_user_id, chat_message:message, action:'insert_chat'},
 		dataType: "json",
@@ -121,7 +121,7 @@ function sendMessage(to_user_id) {
 }
 function showUserChat(to_user_id){
 	$.ajax({
-		url:"chat_action.php",
+		url:"../chat_action.php",
 		method:"POST",
 		data:{to_user_id:to_user_id, action:'show_chat'},
 		dataType: "json",
@@ -136,7 +136,7 @@ function updateUserChat() {
 	$('li.contact.active').each(function(){
 		var to_user_id = $(this).attr('data-touserid');
 		$.ajax({
-			url:"chat_action.php",
+			url:"../chat_action.php",
 			method:"POST",
 			data:{to_user_id:to_user_id, action:'update_user_chat'},
 			dataType: "json",
@@ -151,7 +151,7 @@ function updateUnreadMessageCount() {
 		if(!$(this).hasClass('active')) {
 			var to_user_id = $(this).attr('data-touserid');
 			$.ajax({
-				url:"chat_action.php",
+				url:"../chat_action.php",
 				method:"POST",
 				data:{to_user_id:to_user_id, action:'update_unread_message'},
 				dataType: "json",
@@ -168,7 +168,7 @@ function showTypingStatus() {
 	$('li.contact.active').each(function(){
 		var to_user_id = $(this).attr('data-touserid');
 		$.ajax({
-			url:"chat_action.php",
+			url:"../chat_action.php",
 			method:"POST",
 			data:{to_user_id:to_user_id, action:'show_typing_status'},
 			dataType: "json",
