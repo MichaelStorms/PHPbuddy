@@ -10,13 +10,16 @@ $(document).ready(function(){
 	$(".messages").animate({ 
 		scrollTop: $(document).height() 
 	}, "fast");
-	$(document).on("click", '#profile-img', function(event) { 	
+	 //kiezen wat je status is(online , afk , busy , offline)
+	$(document).on("click", '#profile-img', function(event) {
 		$("#status-options").toggleClass("active");
 	});
+
 	$(document).on("click", '.expand-button', function(event) { 	
 		$("#profile").toggleClass("expanded");
 		$("#contacts").toggleClass("expanded");
 	});	
+	//toont je status op je profiel wanneer je op 1 van de statuusen klikt.
 	$(document).on("click", '#status-options ul li', function(event) { 	
 		$("#profile-img").removeClass();
 		$("#status-online").removeClass("active");
@@ -37,6 +40,7 @@ $(document).ready(function(){
 		};
 		$("#status-options").removeClass("active");
 	});	
+	//veranderd gebruiker om tegen te praten.
 	$(document).on('click', '.contact', function(){		
 		$('.contact').removeClass('active');
 		$(this).addClass('active');
@@ -45,25 +49,28 @@ $(document).ready(function(){
 		$(".chatMessage").attr('id', 'chatMessage'+to_user_id);
 		$(".chatButton").attr('id', 'chatButton'+to_user_id);
 	});	
+	//stuurt het chatbericht naar de databank
 	$(document).on("click", '.submit', function(event) { 
 		var to_user_id = $(this).attr('id');
 		to_user_id = to_user_id.replace(/chatButton/g, "");
 		sendMessage(to_user_id);
 	});
+	//toont de "is typing status" -> true
 	$(document).on('focus', '.message-input', function(){
 		var is_type = 'yes';
 		$.ajax({
-			url:"chat_action.php",
+			url:"../chat_action.php",
 			method:"POST",
 			data:{is_type:is_type, action:'update_typing_status'},
 			success:function(){
 			}
 		});
 	}); 
+	//toont de "is typing status" -> false
 	$(document).on('blur', '.message-input', function(){
 		var is_type = 'no';
 		$.ajax({
-			url:"chat_action.php",
+			url:"../chat_action.php",
 			method:"POST",
 			data:{is_type:is_type, action:'update_typing_status'},
 			success:function() {
@@ -71,9 +78,10 @@ $(document).ready(function(){
 		});
 	}); 		
 }); 
+//update de status van de users
 function updateUserList() {
 	$.ajax({
-		url:"chat_action.php",
+		url:"../chat_action.php",
 		method:"POST",
 		dataType: "json",
 		data:{action:'update_user_list'},
@@ -92,6 +100,7 @@ function updateUserList() {
 		}
 	});
 }
+//verstuur de message en steek hem in de databank
 function sendMessage(to_user_id) {
 	message = $(".message-input input").val();
 	$('.message-input input').val('');
@@ -99,7 +108,7 @@ function sendMessage(to_user_id) {
 		return false;
 	}
 	$.ajax({
-		url:"chat_action.php",
+		url:"../chat_action.php",
 		method:"POST",
 		data:{to_user_id:to_user_id, chat_message:message, action:'insert_chat'},
 		dataType: "json",
@@ -112,7 +121,7 @@ function sendMessage(to_user_id) {
 }
 function showUserChat(to_user_id){
 	$.ajax({
-		url:"chat_action.php",
+		url:"../chat_action.php",
 		method:"POST",
 		data:{to_user_id:to_user_id, action:'show_chat'},
 		dataType: "json",
@@ -127,7 +136,7 @@ function updateUserChat() {
 	$('li.contact.active').each(function(){
 		var to_user_id = $(this).attr('data-touserid');
 		$.ajax({
-			url:"chat_action.php",
+			url:"../chat_action.php",
 			method:"POST",
 			data:{to_user_id:to_user_id, action:'update_user_chat'},
 			dataType: "json",
@@ -142,7 +151,7 @@ function updateUnreadMessageCount() {
 		if(!$(this).hasClass('active')) {
 			var to_user_id = $(this).attr('data-touserid');
 			$.ajax({
-				url:"chat_action.php",
+				url:"../chat_action.php",
 				method:"POST",
 				data:{to_user_id:to_user_id, action:'update_unread_message'},
 				dataType: "json",
@@ -159,7 +168,7 @@ function showTypingStatus() {
 	$('li.contact.active').each(function(){
 		var to_user_id = $(this).attr('data-touserid');
 		$.ajax({
-			url:"chat_action.php",
+			url:"../chat_action.php",
 			method:"POST",
 			data:{to_user_id:to_user_id, action:'show_typing_status'},
 			dataType: "json",
