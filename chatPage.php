@@ -4,7 +4,7 @@ include_once("loginCheck.inc.php");
 include_once(__DIR__ . "/classes/Filter.php");
 $filter = new Filter();
 if (!empty($_GET)) {
-	$search = htmlspecialchars($_GET["search"]);
+	$search = $_GET["search"];
 	if (!empty($search)) {
 		$searchResult = $filter->searchPerson($search);
 	}
