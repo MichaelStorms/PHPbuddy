@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Gegenereerd op: 29 apr 2020 om 15:03
+-- Gegenereerd op: 01 mei 2020 om 22:48
 -- Serverversie: 8.0.18
 -- PHP-versie: 7.3.12
 
@@ -37,20 +37,17 @@ CREATE TABLE IF NOT EXISTS `antibruteforcetable` (
   `abf_post` text NOT NULL,
   `abf_get` text NOT NULL,
   PRIMARY KEY (`abf_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='Logs of brute-force attacks';
+) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COMMENT='Logs of brute-force attacks';
 
 --
 -- Gegevens worden geëxporteerd voor tabel `antibruteforcetable`
 --
 
 INSERT INTO `antibruteforcetable` (`abf_id`, `abf_account`, `abf_ipadress`, `abf_time`, `abf_post`, `abf_get`) VALUES
-(18, '', '::1', '2020-04-28 17:16:52', 'Array\n(\n    [email] => r0701956@student.thomasmore.be\n    [password] => test\n)\n', 'Array\n(\n)\n'),
-(17, '', '::1', '2020-04-28 17:16:17', 'Array\n(\n    [email] => r0701956@student.thomasmore.be\n    [password] => test\n)\n', 'Array\n(\n)\n'),
-(16, '', '::1', '2020-04-28 17:13:54', 'Array\n(\n    [email] => r0701956@student.thomasmore.be\n    [password] => test\n)\n', 'Array\n(\n)\n'),
-(15, '', '::1', '2020-04-28 17:13:12', 'Array\n(\n    [email] => r0701956@student.thomasmore.be\n    [password] => code2012\n)\n', 'Array\n(\n)\n'),
+(38, '', '::1', '2020-04-29 18:23:42', 'Array\n(\n    [email] => r0701956@student.thomasmore.be\n    [password] => code2012\n)\n', 'Array\n(\n)\n'),
 (35, 'Honorable', '::1', '2020-04-29 00:19:04', 'Array\n(\n    [email] => Honorable\n    [password] => Mitch1998Storms1\n)\n', 'Array\n(\n)\n'),
 (34, 'Honorable', '::1', '2020-04-29 00:19:03', 'Array\n(\n    [email] => Honorable\n    [password] => Mitch1998Storms1\n)\n', 'Array\n(\n)\n'),
-(37, 'r0701956@student.thomasmore.be', '::1', '2020-04-29 16:30:32', 'Array\n(\n    [email] => r0701956@student.thomasmore.be\n    [password] => code2012\n)\n', 'Array\n(\n)\n');
+(42, 'r0701956@student.thomasmore.be', '::1', '2020-05-01 23:32:32', 'Array\n(\n    [email] => r0701956@student.thomasmore.be\n    [password] => code2012\n)\n', 'Array\n(\n)\n');
 
 -- --------------------------------------------------------
 
@@ -67,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `buddychat` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `buddychat`
@@ -84,7 +81,12 @@ INSERT INTO `buddychat` (`id`, `sender_id`, `reciever_id`, `message`, `timestamp
 (8, 5, 7, 'hello', '2020-04-27 13:21:07', 1),
 (9, 5, 6, 'hello', '2020-04-27 13:36:51', 1),
 (10, 5, 6, 'how are you', '2020-04-27 13:36:55', 1),
-(11, 5, 6, '&lt;script&gt;alert(‘XSS’)&lt;/script&gt;', '2020-04-27 14:34:47', 1);
+(11, 5, 6, '&lt;script&gt;alert(‘XSS’)&lt;/script&gt;', '2020-04-27 14:34:47', 1),
+(12, 5, 10, ':message', '2020-05-01 12:12:02', 1),
+(13, 5, 10, 'test', '2020-05-01 12:12:22', 1),
+(14, 5, 10, 'hello', '2020-05-01 12:12:46', 1),
+(15, 5, 10, 'testerino', '2020-05-01 12:13:12', 1),
+(16, 5, 7, 'hello', '2020-05-01 21:35:35', 1);
 
 -- --------------------------------------------------------
 
@@ -106,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `chat_login_details` (
 --
 
 INSERT INTO `chat_login_details` (`id`, `userid`, `last_activity`, `is_typing`) VALUES
-(0, 5, '2020-04-25 14:08:53', 'yes');
+(0, 5, '2020-04-25 14:08:53', 'no');
 
 -- --------------------------------------------------------
 
@@ -230,10 +232,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `locatie`, `interests`, `hobby`, `extra`, `class`, `buddy`, `image`, `imgDescription`, `current_session`, `online`) VALUES
-(5, 'Michaël', 'Storms', 'r0701956@student.thomasmore.be', '$2y$16$nJjC5dZwz1xCOG1G.L40muhAeE/jqu3PJIADHz7ps4k96zt70Gp9C', 'malle', 'Design', 'Gaming', 'foodie', '3IMD', 'BuddySearcher', '', '', 9, 1),
-(6, 'john', 'doe', 'r0701757@student.thomasmore.be', '$2y$16$75Ec4jiBwkvXkjl.jcuU6Ox35MP0My78oeDMNUk0ZsXjEkY13Tuti', 'Mechelen', 'Development', 'Voetbal', 'party', '1IMD', 'BuddySearcher', '', '', 0, 0),
-(7, 'Nina', 'Van der kerken', 'r0701958@student.thomasmore.be', '$2y$16$fPRZivdzT7wCU7KdYBGVAeL6Ao3b51Mvd8NxWlJR3d8BkO24vx0Bm', 'malle', 'Development', 'Voetbal', 'foodie', '1IMD', 'BuddySearcher', '', '', 6, 1),
-(8, 'Kevin', 'De Vos', 'r0701959@student.thomasmore.be', '$2y$16$bl1XVyZOGlS7asMaRvNAxuof5A7pod1SFZ/u5C3XvgAc/lCAaDipm', 'malle', 'Design & Development', 'Basketbal', 'foodie', '3IMD', 'BuddyHolder', '', '', 0, 0),
+(5, 'Michaël', 'Storms', 'r0701956@student.thomasmore.be', '$2y$16$nJjC5dZwz1xCOG1G.L40muhAeE/jqu3PJIADHz7ps4k96zt70Gp9C', 'malle', 'Design', 'Gaming', 'foodie', '3IMD', 'BuddySearcher', '', '', 7, 1),
+(6, 'john', 'doe', 'r0701757@student.thomasmore.be', '$2y$16$75Ec4jiBwkvXkjl.jcuU6Ox35MP0My78oeDMNUk0ZsXjEkY13Tuti', 'Mechelen', 'Development', 'Soccer', 'party', '1IMD', 'BuddySearcher', '', '', 0, 0),
+(7, 'Nina', 'Van der kerken', 'r0701958@student.thomasmore.be', '$2y$16$fPRZivdzT7wCU7KdYBGVAeL6Ao3b51Mvd8NxWlJR3d8BkO24vx0Bm', 'malle', 'Development', 'Soccer', 'foodie', '1IMD', 'BuddySearcher', '', '', 6, 1),
+(8, 'Kevin', 'De Vos', 'r0701959@student.thomasmore.be', '$2y$16$bl1XVyZOGlS7asMaRvNAxuof5A7pod1SFZ/u5C3XvgAc/lCAaDipm', 'malle', 'Design & Development', 'Basketball', 'foodie', '3IMD', 'BuddyHolder', '', '', 0, 0),
 (9, 'Jasmina', 'Mulder', 'r0701916@student.thomasmore.be', '$2y$16$LROOy5giaT0u40rvL0J14.fSJeiffkNWStxdaaWCGx3e9PKLxqRVC', 'Lier', 'Design & Development', 'Gaming', 'foodie', '1IMD', 'BuddySearcher', '', '', 0, 0),
 (10, 'luka', 'luka', 'r0764418@student.thomasmore.be', '$2y$16$wuhQlZ8jMi/bByz9vw8IIuJJiEEybphTaDlp7iL.RZDp.Hu7aU19u', '', '', '', '', '', '', '', '', 0, 0);
 
