@@ -36,6 +36,7 @@ if (!empty($_POST)) {
 			$user->setBuddy($_POST["buddy"]);
 
 			$user->updateProfile();
+			$succes = "Saved";
 		} else if (!empty($locatie) || !empty($hobby) || !empty($course) || !empty($extra)) {
 
 			$user->setLocatie($_POST["locatie"]);
@@ -43,6 +44,7 @@ if (!empty($_POST)) {
 			$user->setHobby($_POST["hobby"]);
 			$user->setExtra($_POST["extra"]);
 			$user->updateProfileNoClassBuddy();
+			$succes = "Saved";
 		} else {
 			//echo "niet succes";
 
@@ -159,6 +161,11 @@ if (!empty($_POST)) {
 				</select>
 			</div>
 			</div>
+			<?php if (isset($succes)) : ?>
+			<div class="form__succes">
+				<?php echo $succes; ?>
+			</div>
+		<?php endif; ?>
 			<input class="btn btn-outline-dark" style="margin-top:2%; width:30%;" type="submit" name="profileupdate" value="Update" />
 		</form>
 	</div>

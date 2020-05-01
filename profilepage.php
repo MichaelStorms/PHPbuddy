@@ -146,6 +146,7 @@ if (!empty($_POST['emailOld'])) {
 			<div class="row " style="width: 100%">
 				<div class="col">
 					<h2>Verander profiel foto</h2>
+					<small>Moet jpg formaat zijn</small>
 					<input class="form-control-file" type="file" name="avatar">
 					<br>
 					
