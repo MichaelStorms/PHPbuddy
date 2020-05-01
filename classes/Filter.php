@@ -55,7 +55,9 @@ include_once(__DIR__ . "/db.php");
 
     public static function searchPerson($search){
         $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT * FROM users WHERE CONCAT_WS(' ', firstname, lastname) LIKE '%$search%'");
+        $statement = $conn->prepare("SELECT * FROM users WHERE CONCAT_WS(' ', firstname, lastname) LIKE '%:search%'");
+        $searchRes = $search;
+        $statement->bindParam(":search",$searchRes);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
