@@ -121,8 +121,8 @@ if (!empty($_POST)) {
                 <div class="form-group" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
                     <label for="exampleFormControlSelect1">buddy</label>
                     <select name="buddy" class="form-control" id="exampleFormControlSelect1">
-                        <option value="BuddySearcher">Ik zoek een buddy</option>
-                        <option value="BuddyHolder">Ik wil een buddy onder mijn hoeden</option>
+                        <option value="BuddySearcher">I'm searching for a buddy</option>
+                        <option value="BuddyHolder">I want to take care of a buddy</option>
                     </select>
 
                 </div>

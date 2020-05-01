@@ -156,7 +156,7 @@ if (!empty($_GET)) {
 						<div class="message-input" id="replyContainer">
 							<div class="wrap">
 								<input name="chatMessage" type="text" class="chatMessage" id="chatMessage<?php echo $currentSession; ?>" placeholder="Write your message..." />
-								<button class="submit chatButton" id="chatButton<?php echo $currentSession; ?>"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+								<button class="submit chatButton" id="chatButton<?php echo $currentSession; ?>" value="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 							</div>
 						</div>
 					</div>

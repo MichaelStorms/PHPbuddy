@@ -145,8 +145,8 @@ if (!empty($_POST['emailOld'])) {
 		<form class="form-group bg-light p-3" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data" style="margin-top: 2%;">
 			<div class="row " style="width: 100%">
 				<div class="col">
-					<h2>Verander profiel foto</h2>
-					<small>Moet jpg formaat zijn</small>
+					<h2>Change profile picture</h2>
+					<small>Must be jpg format</small>
 					<input class="form-control-file" type="file" name="avatar">
 					<br>
 					
@@ -159,23 +159,23 @@ if (!empty($_POST['emailOld'])) {
 			</div>
 
 			<div>
-				<h2>Verander wachtwoord</h2>
+				<h2>Change password</h2>
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Oud wachtwoord</label>
+					<label class="col-sm-2 col-form-label">Old password</label>
 					<div class="col-sm-10">
 						<input type="password" name="passwordOld" class="form-control" placeholder="Oud wachtwoord">
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Nieuw wachtwoord</label>
+					<label class="col-sm-2 col-form-label">New password</label>
 					<div class="col-sm-10">
 						<input type="password" name="passwordNew" class="form-control" placeholder="Nieuw wachtwoord">
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Herhaal nieuw wachtwoord</label>
+					<label class="col-sm-2 col-form-label">Repeat new password</label>
 					<div class="col-sm-10">
 						<input type="password" name="passwordCheck" class="form-control" placeholder="Herhaal wachtwoord">
 					</div>
@@ -183,21 +183,21 @@ if (!empty($_POST['emailOld'])) {
 
 			</div>
 			<div>
-				<h2>Verander Email</h2>
+				<h2>Change Email</h2>
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Oude email adres</label>
+					<label class="col-sm-2 col-form-label">Old email</label>
 					<div class="col-sm-10">
 						<input type="text" name="emailOld" class="form-control" placeholder="email@example.com">
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Nieuwe email adres</label>
+					<label class="col-sm-2 col-form-label">New email</label>
 					<div class="col-sm-10">
 						<input type="text" name="emailNew" class="form-control" placeholder="email@example.com">
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Herhaal nieuwe email adres</label>
+					<label class="col-sm-2 col-form-label">Repeat new email</label>
 					<div class="col-sm-10">
 						<input type="text" name="emailCheck" class="form-control" placeholder="email@example.com">
 					</div>

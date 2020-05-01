@@ -55,7 +55,7 @@ $get_frnd_num = $buddy->get_all_friends($_SESSION['id'], false);
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="userPage.php">Profile</a>
                     <a class="dropdown-item" href="profileFeatures.php">Hobby update</a>
-                    <a class="dropdown-item" href="profilepage.php">Setting veranderinegen</a>
+                    <a class="dropdown-item" href="profilepage.php">Settings</a>
                 </div>
             </li>
             <li><a class="nav-link"  href="logout.php" rel="noopener noreferrer">Logout</a></li>

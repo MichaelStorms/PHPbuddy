@@ -44,7 +44,7 @@ $get_all_friends = $buddy->get_all_friends($_SESSION['id'], true);
                 <h2><?php echo  $user_data->firstname . " " . $user_data->lastname; ?></h2>
                 <span><a href="UserFriendProfile.php?id='<?php echo $user_data->id ?>'" class="see_profileBtn">See your profile</a>
             </div>
-            <h3 style="text-align:center; ">bevriend met</h3>
+            <h3 style="text-align:center; ">Friends with</h3>
             <div class="all_users " style="margin-top: 2%">
                 <div class="usersWrapper">
                     <?php

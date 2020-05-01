@@ -85,17 +85,17 @@ if (!empty($_POST)) {
 				</div>
 			<?php endif; ?>
 			<div class="form-group">
-				<label>Locatie:</label><br>
+				<label>Location:</label><br>
 				<input class="form-control" style="width:30%" type="text" name="locatie" placeholder="Waar woon je/ zit je op kot?" />
 			</div>
 			<div class="dropdown form-group row">
-            <label class="col-sm-2 col-form-label">Wat is je richting:</label>
+            <label class="col-sm-2 col-form-label">What is your field of study:</label>
             <div class="col-sm-10">
               <select class="form-control" name="course" id="course">
               <?php if (!empty(Filter::getInterests($email)[0]["interests"])){ ?>
                 <option class="border border-info" value="<?php echo Filter::getInterests($email)[0]["interests"] ?>"><?php echo Filter::getInterests($email)[0]["interests"] ?></option>
               <?php }else{ ?>
-                <option class="border border-info" value="">kies</option>
+                <option class="border border-info" value="">choose</option>
               <?php } ?>
                 <?php foreach ($coursesList as $course) : ?>
                   <option value="<?php echo $course ?>"><?php echo $course ?> </option>
@@ -105,13 +105,13 @@ if (!empty($_POST)) {
           </div>
 
           <div class="dropdown form-group row">
-            <label class="col-sm-2 col-form-label">wat zijn je hobbies:</label>
+            <label class="col-sm-2 col-form-label">what are your hobbies:</label>
             <div class="col-sm-10">
               <select class="form-control" name="hobby" id="hobby">
         <?php if(!empty(Filter::getHobby($email)[0]["hobby"])){ ?>
                <option class="border border-info" value="<?php echo Filter::getHobby($email)[0]["hobby"]; ?>"><?php echo Filter::getHobby($email)[0]["hobby"]; ?></option>
         <?php }else{ ?>
-                <option class="border border-info" value="">Kies</option>
+                <option class="border border-info" value="">choose</option>
         <?php } ?>
                 <?php foreach ($hobbyList as $hobby) : ?>
                   <option value="<?php echo $hobby ?>"><?php echo $hobby ?> </option>
@@ -127,7 +127,7 @@ if (!empty($_POST)) {
              <?php if(!empty(Filter::getExtra($email)[0]["extra"])){ ?>
                 <option class="border border-info" value="<?php echo Filter::getExtra($email)[0]["extra"]; ?>"><?php echo Filter::getExtra($email)[0]["extra"]; ?></option>
              <?php } else{ ?>
-                <option class="border border-info" value="">kies</option>
+                <option class="border border-info" value="">choose</option>
                <?php } ?>
                 <?php foreach ($extraList as $extra) : ?>
                   <option value="<?php echo $extra ?>"><?php echo $extra ?> </option>
@@ -137,13 +137,13 @@ if (!empty($_POST)) {
 		  </div>
 		  
 			<div class="dropdown form-group row">
-				<label class="col-sm-2 col-form-label">Welke klas zit je in:</label><br>
+				<label class="col-sm-2 col-form-label">What grade are you in:</label><br>
 				<div class="col-sm-10">
 				<select class="form-control" name="class" id="class">
 				<?php if(!empty(Filter::getClass($email)[0]["class"])){ ?>
                 <option class="border border-info" value="<?php echo Filter::getClass($email)[0]["class"]; ?>"><?php echo Filter::getClass($email)[0]["class"]; ?></option>
              <?php } else{ ?>
-                <option class="border border-info" value="">kies</option>
+                <option class="border border-info" value="">choose</option>
                <?php } ?>
 					<option class="border border-info" value="1IMD">1IMD</option>
 					<option class="border border-info" value="2IMD">2IMD</option>
@@ -153,11 +153,11 @@ if (!empty($_POST)) {
 			</div>
 
 			<div class="dropdown form-group row">
-				<label class="col-sm-2 col-form-label">Zoek je een buddy of wil je een buddy onder hoede nemen:</label><br>
+				<label class="col-sm-2 col-form-label">Do you want a buddy or do you wanna take care of a buddy:</label><br>
 				<div class="col-sm-10">
 				<select class="form-control" name="buddy" id="buddy" style="width: 30%">
-					<option class="border border-info" value="BuddySearcher">Ik zoek een buddy</option>
-					<option class="border border-info" value="BuddyHolder">Ik wil een buddy onder mijn hoede</option>
+					<option class="border border-info" value="BuddySearcher">I search for a buddy</option>
+					<option class="border border-info" value="BuddyHolder">I wanna take care of a buddy</option>
 				</select>
 			</div>
 			</div>

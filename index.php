@@ -13,6 +13,7 @@ $locatie = '';
 $users = $filter->getUsers();
 if (!empty($_GET)) {
   $search = $_GET["search"];
+  $filter->setSearch($_GET["search"]);
   $course = $_GET["course"];
   if (!empty($locatie)) {
     $locatie = $_GET["locatie"];
@@ -20,7 +21,7 @@ if (!empty($_GET)) {
   $hobby = $_GET["hobby"];
   $extra = $_GET["extra"];
   if (!empty($search)) {
-    $searchResult = $filter->searchPerson($search);
+    $searchResult = $filter->searchPerson();
   } else if (!empty($course) || !empty($locatie) || !empty($hobby) || !empty($extra)) {
     $searchResult = $filter->filterSearch($course, $locatie, $hobby, $extra);
   }
@@ -80,7 +81,7 @@ $bootstrapColWidth = 12 / $numOfCols;
 
         <div class="form__field form-group row">
 
-          <label class="col-sm-2 col-form-labe">Zoek een persoon</label>
+          <label class="col-sm-2 col-form-labe">Search a person</label>
           <div class="col-sm-10">
             <input class="border form-control" type="text" placeholder="search" id="search" name="search">
           </div>
@@ -88,7 +89,7 @@ $bootstrapColWidth = 12 / $numOfCols;
         <?php if (!empty(Filter::getLocation($email)[0]["locatie"])) : ?>
 
           <div class="f form-group row">
-            <label class="col-sm-2 col-form-labe">Zoek op:</label>
+            <label class="col-sm-2 col-form-labe">Filter on:</label>
             <div class="col-sm-10">
               <input class=" form-check-input" style="margin-left: 1px;" type="checkbox" id="locatie" name="locatie" value="<?php echo ucfirst(Filter::getLocation($email)[0]["locatie"]); ?>">
               <label class="form-check-label" style="margin-left: 2%;" for="locatie">
@@ -101,11 +102,11 @@ $bootstrapColWidth = 12 / $numOfCols;
 
 
         <div class="dropdown form-group row">
-          <label class="col-sm-2 col-form-label">Filter op richting:</label>
+          <label class="col-sm-2 col-form-label">Filter on field of study:</label>
           <div class="col-sm-10">
             <select class="form-control" name="course" id="course">
 
-              <option class="border border-info" value="">kies</option>
+              <option class="border border-info" value="">choose</option>
               <?php foreach ($coursesList as $course) : ?>
                 <option value="<?php echo $course ?>"><?php echo $course ?> </option>
               <?php endforeach; ?>
@@ -114,11 +115,11 @@ $bootstrapColWidth = 12 / $numOfCols;
         </div>
 
         <div class="dropdown form-group row">
-          <label class="col-sm-2 col-form-label">Filter op hobby:</label>
+          <label class="col-sm-2 col-form-label">Filter on hobby:</label>
           <div class="col-sm-10">
             <select class="form-control" name="hobby" id="hobby">
 
-              <option class="border border-info" value="">Kies</option>
+              <option class="border border-info" value="">choose</option>
               <?php foreach ($hobbyList as $hobby) : ?>
                 <option value="<?php echo $hobby ?>"><?php echo $hobby ?> </option>
               <?php endforeach; ?>
@@ -127,11 +128,11 @@ $bootstrapColWidth = 12 / $numOfCols;
         </div>
 
         <div class="dropdown form-group row">
-          <label class="col-sm-2 col-form-label">Filter op extra:</label>
+          <label class="col-sm-2 col-form-label">Filter on extra:</label>
           <div class="col-sm-10">
             <select class="form-control" name="extra" id="extra">
 
-              <option class="border border-info" value="">kies</option>
+              <option class="border border-info" value="">choose</option>
               <?php foreach ($extraList as $extra) : ?>
                 <option value="<?php echo $extra ?>"><?php echo $extra ?> </option>
               <?php endforeach; ?>
@@ -139,6 +140,20 @@ $bootstrapColWidth = 12 / $numOfCols;
           </div>
 
         </div>
+
+        <div class="dropdown form-group row">
+          <label class="col-sm-2 col-form-label">Filter on grade:</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="grade" id="grade">
+
+              <option class="border border-info" value="">choose</option>
+              <?php foreach ($classList as $class) : ?>
+                <option value="<?php echo $class ?>"><?php echo $class ?> </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+
         <div class="form__field">
           <input value="Find a buddy!" type="submit" id="submit" class="btn btn-outline-secondary" style="margin-top: 2%;">
         </div>
@@ -161,8 +176,8 @@ $bootstrapColWidth = 12 / $numOfCols;
                 <a href="UserFriendProfile.php?id=<?php echo $user["id"]; ?>">
                   <p><?php echo ucfirst($user["Firstname"]) . " " . $user["LastName"] ?></p>
                 </a>
-                <p>woont in: <?php echo $user["locatie"] ?></p>
-                <p>zit in klas: <?php echo $user["class"] ?></p>
+                <p>lives in: <?php echo $user["locatie"] ?></p>
+                <p>is in grade: <?php echo $user["class"] ?></p>
                 <a href="UserFriendProfile.php?id=<?php echo $user["id"] ?>">Request buddy</a>
                 <hr>
               </div>
@@ -176,7 +191,7 @@ $bootstrapColWidth = 12 / $numOfCols;
             ?>
               <div class="">
                 <div class="user" style=" margin-left:20px;">
-                <img src="images/<?php echo $user['image']?>" style="width: 20%; float:left; padding-right:2%" alt="">
+                <img src="images/<?php echo $result['image']?>" style="width: 20%; float:left; padding-right:2%" alt="">
                   <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>" style="background-image: url(<?php echo $result["image"] ?>)"></a>
                   <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>">
                     <p><?php echo ucfirst($result["firstname"]) . " " . $result["lastname"] ?></p>

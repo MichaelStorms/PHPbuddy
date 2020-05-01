@@ -6,14 +6,21 @@
     ];
 
     $hobbyList = [
-        0 => "Voetbal",
-        1 => "Basketbal",
+        0 => "Soccer",
+        1 => "Basketball",
         2 => "Gaming",
-        3 => "Films kijken"
+        3 => "Movies"
     ];
 
     $extraList = [
         0 => "foodie",
-        1 => "party"
-    ]
+        1 => "party",
+        2 => "relaxing"
+    ];
+
+    $classList = [
+        0 => "1IMD",
+        1 => "2IMD",
+        2 => "3IMD"
+    ];
 ?>

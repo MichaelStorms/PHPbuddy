@@ -16,7 +16,7 @@ include_once("filterArray.php");
     $extra = $_GET["extra"];
     if(!empty($search))
     {
-      $searchResult = $filter->searchPerson($search);
+      $searchResult = $filter->searchPerson();
     }else if(!empty($course)||!empty($locatie)||!empty($hobby)||!empty($extra)){
       $searchResult = $filter->filterSearch($course,$locatie,$hobby,$extra);
     }
@@ -47,18 +47,18 @@ include_once("filterArray.php");
     <div>
     <form action="" method="get">
       <div class="form__field">
-      <label for="search">zoek een persoon</label>
+      <label for="search">Search a person</label>
       <input type="text" placeholder="search" id="search" name="search" >
       </div>
       <?php if(!empty(Filter::getLocation($email)[0]["locatie"])): ?>
       <div class="form__field">
-      <label for="locatie">zoek op <?php echo ucfirst(Filter::getLocation($email)[0]["locatie"]); ?></label>
+      <label for="locatie">filter on:<?php echo ucfirst(Filter::getLocation($email)[0]["locatie"]); ?></label>
       <input type="checkbox" id="locatie" name="locatie" value="<?php echo ucfirst(Filter::getLocation($email)[0]["locatie"]); ?>">
       </div>
       <?php endif; ?>
       <?php if(!empty(Filter::getInterests($email)[0]["interests"])): ?>
         <div class="dropdown">
-					<label>filter op richting:</label><br> 
+					<label>filter on field of study:</label><br> 
 						<select name="course" id="course" >
             <option value="">Kies</option>
               <?php foreach($coursesList as $course): ?>
@@ -69,7 +69,7 @@ include_once("filterArray.php");
       <?php endif; ?>
       <?php if(!empty(Filter::getHobby($email)[0]["hobby"])): ?>
         <div class="dropdown">
-					<label>filter op hobby:</label><br> 
+					<label>filter on hobby:</label><br> 
 						<select name="hobby" id="hobby" >
             <option value="">Kies</option>
               <?php foreach($hobbyList as $hobby): ?>
@@ -80,7 +80,7 @@ include_once("filterArray.php");
       <?php endif; ?>
       <?php if(!empty(Filter::getExtra($email)[0]["extra"])): ?>
          <div class="dropdown">
-					<label>filter op extra:</label><br> 
+					<label>filter on extra:</label><br> 
 						<select name="extra" id="extra">
               <option value="">Kies</option>
               <?php foreach($extraList as $extra): ?>

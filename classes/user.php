@@ -449,7 +449,7 @@ class User
         $email = trim($_SESSION['user']);
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET email = ':emailNew' WHERE email = '$email'");
+        $statement = $conn->prepare("UPDATE users SET email = :emailNew WHERE email = '$email'");
         $emailNew = $this->getEmail();
         
         
@@ -465,7 +465,7 @@ class User
         $email = trim($_SESSION['user']);
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET image = ':image' WHERE email = '$email'");
+        $statement = $conn->prepare("UPDATE users SET image = :image WHERE email = '$email'");
         $image = $this->getImage();
         
         
@@ -482,7 +482,7 @@ class User
         $email = trim($_SESSION['user']);
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET imgDescription = ':description' WHERE email = '$email'");
+        $statement = $conn->prepare("UPDATE users SET imgDescription = :description WHERE email = '$email'");
         $description = $this->getDescription();
         
         

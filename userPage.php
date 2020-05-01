@@ -24,7 +24,7 @@ $profile = $user->getUser($email);
     </header>
     <div class="bg-light">
         <div class="container bg-light mt-3">
-            <h1 class="text-dark p-3">Jouw profiel</h1>
+            <h1 class="text-dark p-3">Your profile</h1>
             <div class="container p-3">
                 <div class="row">
                     <div class="col">

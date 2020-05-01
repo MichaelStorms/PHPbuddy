@@ -48,7 +48,7 @@ $get_frnd_num = $buddy->get_all_friends($_SESSION['id'], false);
         </div>
 
         <div class="all_users">
-            <h3>All Users</h3>
+            <h3>All friends</h3>
             <div class="usersWrapper">
                 <?php
                 if ($all_users) {

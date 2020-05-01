@@ -13,74 +13,6 @@ include_once(__DIR__ . "/db.php");
 
 
     
- 
-
-    public static function getUsers(){
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT id, Firstname , LastName , image , locatie , class FROM users");
-        $statement->execute();
-        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $users;
-    }
-
-    public static function getLocation($email){
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT locatie FROM users WHERE email = '$email'");
-        $statement->execute();
-        $locatie = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $locatie;
-    }
-
-    public static function getInterests($email){
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT interests FROM users WHERE email = '$email'");
-        $statement->execute();
-        $interests = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $interests;
-    }
-    public static function getHobby($email){
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT hobby FROM users WHERE email = '$email'");
-        $statement->execute();
-        $hobby = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $hobby;
-    }
-    public static function getExtra($email){
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT extra FROM users WHERE email = '$email'");
-        $statement->execute();
-        $extra = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $extra;
-    }
-
-    public static function getClass($email){
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT class FROM users WHERE email = '$email'");
-        $statement->execute();
-        $extra = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $extra;
-    }
-
-
-    public static function searchPerson($search){
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT * FROM users WHERE CONCAT_WS(' ', firstname, lastname) LIKE '%$search%'");
-      //  $searchRes = $search;
-      //  $statement->bindParam(":search",$searchRes);
-        $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
-
-    public static function filterSearch($course,$locatie,$hobby,$extra){
-        $conn = Db::getConnection();
-        $query = "SELECT * FROM users WHERE ('$course' = '' OR interests = '$course') AND ('$locatie' = '' OR locatie = '$locatie') AND ('$hobby' = '' OR hobby = '$hobby') AND ('$extra' = '' OR extra= '$extra')";
-        $statement = $conn->prepare($query);
-        $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
-
     /**
      * Get the value of search
      */ 
@@ -96,6 +28,8 @@ include_once(__DIR__ . "/db.php");
      */ 
     public function setSearch($search)
     {
+        
+        $search = preg_replace("/[^a-z-A-Z]/", "", $search);
         $this->search = $search;
 
         return $this;
@@ -179,5 +113,73 @@ include_once(__DIR__ . "/db.php");
         $this->extraS = $extraS;
 
         return $this;
+    }
+ 
+
+    public static function getUsers(){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT id, Firstname , LastName , image , locatie , class FROM users");
+        $statement->execute();
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $users;
+    }
+
+    public static function getLocation($email){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT locatie FROM users WHERE email = '$email'");
+        $statement->execute();
+        $locatie = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $locatie;
+    }
+
+    public static function getInterests($email){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT interests FROM users WHERE email = '$email'");
+        $statement->execute();
+        $interests = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $interests;
+    }
+    public static function getHobby($email){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT hobby FROM users WHERE email = '$email'");
+        $statement->execute();
+        $hobby = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $hobby;
+    }
+    public static function getExtra($email){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT extra FROM users WHERE email = '$email'");
+        $statement->execute();
+        $extra = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $extra;
+    }
+
+    public static function getClass($email){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT class FROM users WHERE email = '$email'");
+        $statement->execute();
+        $extra = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $extra;
+    }
+
+
+    public function searchPerson(){
+        $conn = Db::getConnection();
+        $searchres = $this->getSearch();
+        $statement = $conn->prepare("SELECT * FROM users WHERE CONCAT_WS(' ', firstname, lastname) LIKE '%$searchres%'");
+      //  $searchRes = $search;
+        $statement->bindParam(":search",$searchres);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public static function filterSearch($course,$locatie,$hobby,$extra){
+        $conn = Db::getConnection();
+        $query = "SELECT * FROM users WHERE ('$course' = '' OR interests = '$course') AND ('$locatie' = '' OR locatie = '$locatie') AND ('$hobby' = '' OR hobby = '$hobby') AND ('$extra' = '' OR extra= '$extra')";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
  }

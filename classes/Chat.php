@@ -89,15 +89,16 @@ class Chat extends User{
             $statement->execute();	
 	}
 	public function insertChat($reciever_id, $sender_id, $message) {		
-        $conn = Db::getConnection();
+		$conn = Db::getConnection();
+		
 		$sqlInsert = "
 			INSERT INTO buddychat 
 			(reciever_id, sender_id, message, status) 
-			VALUES ('$reciever_id', '$sender_id', '$message', '1')";
+			VALUES ('$reciever_id', '$sender_id', :message, '1')";
 
 		$statement = $conn->prepare($sqlInsert);
 	//	$msg = $message;
-	//	$statement->bindParam(":message",$msg);
+		$statement->bindParam(":message",$message);
         $result = $statement->execute();	
 		if(!$result){
 			return ('Error in query: '. PDO::errorInfo());
