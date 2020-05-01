@@ -138,9 +138,9 @@ $bootstrapColWidth = 12 / $numOfCols;
                 <?php endforeach; ?>
               </select>
             </div>
-
           </div>
         <?php endif; ?>
+        
         <div class="form__field">
           <input value="Find a buddy!" type="submit" id="submit" class="btn btn-outline-secondary" style="margin-top: 2%;">
         </div>
