@@ -6,9 +6,10 @@ error_reporting(E_ALL);*/
 
 include("init.php");
 include("loginCheck.inc.php");
+include("classes/Filter.php");
 
-
-
+$filter = new Filter();
+$email = $_SESSION["user"];
 
 if (!empty($_POST)) {
 	//echo "test";
@@ -84,49 +85,78 @@ if (!empty($_POST)) {
 				<label>Locatie:</label><br>
 				<input class="form-control" style="width:30%" type="text" name="locatie" placeholder="Waar woon je/ zit je op kot?" />
 			</div>
-			<div class="dropdown form-group">
-				<label>Interesse in de richting IMD:</label><br>
-				<select class="form-control" name="course" id="course" style="width: 30%">
-					<option value="">Kies</option>
-					<option value="Development">Development</option>
-					<option value="Design">Design</option>
-					<option value="Design & Development">Design & Development</option>
+			<div class="dropdown form-group row">
+            <label class="col-sm-2 col-form-label">Wat is je richting:</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="course" id="course">
+              <?php if (!empty(Filter::getInterests($email)[0]["interests"])){ ?>
+                <option class="border border-info" value="<?php echo Filter::getInterests($email)[0]["interests"] ?>"><?php echo Filter::getInterests($email)[0]["interests"] ?></option>
+              <?php }else{ ?>
+                <option class="border border-info" value="">kies</option>
+              <?php } ?>
+                <?php foreach ($coursesList as $course) : ?>
+                  <option value="<?php echo $course ?>"><?php echo $course ?> </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </div>
+
+          <div class="dropdown form-group row">
+            <label class="col-sm-2 col-form-label">wat zijn je hobbies:</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="hobby" id="hobby">
+        <?php if(!empty(Filter::getHobby($email)[0]["hobby"])){ ?>
+               <option class="border border-info" value="<?php echo Filter::getHobby($email)[0]["hobby"]; ?>"><?php echo Filter::getHobby($email)[0]["hobby"]; ?></option>
+        <?php }else{ ?>
+                <option class="border border-info" value="">Kies</option>
+        <?php } ?>
+                <?php foreach ($hobbyList as $hobby) : ?>
+                  <option value="<?php echo $hobby ?>"><?php echo $hobby ?> </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </div>
+
+          <div class="dropdown form-group row">
+            <label class="col-sm-2 col-form-label">extra:</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="extra" id="extra">
+             <?php if(!empty(Filter::getExtra($email)[0]["extra"])){ ?>
+                <option class="border border-info" value="<?php echo Filter::getExtra($email)[0]["extra"]; ?>"><?php echo Filter::getExtra($email)[0]["extra"]; ?></option>
+             <?php } else{ ?>
+                <option class="border border-info" value="">kies</option>
+               <?php } ?>
+                <?php foreach ($extraList as $extra) : ?>
+                  <option value="<?php echo $extra ?>"><?php echo $extra ?> </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+		  </div>
+		  
+			<div class="dropdown form-group row">
+				<label class="col-sm-2 col-form-label">Welke klas zit je in:</label><br>
+				<div class="col-sm-10">
+				<select class="form-control" name="class" id="class">
+				<?php if(!empty(Filter::getClass($email)[0]["class"])){ ?>
+                <option class="border border-info" value="<?php echo Filter::getClass($email)[0]["class"]; ?>"><?php echo Filter::getClass($email)[0]["class"]; ?></option>
+             <?php } else{ ?>
+                <option class="border border-info" value="">kies</option>
+               <?php } ?>
+					<option class="border border-info" value="1IMD">1IMD</option>
+					<option class="border border-info" value="2IMD">2IMD</option>
+					<option class="border border-info" value="3IMD">3IMD</option>
 				</select>
 			</div>
-			<div class="dropdown form-group">
-				<label>Hobby:</label><br>
-				<select class="form-control" name="hobby" id="hobby" style="width: 30%">
-					<option value="">Kies</option>
-					<option value="Voetbal">Voetbal</option>
-					<option value="Basketbal">Basketbal</option>
-					<option value="Gaming">Gaming</option>
-					<option value="Films kijken">Films kijken</option>
-				</select>
 			</div>
-			<div class="dropdown form-group">
-				<label>Extra:</label><br>
-				<select class="form-control" name="extra" id="extra" style="width: 30%">
-					<option value="">Kies</option>
-					<option value="foodie">Ik ben een foodie</option>
-					<option value="party">Ik vind een stevige party wel tof</option>
-				</select>
-			</div>
-			<div class="dropdown form-group">
-				<label>Welke klas zit je in:</label><br>
-				<select class="form-control" name="class" id="class" style="width: 30%">
-					<option value="">Kies</option>
-					<option value="1IMD">1IMD</option>
-					<option value="2IMD">2IMD</option>
-					<option value="3IMD">3IMD</option>
-				</select>
-			</div>
-			<div class="dropdown form-groupn">
-				<label>Zoek je een buddy of wil je een buddy onder hoede nemen:</label><br>
+
+			<div class="dropdown form-group row">
+				<label class="col-sm-2 col-form-label">Zoek je een buddy of wil je een buddy onder hoede nemen:</label><br>
+				<div class="col-sm-10">
 				<select class="form-control" name="buddy" id="buddy" style="width: 30%">
-					<option value="">Kies</option>
-					<option value="BuddySearcher">Ik zoek een buddy</option>
-					<option value="BuddyHolder">Ik wil een buddy onder mijn hoede</option>
+					<option class="border border-info" value="BuddySearcher">Ik zoek een buddy</option>
+					<option class="border border-info" value="BuddyHolder">Ik wil een buddy onder mijn hoede</option>
 				</select>
+			</div>
 			</div>
 			<input class="btn btn-outline-dark" style="margin-top:2%; width:30%;" type="submit" name="profileupdate" value="Update" />
 		</form>

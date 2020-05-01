@@ -99,40 +99,48 @@ $bootstrapColWidth = 12 / $numOfCols;
           </div>
         <?php endif; ?>
 
-        <?php if (!empty(Filter::getInterests($email)[0]["interests"])) : ?>
+        
           <div class="dropdown form-group row">
             <label class="col-sm-2 col-form-label">Filter op richting:</label>
             <div class="col-sm-10">
               <select class="form-control" name="course" id="course">
-                <option class="border border-info" value="">Kies</option>
+              <?php if (!empty(Filter::getInterests($email)[0]["interests"])){ ?>
+                <option class="border border-info" value="<?php echo Filter::getInterests($email)[0]["interests"] ?>"><?php echo Filter::getInterests($email)[0]["interests"] ?></option>
+              <?php }else{ ?>
+                <option class="border border-info" value="">kies</option>
+              <?php } ?>
                 <?php foreach ($coursesList as $course) : ?>
                   <option value="<?php echo $course ?>"><?php echo $course ?> </option>
                 <?php endforeach; ?>
               </select>
             </div>
           </div>
-        <?php endif; ?>
 
-        <?php if (!empty(Filter::getHobby($email)[0]["hobby"])) : ?>
           <div class="dropdown form-group row">
             <label class="col-sm-2 col-form-label">Filter op hobby:</label>
             <div class="col-sm-10">
               <select class="form-control" name="hobby" id="hobby">
-                <option value="">Kies</option>
+        <?php if(!empty(Filter::getHobby($email)[0]["hobby"])){ ?>
+               <option class="border border-info" value="<?php echo Filter::getHobby($email)[0]["hobby"]; ?>"><?php echo Filter::getHobby($email)[0]["hobby"]; ?></option>
+        <?php }else{ ?>
+                <option class="border border-info" value="">Kies</option>
+        <?php } ?>
                 <?php foreach ($hobbyList as $hobby) : ?>
                   <option value="<?php echo $hobby ?>"><?php echo $hobby ?> </option>
                 <?php endforeach; ?>
               </select>
             </div>
           </div>
-        <?php endif; ?>
 
-        <?php if (!empty(Filter::getExtra($email)[0]["extra"])) : ?>
           <div class="dropdown form-group row">
             <label class="col-sm-2 col-form-label">Filter op extra:</label>
             <div class="col-sm-10">
               <select class="form-control" name="extra" id="extra">
-                <option value="">Kies</option>
+             <?php if(!empty(Filter::getExtra($email)[0]["extra"])){ ?>
+                <option class="border border-info" value="<?php echo Filter::getExtra($email)[0]["extra"]; ?>"><?php echo Filter::getExtra($email)[0]["extra"]; ?></option>
+             <?php } else{ ?>
+                <option class="border border-info" value="">kies</option>
+               <?php } ?>
                 <?php foreach ($extraList as $extra) : ?>
                   <option value="<?php echo $extra ?>"><?php echo $extra ?> </option>
                 <?php endforeach; ?>
@@ -140,7 +148,6 @@ $bootstrapColWidth = 12 / $numOfCols;
             </div>
 
           </div>
-        <?php endif; ?>
         <div class="form__field">
           <input value="Find a buddy!" type="submit" id="submit" class="btn btn-outline-secondary" style="margin-top: 2%;">
         </div>

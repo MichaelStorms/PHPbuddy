@@ -53,6 +53,15 @@ include_once(__DIR__ . "/db.php");
         return $extra;
     }
 
+    public static function getClass($email){
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT class FROM users WHERE email = '$email'");
+        $statement->execute();
+        $extra = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $extra;
+    }
+
+
     public static function searchPerson($search){
         $conn = Db::getConnection();
         $statement = $conn->prepare("SELECT * FROM users WHERE CONCAT_WS(' ', firstname, lastname) LIKE '%$search%'");
