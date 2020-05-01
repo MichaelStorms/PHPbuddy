@@ -109,7 +109,7 @@ if (!empty($_POST)) {
                     <input class="form-control border border-info rounded" type="password" id="password" name="password_confirmation">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
                     <label for="exampleFormControlSelect1">class</label>
                     <select name="klas" class="form-control" id="exampleFormControlSelect1">
                         <option value="1IMD">1IMD</option>
@@ -118,7 +118,7 @@ if (!empty($_POST)) {
                     </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
                     <label for="exampleFormControlSelect1">buddy</label>
                     <select name="buddy" class="form-control" id="exampleFormControlSelect1">
                         <option value="BuddySearcher">Ik zoek een buddy</option>
