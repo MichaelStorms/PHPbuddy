@@ -12,7 +12,7 @@ $filter = new Filter();
 $locatie = '';
 $users = $filter->getUsers();
 if (!empty($_GET)) {
-  $search = htmlspecialchars($_GET["search"]);
+  $search = $_GET["search"];
   $course = $_GET["course"];
   if (!empty($locatie)) {
     $locatie = $_GET["locatie"];
@@ -146,12 +146,8 @@ $bootstrapColWidth = 12 / $numOfCols;
                 <?php endforeach; ?>
               </select>
             </div>
+
           </div>
-<<<<<<< HEAD
-=======
-        <?php endif; ?>
-        
->>>>>>> ebf1ae8b37dd9ea78f7a2b4caa0c16b31de90e3f
         <div class="form__field">
           <input value="Find a buddy!" type="submit" id="submit" class="btn btn-outline-secondary" style="margin-top: 2%;">
         </div>
