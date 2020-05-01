@@ -12,7 +12,7 @@ $filter = new Filter();
 $locatie = '';
 $users = $filter->getUsers();
 if (!empty($_GET)) {
-  $search = htmlspecialchars($_GET["search"]);
+  $search = $_GET["search"];
   $course = $_GET["course"];
   if (!empty($locatie)) {
     $locatie = $_GET["locatie"];
