@@ -4,7 +4,7 @@ include_once("loginCheck.inc.php");
 include_once(__DIR__ . "/classes/Filter.php");
 $filter = new Filter();
 if (!empty($_GET)) {
-	$search = $_GET["search"];
+	$search = htmlspecialchars($_GET["search"]);
 	if (!empty($search)) {
 		$searchResult = $filter->searchPerson($search);
 	}
@@ -168,7 +168,7 @@ if (!empty($_GET)) {
 		<br>
 
 	</div>
-	<script src="js/chat.js"></script>
+	<script src="chat.js"></script>
 
 	<!-- begin footer -->
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
