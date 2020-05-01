@@ -7,6 +7,7 @@ error_reporting(E_ALL);*/
 include("init.php");
 include("loginCheck.inc.php");
 include("classes/Filter.php");
+include("filterArray.php");
 
 $filter = new Filter();
 $email = $_SESSION["user"];
