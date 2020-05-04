@@ -137,8 +137,10 @@ if (!empty($_POST['emailOld'])) {
 	</header>
 	<div class="container">
 		<?php if (isset($error)) : ?>
-			<div class="form__error">
-				<?php echo $error; ?>
+			<div class="alert alert-primary" role="alert">
+				<div class="form__error">
+					<?php echo $error; ?>
+				</div>
 			</div>
 		<?php endif; ?>
 
@@ -149,55 +151,65 @@ if (!empty($_POST['emailOld'])) {
 					<small>Must be jpg format</small>
 					<input class="form-control-file" type="file" name="avatar">
 					<br>
-					
+
 					<textarea class="form-control" name="description" rows="9" placeholder="Foto beschrijving"></textarea>
 				</div>
 				<div class="col">
-					<img src="images/<?php echo $user_data->image ?>" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: 100%">
+					<img src="images/<?php echo $user_data->image ?>" style="width: auto; height:350px;" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: 100%">
 					<p><?php echo $user_data->imgDescription ?></p>
 				</div>
 			</div>
 
+			<div style="width: 50%; margin:auto;">
+				<input class="btn btn-outline-dark" type="submit" value="Update foto en beschrijving" style="width: 100%;  text-align: center;">
+			</div>
+			<hr>
 			<div>
 				<h2>Change password</h2>
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Old password</label>
+					<label class="col-sm-2 col-form-label">Oud Wachtwoord</label>
 					<div class="col-sm-10">
 						<input type="password" name="passwordOld" class="form-control" placeholder="Oud wachtwoord">
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">New password</label>
+					<label class="col-sm-2 col-form-label">Nieuw wachtwoord</label>
 					<div class="col-sm-10">
 						<input type="password" name="passwordNew" class="form-control" placeholder="Nieuw wachtwoord">
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Repeat new password</label>
+					<label class="col-sm-2 col-form-label">Heraal nieuw wachtwoor</label>
 					<div class="col-sm-10">
 						<input type="password" name="passwordCheck" class="form-control" placeholder="Herhaal wachtwoord">
 					</div>
 				</div>
 
 			</div>
+
+			<div style="width: 50%; margin:auto;">
+				<input class="btn btn-outline-dark" type="submit" value="Update wachtwoord" style="width: 100%;  text-align: center;">
+			</div>
+
+			<hr>
 			<div>
 				<h2>Change Email</h2>
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Old email</label>
+					<label class="col-sm-2 col-form-label">Oud email</label>
 					<div class="col-sm-10">
 						<input type="text" name="emailOld" class="form-control" placeholder="email@example.com">
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">New email</label>
+					<label class="col-sm-2 col-form-label">Nieuw email</label>
 					<div class="col-sm-10">
 						<input type="text" name="emailNew" class="form-control" placeholder="email@example.com">
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Repeat new email</label>
+					<label class="col-sm-2 col-form-label">Heraal nieuw email</label>
 					<div class="col-sm-10">
 						<input type="text" name="emailCheck" class="form-control" placeholder="email@example.com">
 					</div>
@@ -205,9 +217,9 @@ if (!empty($_POST['emailOld'])) {
 			</div>
 
 			<div style="width: 50%; margin:auto;">
-				<input class="btn btn-outline-dark" type="submit" value="Submit" style="width: 100%;  text-align: center;">
+				<input class="btn btn-outline-dark" type="submit" value="Update Email" style="width: 100%;  text-align: center;">
 			</div>
-			
+
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

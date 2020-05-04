@@ -35,11 +35,11 @@ $get_all_friends = $buddy->get_all_friends($_SESSION['id'], true);
         </div>
     </header>
     
-        <div class="profile_container container">
+        <div class="profile_container container bg-light p-3" style="margin-top: 2%">
 
             <div class="inner_profile " style="margin-top: 2%">
                 <div class="img">
-                    <img src="images/<?php echo $user_data->image . "" ?>" alt="Profile image" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: 250px; ">
+                    <img src="images/<?php echo $user_data->image . "" ?>" alt="Profile image" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: auto; height:200px; ">
                 </div>
                 <h2><?php echo  $user_data->firstname . " " . $user_data->lastname; ?></h2>
                 <span><a href="UserFriendProfile.php?id='<?php echo $user_data->id ?>'" class="see_profileBtn">See your profile</a>

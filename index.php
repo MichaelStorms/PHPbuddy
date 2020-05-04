@@ -56,6 +56,8 @@ $bootstrapColWidth = 12 / $numOfCols;
       </div>
     </div>
   </header>
+
+  
   <section class="jumbotron text-center" style="margin: 0">
     <div class="container">
       <h1>Hello, <?php echo  $user_data->firstname . " " . $user_data->lastname; ?></h1>
@@ -170,8 +172,8 @@ $bootstrapColWidth = 12 / $numOfCols;
           ?>
 
             <div class="">
-              <div class="user" style=" margin-left:20px;">
-                <img src="images/<?php echo $user['image']?>" style="width: 20%; float:left; padding-right:2%" alt="">
+              <div class="user" style=" margin-left:20px; ">
+                <img src="images/<?php echo $user['image']?>" style="width: auto; height:200px; padding-right:2%;" alt="profile pic">
                 <a href="UserFriendProfile.php?id=<?php echo $user["id"]; ?>" ></a>
                 <a href="UserFriendProfile.php?id=<?php echo $user["id"]; ?>">
                   <p><?php echo ucfirst($user["Firstname"]) . " " . $user["LastName"] ?></p>
@@ -191,7 +193,7 @@ $bootstrapColWidth = 12 / $numOfCols;
             ?>
               <div class="">
                 <div class="user" style=" margin-left:20px;">
-                <img src="images/<?php echo $result['image']?>" style="width: 20%; float:left; padding-right:2%" alt="">
+                <img src="images/<?php echo $result['image']?>" style="width: auto; height:200px; padding-right:2%;%" alt="profile pic">
                   <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>" style="background-image: url(<?php echo $result["image"] ?>)"></a>
                   <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>">
                     <p><?php echo ucfirst($result["firstname"]) . " " . $result["lastname"] ?></p>

@@ -80,8 +80,17 @@ if (!empty($_POST)) {
 		<form method="post" action="">
 
 			<?php if (isset($error)) : ?>
-				<div class="form__error">
-					<p><?php echo $error; ?></p>
+				<div class="alert alert-primary" role="alert">
+					<div class="form__error">
+						<p><?php echo $error; ?></p>
+					</div>
+				</div>
+			<?php endif; ?>
+			<?php if (isset($succes)) : ?>
+				<div class="alert alert-primary" role="alert">
+					<div class="form__error">
+						<p><?php echo $succes; ?></p>
+					</div>
 				</div>
 			<?php endif; ?>
 			<div class="form-group">
@@ -89,83 +98,83 @@ if (!empty($_POST)) {
 				<input class="form-control" style="width:30%" type="text" name="locatie" placeholder="Waar woon je/ zit je op kot?" />
 			</div>
 			<div class="dropdown form-group row">
-            <label class="col-sm-2 col-form-label">What is your field of study:</label>
-            <div class="col-sm-10">
-              <select class="form-control" name="course" id="course">
-              <?php if (!empty(Filter::getInterests($email)[0]["interests"])){ ?>
-                <option class="border border-info" value="<?php echo Filter::getInterests($email)[0]["interests"] ?>"><?php echo Filter::getInterests($email)[0]["interests"] ?></option>
-              <?php }else{ ?>
-                <option class="border border-info" value="">choose</option>
-              <?php } ?>
-                <?php foreach ($coursesList as $course) : ?>
-                  <option value="<?php echo $course ?>"><?php echo $course ?> </option>
-                <?php endforeach; ?>
-              </select>
-            </div>
-          </div>
+				<label class="col-sm-2 col-form-label">What is your field of study:</label>
+				<div class="col-sm-10">
+					<select class="form-control" name="course" id="course">
+						<?php if (!empty(Filter::getInterests($email)[0]["interests"])) { ?>
+							<option class="border border-info" value="<?php echo Filter::getInterests($email)[0]["interests"] ?>"><?php echo Filter::getInterests($email)[0]["interests"] ?></option>
+						<?php } else { ?>
+							<option class="border border-info" value="">choose</option>
+						<?php } ?>
+						<?php foreach ($coursesList as $course) : ?>
+							<option value="<?php echo $course ?>"><?php echo $course ?> </option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+			</div>
 
-          <div class="dropdown form-group row">
-            <label class="col-sm-2 col-form-label">what are your hobbies:</label>
-            <div class="col-sm-10">
-              <select class="form-control" name="hobby" id="hobby">
-        <?php if(!empty(Filter::getHobby($email)[0]["hobby"])){ ?>
-               <option class="border border-info" value="<?php echo Filter::getHobby($email)[0]["hobby"]; ?>"><?php echo Filter::getHobby($email)[0]["hobby"]; ?></option>
-        <?php }else{ ?>
-                <option class="border border-info" value="">choose</option>
-        <?php } ?>
-                <?php foreach ($hobbyList as $hobby) : ?>
-                  <option value="<?php echo $hobby ?>"><?php echo $hobby ?> </option>
-                <?php endforeach; ?>
-              </select>
-            </div>
-          </div>
+			<div class="dropdown form-group row">
+				<label class="col-sm-2 col-form-label">what are your hobbies:</label>
+				<div class="col-sm-10">
+					<select class="form-control" name="hobby" id="hobby">
+						<?php if (!empty(Filter::getHobby($email)[0]["hobby"])) { ?>
+							<option class="border border-info" value="<?php echo Filter::getHobby($email)[0]["hobby"]; ?>"><?php echo Filter::getHobby($email)[0]["hobby"]; ?></option>
+						<?php } else { ?>
+							<option class="border border-info" value="">choose</option>
+						<?php } ?>
+						<?php foreach ($hobbyList as $hobby) : ?>
+							<option value="<?php echo $hobby ?>"><?php echo $hobby ?> </option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+			</div>
 
-          <div class="dropdown form-group row">
-            <label class="col-sm-2 col-form-label">extra:</label>
-            <div class="col-sm-10">
-              <select class="form-control" name="extra" id="extra">
-             <?php if(!empty(Filter::getExtra($email)[0]["extra"])){ ?>
-                <option class="border border-info" value="<?php echo Filter::getExtra($email)[0]["extra"]; ?>"><?php echo Filter::getExtra($email)[0]["extra"]; ?></option>
-             <?php } else{ ?>
-                <option class="border border-info" value="">choose</option>
-               <?php } ?>
-                <?php foreach ($extraList as $extra) : ?>
-                  <option value="<?php echo $extra ?>"><?php echo $extra ?> </option>
-                <?php endforeach; ?>
-              </select>
-            </div>
-		  </div>
-		  
+			<div class="dropdown form-group row">
+				<label class="col-sm-2 col-form-label">extra:</label>
+				<div class="col-sm-10">
+					<select class="form-control" name="extra" id="extra">
+						<?php if (!empty(Filter::getExtra($email)[0]["extra"])) { ?>
+							<option class="border border-info" value="<?php echo Filter::getExtra($email)[0]["extra"]; ?>"><?php echo Filter::getExtra($email)[0]["extra"]; ?></option>
+						<?php } else { ?>
+							<option class="border border-info" value="">choose</option>
+						<?php } ?>
+						<?php foreach ($extraList as $extra) : ?>
+							<option value="<?php echo $extra ?>"><?php echo $extra ?> </option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+			</div>
+
 			<div class="dropdown form-group row">
 				<label class="col-sm-2 col-form-label">What grade are you in:</label><br>
 				<div class="col-sm-10">
-				<select class="form-control" name="class" id="class">
-				<?php if(!empty(Filter::getClass($email)[0]["class"])){ ?>
-                <option class="border border-info" value="<?php echo Filter::getClass($email)[0]["class"]; ?>"><?php echo Filter::getClass($email)[0]["class"]; ?></option>
-             <?php } else{ ?>
-                <option class="border border-info" value="">choose</option>
-               <?php } ?>
-					<option class="border border-info" value="1IMD">1IMD</option>
-					<option class="border border-info" value="2IMD">2IMD</option>
-					<option class="border border-info" value="3IMD">3IMD</option>
-				</select>
-			</div>
+					<select class="form-control" name="class" id="class">
+						<?php if (!empty(Filter::getClass($email)[0]["class"])) { ?>
+							<option class="border border-info" value="<?php echo Filter::getClass($email)[0]["class"]; ?>"><?php echo Filter::getClass($email)[0]["class"]; ?></option>
+						<?php } else { ?>
+							<option class="border border-info" value="">choose</option>
+						<?php } ?>
+						<option class="border border-info" value="1IMD">1IMD</option>
+						<option class="border border-info" value="2IMD">2IMD</option>
+						<option class="border border-info" value="3IMD">3IMD</option>
+					</select>
+				</div>
 			</div>
 
 			<div class="dropdown form-group row">
 				<label class="col-sm-2 col-form-label">Do you want a buddy or do you wanna take care of a buddy:</label><br>
 				<div class="col-sm-10">
-				<select class="form-control" name="buddy" id="buddy" style="width: 30%">
-					<option class="border border-info" value="BuddySearcher">I search for a buddy</option>
-					<option class="border border-info" value="BuddyHolder">I wanna take care of a buddy</option>
-				</select>
-			</div>
+					<select class="form-control" name="buddy" id="buddy" style="width: 30%">
+						<option class="border border-info" value="BuddySearcher">I search for a buddy</option>
+						<option class="border border-info" value="BuddyHolder">I wanna take care of a buddy</option>
+					</select>
+				</div>
 			</div>
 			<?php if (isset($succes)) : ?>
-			<div class="form__succes">
-				<?php echo $succes; ?>
-			</div>
-		<?php endif; ?>
+				<div class="form__succes">
+					<?php echo $succes; ?>
+				</div>
+			<?php endif; ?>
 			<input class="btn btn-outline-dark" style="margin-top:2%; width:30%;" type="submit" name="profileupdate" value="Update" />
 		</form>
 	</div>

@@ -79,7 +79,7 @@ $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
     </div>
 
 
-    
+
 
     <div>
       <?php
@@ -164,7 +164,7 @@ $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
           <?php endif; ?>   
 
 
-          <img src="https://avataaars.io/?avatarStyle=Transparent&topType=LongHairStraight&accessoriesType=Blank&hairColor=Brown&facialHairType=Blank&clotheType=ShirtVNeck&clotheColor=PastelBlue&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Pale" height="100" width="100" alt="BuddyTo">
+          <img src="images/" height="100" width="100" alt="BuddyTo">
           <p id="name"><b>Julie</b></p>
 
           <div id="sending">

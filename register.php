@@ -36,14 +36,18 @@ if (!empty($_POST)) {
                 $error = "Sorry... email already taken";
             } else {
                 if (!empty($password) && $password === $passwordConfirmation) {
-
+                    $success =  "<script>alert('Welcome to Geeks for Geeks)</script>";
                     $password = password_hash($password, PASSWORD_DEFAULT, ["cost" => 16]);
 
                     $user->setPassword($password);
-                    header("location: login.php");
 
+                   
+                    $test = 1;
+                    if ($test ==1) {
+                        usleep(4000000);
+                        header("location: login.php");
+                    }
                     $user->save();
-                    
                 } else {
                     $error = "Password cannot be empty";
                 }
@@ -85,8 +89,16 @@ if (!empty($_POST)) {
                         </p>
                     </div>
                 <?php endif; ?>
+                <?php if (isset($success)) : ?>
+                    <div style="margin-top: 2%">
+                        <p>
+                            <?php echo $success;?>
+                        </p>
 
+                    </div>
+                <?php endif; ?>
 
+            
                 <div class="form-group row" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
                     <label class="col-sm-2 col-form-label" for="firstname">Firstname</label>
                     <input class="form-control border border-info rounded" type="text" id="firstname" name="firstname">
@@ -103,7 +115,7 @@ if (!empty($_POST)) {
                     <label class="col-sm-2 col-form-label" for="password">Password</label>
                     <input class="form-control border border-info rounded" type="password" id="password" name="password">
                 </div>
-                
+
                 <div class="form-group row" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
                     <label class="col-sm-2 col-form-label" for="password">Password</label>
                     <input class="form-control border border-info rounded" type="password" id="password" name="password_confirmation">
@@ -134,6 +146,7 @@ if (!empty($_POST)) {
             </form>
         </div>
     </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
