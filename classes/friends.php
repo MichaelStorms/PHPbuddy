@@ -352,7 +352,7 @@ class Buddy{
         $msg = '<html><body>';
         $msg .= "<h1>You've a friend request!</h1>";
         $msg .= "<p>Hello you have a new friend request! Go make some buddies!</p>";
-        $msg .= '<a href="www.digitalmist.be/phpbuddy/index.html> go to Phpbuddy! </a>"';
+        $msg .= "<a href='www.digitalmist.be/phpbuddy/index.html'> go to Phpbuddy! </a>";
         $msg .= "</body></html>";
 
 // use wordwrap() if lines are longer than 70 characters
