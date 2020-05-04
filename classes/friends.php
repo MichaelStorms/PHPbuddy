@@ -347,7 +347,7 @@ class Buddy{
 $msg = "Hello you have a new friend request! Go make some buddies!";
 
 // use wordwrap() if lines are longer than 70 characters
-$headers = "From: m.storms1998@gmail.be";
+$headers = "From: Michael@digitalmist.be";
 // of $user->getUserEmail($_GET["id"]);
 // send email
 mail($email,"Friend request",$msg,$headers);
