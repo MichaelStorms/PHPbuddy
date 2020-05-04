@@ -36,17 +36,15 @@ if (!empty($_POST)) {
                 $error = "Sorry... email already taken";
             } else {
                 if (!empty($password) && $password === $passwordConfirmation) {
-                    $success =  "<script>alert('Welcome to Geeks for Geeks)</script>";
+                    
                     $password = password_hash($password, PASSWORD_DEFAULT, ["cost" => 16]);
 
                     $user->setPassword($password);
 
-                   
-                    $test = 1;
-                    if ($test ==1) {
-                        usleep(4000000);
-                        header("location: login.php");
-                    }
+                
+                    
+                        header("location: thankYou.php");
+                    
                     $user->save();
                 } else {
                     $error = "Password cannot be empty";
@@ -89,14 +87,7 @@ if (!empty($_POST)) {
                         </p>
                     </div>
                 <?php endif; ?>
-                <?php if (isset($success)) : ?>
-                    <div style="margin-top: 2%">
-                        <p>
-                            <?php echo $success;?>
-                        </p>
-
-                    </div>
-                <?php endif; ?>
+                
 
             
                 <div class="form-group row" style="width: 80%; margin:auto; padding-top:2%; padding-bottom:2%;">
