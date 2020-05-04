@@ -343,11 +343,18 @@ class Buddy{
        }
 
     public function sendMail($email){
+  $headers = "From: Michael@digitalmist.be";
+  $headers .= "MIME-Version: 1.0\r\n";
+  $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
         // the message
-$msg = "Hello you have a new friend request! Go make some buddies!";
+        $msg = '<html><body>';
+        $msg .= "<h1>You've a friend request!</h1>";
+        $msg .= "<p>Hello you have a new friend request! Go make some buddies!</p>";
+        $msg .= '<a href="www.digitalmist.be/phpbuddy/index.html> go to Phpbuddy! </a>"';
+        $msg .= "</body></html>";
 
 // use wordwrap() if lines are longer than 70 characters
-$headers = "From: Michael@digitalmist.be";
 // of $user->getUserEmail($_GET["id"]);
 // send email
 mail($email,"Friend request",$msg,$headers);
