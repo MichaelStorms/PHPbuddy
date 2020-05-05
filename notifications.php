@@ -36,49 +36,49 @@ $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
     </div>
   </header>
 
-  <main role="main" class="container">
 
-    <div class="dropdown">
-      <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <a class="text-dark" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications
-          <?php
-          $query = "SELECT * from `notifications` where `status` = 'unread' order by `date` DESC";
-          if (count(fetchAll($query)) > 0) { ?>
-            <span class="badge badge-light"><?php echo count(fetchAll($query)); ?></span>
-          <?php } ?>
-        </a>
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button class="dropdown-item" type="button"><?php
-                                                    $query = "SELECT * from `notifications` order by `date` DESC";
-                                                    if (count(fetchAll($query)) > 0) {
-                                                      foreach (fetchAll($query) as $i) {
-                                                    ?>
-              <a style="<?php if ($i['status'] == 'unread') {
-                                                          echo 'font-weight:bold;';
-                                                        } ?>" class="dropdown-item" href="notificationsView.php?id=<?php echo $i['id'] ?>">
-                <small><i><?php echo date('F j, Y, g:i a', strtotime($i['date'])) ?></i></small><br />
-                <?php
 
-                                                        if ($i['type'] == 'comment') {
-                                                        } else if ($i['type'] == 'like') {
-                                                        }
+  <div class="dropdown float-left mt-3 position-fixed">
+    <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="text-dark" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notifications
+        <?php
+        $query = "SELECT * from `notifications` where `status` = 'unread' order by `date` DESC";
+        if (count(fetchAll($query)) > 0) { ?>
+          <span class="badge badge-light"><?php echo count(fetchAll($query)); ?></span>
+        <?php } ?>
+      </a>
+    </button>
+    <div class="dropdown-menu"  aria-labelledby="dropdownMenu2">
+      <button class="dropdown-item" type="button"><?php
+                                                  $query = "SELECT * from `notifications` order by `date` DESC";
+                                                  if (count(fetchAll($query)) > 0) {
+                                                    foreach (fetchAll($query) as $i) {
+                                                  ?>
+            <a style="<?php if ($i['status'] == 'unread') {
+                                                        echo 'font-weight:bold;';
+                                                      } ?>" class="dropdown-item" href="notificationsView.php?id=<?php echo $i['id'] ?>">
+              <small><i><?php echo date('F j, Y, g:i a', strtotime($i['date'])) ?></i></small><br />
+              <?php
 
-                ?>
-              </a>
-              <div class="dropdown-divider"></div>
-          <?php
+                                                      if ($i['type'] == 'comment') {
+                                                      } else if ($i['type'] == 'like') {
                                                       }
-                                                    } else {
-                                                      echo "No Records yet.";
+
+              ?>
+            </a>
+            <div class="dropdown-divider"></div>
+        <?php
                                                     }
-          ?>
-        </button>
+                                                  } else {
+                                                    echo "No Records yet.";
+                                                  }
+        ?>
+      </button>
 
-      </div>
     </div>
+  </div>
 
-
+  <main role="main" class="container bg-light mt-3">
 
 
     <div>
@@ -93,10 +93,13 @@ $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
       }
 
       ?>
-      <form method="post" class="" style="padding:10px;">
-        <input name="message" class="" type="text" placeholder="Message" style=" width:300px; height:200px; " required>
-        <button name="submit" class="" type="submit">Submit</button>
-      </form>
+      <div class="p-3">
+        <form method="post" class="">
+          <input name="message" class="" type="text" placeholder="Message" style=" width:300px; height:200px; " required>
+          <button name="submit" class="" type="submit">Submit</button>
+        </form>
+      </div>
+
       <br>
       <?php
 
@@ -145,7 +148,7 @@ $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
       }
 
       ?>
-      <form method="post" class="" style="padding:10px;">
+      <form method="post" class="p-3">
         <input name="name" class="" type="text" placeholder="Name" style=" width:300px; height:200px;" required>
         <button name="like" class="" type="submit">Like </button>
         <button name="heart" class="" type="submit">❤</button>
@@ -156,35 +159,21 @@ $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
       </form>
 
       <br>
-      <form method="post" action="">     
-        <?php if (isset($error)) : ?>
-          <div class="form__error">
-            <p><?php echo $error; ?></p>
-          </div>
-          <?php endif; ?>   
 
-
-          <img src="images/" height="100" width="100" alt="BuddyTo">
-          <p id="name"><b>Julie</b></p>
-
-          <div id="sending">
-            <input type="submit" onclick="this.disabled=true;this.value='Request has been sent';this.form.submit();" class="button" name="send" value="Send Request" />
-          </div>
-      </form>
 
   </main><!-- /.container -->
 
   <!-- Vanaf hier friend request -->
-  <div class="container">
+  <div class="container bg-light mt-3">
 
-    <div class="inner_profile">
+    <div class="inner_profile p-3">
       <div class="img">
-        <img src="images/<?php echo $user_data->image; ?>" alt="Profile image">
+        <img src="images/<?php echo $user_data->image; ?>" alt="Profile image" style="width: auto; height:200px">
       </div>
       <h1><?php echo  $user_data->firstname . " " . $user_data->lastname; ?></h1>
     </div>
 
-    <div class="all_users">
+    <div class="all_users p-3">
       <h3>All request senders</h3>
       <div class="usersWrapper">
         <?php

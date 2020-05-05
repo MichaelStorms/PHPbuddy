@@ -156,7 +156,7 @@ if (!empty($_POST['emailOld'])) {
 				</div>
 				<div class="col">
 					<img src="images/<?php echo $user_data->image ?>" style="width: auto; height:350px;" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: 100%">
-					<p><?php echo $user_data->imgDescription ?></p>
+					<p><?php echo htmlspecialchars($user_data->imgDescription) ?></p>
 				</div>
 			</div>
 
