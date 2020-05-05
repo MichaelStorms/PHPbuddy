@@ -127,10 +127,10 @@ class Chat extends User{
 			$user_name = '';
 			if($chat["sender_id"] == $from_user_id) {
 				$conversation .= '<li class="sent">';
-				$conversation .= '<img width="22px" height="22px" src="userpics/'.$fromUserAvatar.'" alt="" />';
+				$conversation .= '<img width="22px" height="22px" src="images/'.$fromUserAvatar.'" alt="" />';
 			} else {
 				$conversation .= '<li class="replies">';
-				$conversation .= '<img width="22px" height="22px" src="userpics/'.$toUserAvatar.'" alt="" />';
+				$conversation .= '<img width="22px" height="22px" src="images/'.$toUserAvatar.'" alt="" />';
 			}			
 			$conversation .= '<p>'.$chat["message"].'</p>';			
 			$conversation .= '</li>';
@@ -144,7 +144,7 @@ class Chat extends User{
 		$toUserAvatar = '';
 		foreach ($userDetails as $user) {
 			$toUserAvatar = $user['image'];
-			$userSection = '<img src="userpics/'.$user['image'].'" alt="" />
+			$userSection = '<img src="images/'.$user['image'].'" alt="" />
 				<p>'.$user['firstname'].'</p>
 				<div class="social-media">
 					<i class="fa fa-facebook" aria-hidden="true"></i>

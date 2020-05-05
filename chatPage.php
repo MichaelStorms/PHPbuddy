@@ -52,7 +52,7 @@ if (!empty($_GET)) {
 						$currentSession = '';
 						foreach ($loggedUser as $user) {
 							$currentSession = $user['current_session'];
-							echo '<img id="profile-img" src="userpics/' . $user['image'] . '" class="online" alt="" />';
+							echo '<img id="profile-img" src="images/' . $user['image'] . '" class="online" alt="" />';
 							echo  '<p>' . $user['firstname'] . " " . $user['lastname'] . '</p>';
 							echo '<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>';
 							echo '<div id="status-options">';
@@ -93,7 +93,7 @@ if (!empty($_GET)) {
 								echo '<li id="' . $user['id'] . '" class="contact ' . $activeUser . '" data-touserid="' . $user['id'] . '" data-tousername="' . $user['firstname'] . " " . $user['lastname'] . '">';
 								echo '<div class="wrap">';
 								echo '<span id="status_' . $user['id'] . '" class="contact-status ' . $status . '"></span>';
-								echo '<img src="userpics/' . $user['image'] . '" alt="" />';
+								echo '<img src="images/' . $user['image'] . '" alt="" />';
 								echo '<div class="meta">';
 								echo '<p class="name">' . $user['firstname'] . " " . $user['lastname'] . '<span id="unread_' . $user['id'] . '" class="unread">' . $chat->getUnreadMessageCount($user['id'], $_SESSION['id']) . '</span></p>';
 								echo '<p class="preview"><span id="isTyping_' . $user['id'] . '" class="isTyping"></span></p>';
@@ -115,7 +115,7 @@ if (!empty($_GET)) {
 								echo '<li id="' . $user['id'] . '" class="contact ' . $activeUser . '" data-touserid="' . $user['id'] . '" data-tousername="' . $user['firstname'] . " " . $user['lastname'] . '">';
 								echo '<div class="wrap">';
 								echo '<span id="status_' . $user['id'] . '" class="contact-status ' . $status . '"></span>';
-								echo '<img src="userpics/' . $user['image'] . '" alt="" />';
+								echo '<img src="images/' . $user['image'] . '" alt="" />';
 								echo '<div class="meta">';
 								echo '<p class="name">' . $user['firstname'] . " " . $user['lastname'] . '<span id="unread_' . $user['id'] . '" class="unread">' . $chat->getUnreadMessageCount($user['id'], $_SESSION['id']) . '</span></p>';
 								echo '<p class="preview"><span id="isTyping_' . $user['id'] . '" class="isTyping"></span></p>';
@@ -137,7 +137,7 @@ if (!empty($_GET)) {
 						<?php
 						$userDetails = $chat->getUserDetails($currentSession);
 						foreach ($userDetails as $user) {
-							echo '<img src="userpics/' . $user['image'] . '" alt="" />';
+							echo '<img src="images/' . $user['image'] . '" alt="" />';
 							echo '<p>' . $user['firstname'] . " " . $user['lastname'] . '</p>';
 							echo '<div class="social-media">';
 							echo '<i class="fa fa-facebook" aria-hidden="true"></i>';
