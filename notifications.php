@@ -180,7 +180,7 @@ $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
         if ($get_req_num > 0) {
           foreach ($get_all_req_sender as $row) {
             echo '<div class="user_box">
-                                <div class="user_img"><img src="profile_images/' . htmlspecialchars($row->image) . '" alt="Profile image"></div>
+                                <div class="user_img"><img src="images/' . htmlspecialchars($row->image) . '" alt="Profile image"></div>
                                 <div class="user_info"><span>' . htmlspecialchars($row->firstname) . " " . htmlspecialchars($row->lastname) . '</span>
                                 <span><a href="UserFriendProfile.php?id=' . htmlspecialchars($row->sender) . '" class="see_profileBtn">See profile</a></div>
                             </div>';
