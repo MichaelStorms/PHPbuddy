@@ -35,7 +35,7 @@ if(isset($_GET['action']) && isset($_GET['id'])){
                 // OTHERWISE MAKE FRIEND REQUEST
                 else{
                     $emailfunction = $buddy->getUserEmail($_GET["id"]);
-                    $email = trim($emailfunction[0]["Email"]);
+                    $email = htmlspecialchars(trim($emailfunction[0]["Email"]));
                     $buddy->sendMail($email);
                     $buddy->make_pending_friends($my_id, $id);
 

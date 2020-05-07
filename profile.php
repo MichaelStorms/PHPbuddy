@@ -24,7 +24,7 @@ $get_frnd_num = $buddy->get_all_friends($_SESSION['id'], false);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?php echo  $user_data->firstname . " " . $user_data->lastname; ?></title>
+    <title><?php echo  htmlspecialchars($user_data->firstname) . " " . htmlspecialchars($user_data->lastname); ?></title>
     <link rel="stylesheet" href="./style.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -42,9 +42,9 @@ $get_frnd_num = $buddy->get_all_friends($_SESSION['id'], false);
 
         <div class="inner_profile">
             <div class="img">
-                <img src="images/<?php echo $user_data->image; ?>" alt="Profile image " style="width: 20%;">
+                <img src="images/<?php echo htmlspecialchars($user_data->image); ?>" alt="Profile image " style="width: 20%;">
             </div>
-            <h1><?php echo  $user_data->firstname . " " . $user_data->lastname; ?></h1>
+            <h1><?php echo  htmlspecialchars($user_data->firstname) . " " . htmlspecialchars($user_data->lastname); ?></h1>
         </div>
 
         <div class="all_users">
@@ -54,8 +54,8 @@ $get_frnd_num = $buddy->get_all_friends($_SESSION['id'], false);
                 if ($all_users) {
                     foreach ($all_users as $row) {
                         echo '<div class="user_box">
-                                <div class=""><img src="images/' . $row->image . '" alt="Profile image"  style="width: 20%"></div>
-                                <div class="user_info"><span>' . $row->firstname . " " . $row->lastname . '</span>
+                                <div class=""><img src="images/' . htmlspecialchars($row->image) . '" alt="Profile image"  style="width: 20%"></div>
+                                <div class="user_info"><span>' . htmlspecialchars($row->firstname) . " " . htmlspecialchars($row->lastname) . '</span>
                                 <span><a href="UserFriendProfile.php?id=' . $row->id . '" class="see_profileBtn">See profile</a></div>
                                 <hr>
                             </div>';

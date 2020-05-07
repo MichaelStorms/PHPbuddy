@@ -85,7 +85,7 @@ $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
       <?php
 
       if (isset($_POST['submit'])) {
-        $message = $_POST['message'];
+        $message = htmlspecialchars($_POST['message']);
         $query = "INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '', 'comment', '$message', 'unread', CURRENT_TIMESTAMP)";
         if (performQuery($query)) {
           //header("location:notifications.php");
@@ -104,7 +104,7 @@ $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
       <?php
 
       if (isset($_POST['like'])) {
-        $name = $_POST['name'];
+        $name = htmlspecialchars($_POST['name']);
         $query = "INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', 'like', '', 'unread', CURRENT_TIMESTAMP)";
         if (performQuery($query)) {
           //header("location:index.php");
@@ -112,35 +112,35 @@ $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
       }
 
       if (isset($_POST['lol'])) {
-        $name = $_POST['name'];
+        $name = htmlspecialchars($_POST['name']);
         $query = "INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', '😂', '', 'unread', CURRENT_TIMESTAMP)";
         if (performQuery($query)) {
           //header("location:index.php");
         }
       }
       if (isset($_POST['heart'])) {
-        $name = $_POST['name'];
+        $name = htmlspecialchars($_POST['name']);
         $query = "INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', '❤', '', 'unread', CURRENT_TIMESTAMP)";
         if (performQuery($query)) {
           //header("location:index.php");
         }
       }
       if (isset($_POST['ooh'])) {
-        $name = $_POST['name'];
+        $name =htmlspecialchars($_POST['name']);
         $query = "INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', '😮', '', 'unread', CURRENT_TIMESTAMP)";
         if (performQuery($query)) {
           //header("location:index.php");
         }
       }
       if (isset($_POST['sad'])) {
-        $name = $_POST['name'];
+        $name = htmlspecialchars($_POST['name']);
         $query = "INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', '😥', '', 'unread', CURRENT_TIMESTAMP)";
         if (performQuery($query)) {
           //header("location:index.php");
         }
       }
       if (isset($_POST['angry'])) {
-        $name = $_POST['name'];
+        $name = htmlspecialchars($_POST['name']);
         $query = "INSERT INTO `notifications` (`id`, `name`, `type`, `message`, `status`, `date`) VALUES (NULL, '$name', '😡', '', 'unread', CURRENT_TIMESTAMP)";
         if (performQuery($query)) {
           //header("location:index.php");
@@ -168,9 +168,9 @@ $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
 
     <div class="inner_profile p-3">
       <div class="img">
-        <img src="images/<?php echo $user_data->image; ?>" alt="Profile image" style="width: auto; height:200px">
+        <img src="images/<?php echo htmlspecialchars($user_data->image); ?>" alt="Profile image" style="width: auto; height:200px">
       </div>
-      <h1><?php echo  $user_data->firstname . " " . $user_data->lastname; ?></h1>
+      <h1><?php echo  htmlspecialchars($user_data->firstname) . " " . htmlspecialchars($user_data->lastname); ?></h1>
     </div>
 
     <div class="all_users p-3">
@@ -180,9 +180,9 @@ $get_all_req_sender = $buddy->request_notification($_SESSION['id'], true);
         if ($get_req_num > 0) {
           foreach ($get_all_req_sender as $row) {
             echo '<div class="user_box">
-                                <div class="user_img"><img src="profile_images/' . $row->image . '" alt="Profile image"></div>
-                                <div class="user_info"><span>' . $row->firstname . " " . $row->lastname . '</span>
-                                <span><a href="UserFriendProfile.php?id=' . $row->sender . '" class="see_profileBtn">See profile</a></div>
+                                <div class="user_img"><img src="profile_images/' . htmlspecialchars($row->image) . '" alt="Profile image"></div>
+                                <div class="user_info"><span>' . htmlspecialchars($row->firstname) . " " . htmlspecialchars($row->lastname) . '</span>
+                                <span><a href="UserFriendProfile.php?id=' . htmlspecialchars($row->sender) . '" class="see_profileBtn">See profile</a></div>
                             </div>';
           }
         } else {

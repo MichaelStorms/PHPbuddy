@@ -11,7 +11,7 @@ include_once("filterArray.php");
   if(!empty($_GET)){
     $search = $_GET["search"];
     $course = $_GET["course"];
-    if(!empty($locatie)){ $locatie = $_GET["locatie"];}
+    if(!empty($locatie)){ $locatie = htmlspecialchars($_GET["locatie"]);}
     $hobby = $_GET["hobby"];
     $extra = $_GET["extra"];
     if(!empty($search))
@@ -52,8 +52,8 @@ include_once("filterArray.php");
       </div>
       <?php if(!empty(Filter::getLocation($email)[0]["locatie"])): ?>
       <div class="form__field">
-      <label for="locatie">filter on:<?php echo ucfirst(Filter::getLocation($email)[0]["locatie"]); ?></label>
-      <input type="checkbox" id="locatie" name="locatie" value="<?php echo ucfirst(Filter::getLocation($email)[0]["locatie"]); ?>">
+      <label for="locatie">filter on:<?php echo htmlspecialchars(ucfirst(Filter::getLocation($email)[0]["locatie"])); ?></label>
+      <input type="checkbox" id="locatie" name="locatie" value="<?php echo htmlspecialchars(ucfirst(Filter::getLocation($email)[0]["locatie"])); ?>">
       </div>
       <?php endif; ?>
       <?php if(!empty(Filter::getInterests($email)[0]["interests"])): ?>
@@ -100,9 +100,9 @@ include_once("filterArray.php");
     <?php if(empty($_GET)){ ?>
     <?php foreach($users as $key => $user){ ?>
     <div class="user" style="margin-top:50px; margin-left:20px;">
-    <a href="UserFriendProfile.php?id=<?php  echo $user["id"]; ?>" style="background-image: url(<?php echo $user["image"] ?>)"></a>
-    <a href="UserFriendProfile.php?id=<?php  echo $user["id"]; ?>"><p><?php echo ucfirst($user["Firstname"]) ." " . $user["LastName"] ?></p></a>
-    <p>woont in: <?php echo $user["locatie"] ?></p>
+    <a href="UserFriendProfile.php?id=<?php  echo $user["id"]; ?>" style="background-image: url(<?php echo htmlspecialchars($user["image"]) ?>)"></a>
+    <a href="UserFriendProfile.php?id=<?php  echo $user["id"]; ?>"><p><?php echo htmlspecialchars(ucfirst($user["firstname"])) ." " . htmlspecialchars($user["lastname"]) ?></p></a>
+    <p>woont in: <?php echo htmlspecialchars($user["locatie"]) ?></p>
     <p>zit in klas: <?php echo $user["class"] ?></p>
     <a href="UserFriendProfile.php?id=<?php echo $user["id"] ?>">Request buddy</a>
 
@@ -111,9 +111,9 @@ include_once("filterArray.php");
     <?php }}else if(!empty($_GET)){ ?>
       <?php foreach($searchResult as $key => $result){ ?>
       <div class="user" style="margin-top:50px; margin-left:20px;">
-    <a href="UserFriendProfile.php?id=<?php  echo $result["id"]; ?>" style="background-image: url(<?php echo $result["image"] ?>)"></a>
-    <a href="UserFriendProfile.php?id=<?php  echo $result["id"]; ?>"><p><?php echo ucfirst($result["firstname"]) ." " . $result["lastname"] ?></p></a>
-    <p>woont in: <?php echo $result["locatie"] ?></p>
+    <a href="UserFriendProfile.php?id=<?php  echo $result["id"]; ?>" style="background-image: url(<?php echo htmlspecialchars($result["image"]) ?>)"></a>
+    <a href="UserFriendProfile.php?id=<?php  echo $result["id"]; ?>"><p><?php echo htmlspecialchars(ucfirst($result["firstname"])) ." " . htmlspecialchars($result["lastname"]) ?></p></a>
+    <p>woont in: <?php echo htmlspecialchars($result["locatie"]) ?></p>
     <p>zit in klas: <?php echo $result["class"] ?></p>
     <a href="UserFriendProfile.php?id=<?php echo $result["id"] ?>">Request buddy</a>
     </div>

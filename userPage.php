@@ -28,14 +28,14 @@ $profile = $user->getUser($email);
             <div class="container p-3">
                 <div class="row">
                     <div class="col">
-                        <img class="profile_image" src="images/<?php echo $profile[0]["image"] ?>" alt="<?php echo $profile[0]["imgDescription"] ?>" style="width: 100%">
+                        <img class="profile_image" src="images/<?php echo htmlspecialchars($profile[0]["image"]) ?>" alt="<?php echo htmlspecialchars($profile[0]["imgDescription"]) ?>" style="width: 100%">
                     </div>
                     <div class="col">
-                        <h2 class="profile_name text-dark"><?php echo $profile[0]["firstname"] . " " . $profile[0]["lastname"]; ?></h2>
+                        <h2 class="profile_name text-dark"><?php echo htmlspecialchars($profile[0]["firstname"]) . " " . htmlspecialchars($profile[0]["lastname"]); ?></h2>
                         <h3 class="text-dark">Interests = <?php echo $profile[0]["interests"] ?></h3>
                         <h3 class="text-dark">Hobby = <?php echo $profile[0]["hobby"] ?></h3>
                         <h3 class="text-dark">Extra = <?php echo $profile[0]["extra"] ?></h3>
-                        <h3 class="text-dark">Lives in : <a class="text-dark" href="#"><?php echo $profile[0]["locatie"] ?></a></h3>
+                        <h3 class="text-dark">Lives in : <a class="text-dark" href="#"><?php echo htmlspecialchars($profile[0]["locatie"]) ?></a></h3>
                     </div>
                 </div>
 

@@ -61,9 +61,9 @@ $bootstrapColWidth = 12 / $numOfCols;
   
   <section class="jumbotron text-center" style="margin: 0">
     <div class="container">
-      <h1>Hello, <?php echo  $user_data->firstname . " " . $user_data->lastname; ?></h1>
-      <img class="img-thumbnail" src="images/<?php echo $user_data->image ?>" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: 250px">
-      <p> <?php echo  $user_data->imgDescription ?></p>
+      <h1>Hello, <?php echo  htmlspecialchars($user_data->firstname) . " " . htmlspecialchars($user_data->lastname); ?></h1>
+      <img class="img-thumbnail" src="images/<?php echo htmlspecialchars($user_data->image) ?>" alt="profile picture of <?php echo  htmlspecialchars($user_data->firstname). " " . htmlspecialchars($user_data->lastname); ?>" style="width: 250px">
+      <p> <?php echo  htmlspecialchars($user_data->imgDescription) ?></p>
       <!--     buddies on the site -->
       <div>
         <p>There are currently : <?php echo $buddy->getUserAmount(); ?> people registred.</p>
@@ -94,9 +94,9 @@ $bootstrapColWidth = 12 / $numOfCols;
           <div class="f form-group row">
             <label class="col-sm-2 col-form-labe">Filter on:</label>
             <div class="col-sm-10">
-              <input class=" form-check-input" style="margin-left: 1px;" type="checkbox" id="locatie" name="locatie" value="<?php echo ucfirst(Filter::getLocation($email)[0]["locatie"]); ?>">
+              <input class=" form-check-input" style="margin-left: 1px;" type="checkbox" id="locatie" name="locatie" value="<?php echo htmlspecialchars(ucfirst(Filter::getLocation($email)[0]["locatie"])); ?>">
               <label class="form-check-label" style="margin-left: 2%;" for="locatie">
-                <h5><?php echo ucfirst(Filter::getLocation($email)[0]["locatie"]); ?></h5>
+                <h5><?php echo htmlspecialchars(ucfirst(Filter::getLocation($email)[0]["locatie"])); ?></h5>
               </label>
             </div>
 
@@ -174,12 +174,12 @@ $bootstrapColWidth = 12 / $numOfCols;
 
             <div class="">
               <div class="user" style=" margin-left:20px; ">
-                <img src="images/<?php echo $user['image']?>" style="width: auto; height:200px; padding-right:2%;" alt="profile pic">
+                <img src="images/<?php echo htmlspecialchars($user['image'])?>" style="width: auto; height:200px; padding-right:2%;" alt="profile pic">
                 <a href="UserFriendProfile.php?id=<?php echo $user["id"]; ?>" ></a>
                 <a href="UserFriendProfile.php?id=<?php echo $user["id"]; ?>">
-                  <p><?php echo ucfirst($user["Firstname"]) . " " . $user["LastName"] ?></p>
+                  <p><?php echo htmlspecialchars(ucfirst($user["Firstname"])) . " " . htmlspecialchars($user["LastName"]) ?></p>
                 </a>
-                <p>lives in: <?php echo $user["locatie"] ?></p>
+                <p>lives in: <?php echo htmlspecialchars($user["locatie"]) ?></p>
                 <p>is in grade: <?php echo $user["class"] ?></p>
                 <a href="UserFriendProfile.php?id=<?php echo $user["id"] ?>">Request buddy</a>
                 <hr>
@@ -194,12 +194,12 @@ $bootstrapColWidth = 12 / $numOfCols;
             ?>
               <div class="">
                 <div class="user" style=" margin-left:20px;">
-                <img src="images/<?php echo $result['image']?>" style="width: auto; height:200px; padding-right:2%;%" alt="profile pic">
-                  <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>" style="background-image: url(<?php echo $result["image"] ?>)"></a>
+                <img src="images/<?php echo htmlspecialchars($result['image'])?>" style="width: auto; height:200px; padding-right:2%;%" alt="profile pic">
+                  <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>" style="background-image: url(<?php echo htmlspecialchars($result["image"]) ?>)"></a>
                   <a href="UserFriendProfile.php?id=<?php echo $result["id"]; ?>">
-                    <p><?php echo ucfirst($result["firstname"]) . " " . $result["lastname"] ?></p>
+                    <p><?php echo htmlspecialchars(ucfirst($result["firstname"])) . " " . htmlspecialchars($result["lastname"]) ?></p>
                   </a>
-                  <p>woont in: <?php echo $result["locatie"] ?></p>
+                  <p>woont in: <?php echo htmlspecialchars($result["locatie"]) ?></p>
                   <p>zit in klas: <?php echo $result["class"] ?></p>
                   <a href="UserFriendProfile.php?id=<?php echo $result["id"] ?>">Request buddy</a>
                   <hr>

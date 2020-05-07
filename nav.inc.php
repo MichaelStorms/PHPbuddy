@@ -12,12 +12,12 @@ $get_frnd_num = $buddy->get_all_friends($_SESSION['id'], false);
         width: 100%;
     }
 
-    ul {
+    nav ul {
         width: 100%;
         justify-content: space-evenly;
     }
 
-    li {
+    nav ul li {
         width: 10%;
         margin: 0 5%;
         list-style: none;

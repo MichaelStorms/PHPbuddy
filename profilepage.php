@@ -155,7 +155,7 @@ if (!empty($_POST['emailOld'])) {
 					<textarea class="form-control" name="description" rows="9" placeholder="Foto beschrijving"></textarea>
 				</div>
 				<div class="col">
-					<img src="images/<?php echo $user_data->image ?>" style="width: auto; height:350px;" alt="profile picture of <?php echo  $user_data->firstname . " " . $user_data->lastname; ?>" style="width: 100%">
+					<img src="images/<?php echo htmlspecialchars($user_data->image) ?>" style="width: auto; height:350px;" alt="profile picture of <?php echo  htmlspecialchars($user_data->firstname) . " " . htmlspecialchars($user_data->lastname); ?>" style="width: 100%">
 					<p><?php echo htmlspecialchars($user_data->imgDescription) ?></p>
 				</div>
 			</div>

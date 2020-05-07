@@ -422,12 +422,12 @@ class User
         $email = trim($_SESSION['user']);
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET password = ':password' WHERE email = :email");
+        $statement = $conn->prepare("UPDATE users SET password = ':password' WHERE email = '$email'");
         
         $password = $this->getPassword();
 
         $statement->bindParam(":password", $password);
-        $statement->bindParam(":email", $email);
+
         $result = $statement->execute();
         return $result;
     }
@@ -449,12 +449,11 @@ class User
         $email = trim($_SESSION['user']);
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET email = :emailNew WHERE email = :email");
+        $statement = $conn->prepare("UPDATE users SET email = :emailNew WHERE email = '$email'");
         $emailNew = $this->getEmail();
         
         
         $statement->bindParam(":emailNew", $emailNew);
-        $statement->bindParam(":email", $email);
 
         $result = $statement->execute();
 
@@ -466,12 +465,11 @@ class User
         $email = trim($_SESSION['user']);
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET image = :image WHERE email = :email");
+        $statement = $conn->prepare("UPDATE users SET image = :image WHERE email = '$email'");
         $image = $this->getImage();
         
         
         $statement->bindParam(":image", $image);
-        $statement->bindParam(":email", $email);
 
         $result = $statement->execute();
 
@@ -484,12 +482,11 @@ class User
         $email = trim($_SESSION['user']);
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE users SET imgDescription = :description WHERE email = :email");
+        $statement = $conn->prepare("UPDATE users SET imgDescription = :description WHERE email = '$email'");
         $description = $this->getDescription();
         
         
         $statement->bindParam(":description", $description);
-        $statement->bindParam(":email", $email);
 
         $result = $statement->execute();
 
